@@ -86,3 +86,14 @@ config/*.secret.yaml
 *.swo
 *~
 .tmp/
+
+# Jekyll local development
+docs/Gemfile
+docs/Gemfile.lock
+docs/.bundle/
+docs/vendor/
+docs/.jekyll-cache/
+docs/_site/
+
+# Docker
+docker-compose.yml
