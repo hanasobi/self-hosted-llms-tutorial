@@ -1,0 +1,6 @@
+title: LLM Fine-tuning End-to-End
+description: Production-grade LLM fine-tuning tutorial - completely self-hosted
+theme: jekyll-theme-minimal
+show_downloads: true
+github:
+  repository_url: https://github.com/hanasobi/llm-finetuning-end-to-end

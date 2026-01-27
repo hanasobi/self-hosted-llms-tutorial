@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Training artifacts
+*.pt
+*.pth
+*.bin
+*.safetensors
+checkpoints/
+models/*/
+!models/README.md
+
+# Data
+data/raw/
+data/processed/*.jsonl
+!data/processed/README.md
+*.csv
+*.tsv
+
+# Logs
+logs/
+*.log
+tensorboard/
+mlruns/
+
+# Secrets & Config
+.env
+.env.local
+*.key
+*.pem
+secrets/
+config/*.secret.yaml
+
+# Kubernetes
+*.kubeconfig
+
+# Temporary files
+*.swp
+*.swo
+*~
+.tmp/
