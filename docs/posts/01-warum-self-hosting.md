@@ -177,7 +177,7 @@ Im Folgenden ein kurzer Überblick zu jedem Post:
 
 **Post 1 (dieser Post)** etabliert den Business Case. Warum Self-Hosting? Wann ist es sinnvoll? Was sind die Voraussetzungen?
 
-**Post 2: vLLM auf Kubernetes** bringt dein erstes LLM zum Laufen. Nach diesem Post hast du ein funktionierendes System auf deiner eigenen Infrastruktur – mit einem vortrainierten Base Model, ohne Fine-tuning.
+**Post 2: vLLM auf Kubernetes** bringt dein erstes LLM zum Laufen. Nach diesem Post hast du ein funktionierendes System auf deiner eigenen Infrastruktur – mit einem pre-trained Base Model, ohne Fine-tuning.
 
 ### Phase 2: Anpassung durch Fine-tuning
 
@@ -239,4 +239,4 @@ Diese Tutorial-Serie gibt dir das Werkzeug, um fundierte Entscheidungen zu treff
 
 **📚 Serie: Self-Hosted LLMs für Datensouveränität**
 
-[Serienübersicht](../index.md) | [Post 3: Warum Self-Hosting?](./02-vllm-kubernetes-basics.md) →
+[Serienübersicht](../index.md) | [Post 2: vLLM & Kubernetes Basics](./02-vllm-kubernetes-basics.md) →

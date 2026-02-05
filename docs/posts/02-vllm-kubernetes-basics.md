@@ -8,7 +8,7 @@
 ## TL;DR - Für eilige Leser
 
 **Was wir bauen:**
-- ✅ vLLM auf Kubernetes mit Mistral-7B (4-bit quantisiert)
+- ✅ vLLM auf Kubernetes mit Mistral-7B (4-bit quantized)
 - ✅ OpenAI-kompatible API für einfache Integration
 - ✅ Monitoring mit Prometheus/Grafana out-of-the-box
 - ✅ Kostenoptimiert mit scale-to-zero
@@ -196,7 +196,7 @@ Die Entscheidung für vLLM war aber nicht nur technisch motiviert. Für ein Tuto
 
 ## Quantisierung
 
-Um die Hardware-Anforderungen und damit Kosten zu reduzieren, nutzen wir ein 4-bit quantisiertes Base Model (TheBloke/Mistral-7B-v0.1-AWQ). 
+Um die Hardware-Anforderungen und damit Kosten zu reduzieren, nutzen wir ein 4-bit quantized Base Model (TheBloke/Mistral-7B-v0.1-AWQ). 
 
 **Was bedeutet Quantisierung?**
 
@@ -226,9 +226,9 @@ Ohne Quantisierung würde Mistral-7B etwa 14 GB GPU-Memory nur für die Gewichte
 
 ## Auswahl der Hardware
 
-Um die Kosten für das Tutorial gering zu halten, haben wir zunächst versucht, vLLM auf einer T4 Instanz (AWS g4dn.xlarge / 16GiB VRAM) zu deployen, sind dabei aber auf diverse Probleme gestoßen. Letzten Endes sind 16GiB selbst für ein 4bit quantisiertes Modell zu wenig und die Architektur der T4 ist in die Jahre gekommen. Grundsätzlich sollte es möglich sein, vLLM auf einer T4 zu deployen. Es ist jedoch zu weit entfernt von einem realistischen Szenario.
+Um die Kosten für das Tutorial gering zu halten, haben wir zunächst versucht, vLLM auf einer T4 Instanz (AWS g4dn.xlarge / 16GiB VRAM) zu deployen, sind dabei aber auf diverse Probleme gestoßen. Letzten Endes sind 16GiB selbst für ein 4-bit quantized Model zu wenig und die Architektur der T4 ist in die Jahre gekommen. Grundsätzlich sollte es möglich sein, vLLM auf einer T4 zu deployen. Es ist jedoch zu weit entfernt von einem realistischen Szenario.
 
-Unsere Wahl fiel daher auf eine L4 Instanz (g6.xlarge) mit modernerer Architektur und 24GiB VRAM, was ausreichend für ein auf 4bit quantisiertes Mistral-7B ist. Im Vergleich zu noch potenteren Instanzen halten sich die Kosten in Grenzen. 
+Unsere Wahl fiel daher auf eine L4 Instanz (g6.xlarge) mit modernerer Architektur und 24GiB VRAM, was ausreichend für ein auf 4-bit quantized Mistral-7B ist. Im Vergleich zu noch potenteren Instanzen halten sich die Kosten in Grenzen. 
 
 **Memory-Breakdown für Mistral-7B AWQ auf L4 (aus Deployment-Logs):**
 - Model Weights (4-bit AWQ): 3.96 GB
@@ -453,7 +453,7 @@ args:
 
 **1. Base Model:** `TheBloke/Mistral-7B-v0.1-AWQ`
 
-Wir laden das 4-bit quantisierte Modell direkt von HuggingFace. Beim ersten Start lädt vLLM das Modell herunter (~4 GB) und cached es in `/tmp/huggingface`. Nachfolgende Pod-Restarts sind schneller weil das Modell bereits cached ist (solange der Pod nicht auf einen anderen Node verschoben wird).
+Wir laden das 4-bit quantized Model direkt von HuggingFace. Beim ersten Start lädt vLLM das Modell herunter (~4 GB) und cached es in `/tmp/huggingface`. Nachfolgende Pod-Restarts sind schneller weil das Modell bereits cached ist (solange der Pod nicht auf einen anderen Node verschoben wird).
 
 **2. Context Window:** `--max-model-len=4096`
 
@@ -1125,6 +1125,6 @@ Aber zuerst müssen wir verstehen, warum Fine-tuning überhaupt nötig ist und w
 
 **📚 Serie: Self-Hosted LLMs für Datensouveränität**
 
-← [Post 1: Warum Self-Hosting?](./01-warum-self-hosting.md) | [Serienübersicht](../index.md) | [Post 3: Warum Fine-tuning?](./03-warum-fine-tuning.md) →
+← [Post 1: Warum Self-Hosting?](./01-warum-self-hosting.md) | [Serienübersicht](../index.md) | [Post 3: Warum Fine-tuning?](./03-warum-finetuning.md) →
 
 ---
