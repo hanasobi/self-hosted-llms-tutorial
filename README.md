@@ -60,8 +60,8 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | # | Title | Status | Description |
 |---|-------|--------|-------------|
 | **Phase 1: Self-Hosting Basics** | | | |
-| 1 | Warum Self-Hosting? Der Business Case für Datensouveränität | 📝 Planned | Why self-host, decision framework, series overview |
-| 2 | vLLM auf Kubernetes: Dein erstes selbst gehostetes LLM | 📝 Planned | Deploy Mistral-7B, K8s basics, first inference |
+| 1 | Warum Self-Hosting? Der Business Case für Datensouveränität | ✅ Done | Why self-host, decision framework, series overview |
+| 2 | vLLM auf Kubernetes: Dein erstes selbst gehostetes LLM | ✅ Done | Deploy Mistral-7B, K8s basics, first inference |
 | **Phase 2: Fine-tuning** | | | |
 | 3 | Warum Fine-tuning? Wenn RAG und Prompting nicht reichen | 📝 Planned | When and why to fine-tune |
 | 4 | Dataset Engineering: Von Dokumenten zu Trainingsdaten | 📝 Planned | Chunking, QA generation, quality control |

@@ -1,0 +1,170 @@
+# =============================================================================
+# vLLM ServiceMonitor - Annotated Version for Learning
+# =============================================================================
+# This file is identical to servicemonitor.yaml but includes detailed comments
+# explaining each decision and parameter.
+#
+# For Production: Use servicemonitor.yaml (clean, without comments)
+# For Learning: Use this file
+# =============================================================================
+
+apiVersion: monitoring.coreos.com/v1
+# Custom Resource Definition (CRD) from Prometheus Operator
+# 
+# What is Prometheus Operator?
+# - Kubernetes Operator that manages Prometheus
+# - Adds CRDs: ServiceMonitor, PodMonitor, PrometheusRule
+# - ServiceMonitor = declarative config for "what to scrape"
+# 
+# Without Prometheus Operator:
+# → Must manually edit prometheus.yml
+# → scrape_configs, relabel_configs, etc.
+# → Complex, error-prone
+# 
+# With Prometheus Operator:
+# → Create ServiceMonitor
+# → Operator updates Prometheus config automatically
+# → Declarative, version-controllable, GitOps-friendly
+
+kind: ServiceMonitor
+# CRD for Prometheus service discovery
+# 
+# What does a ServiceMonitor do?
+# 1. Finds Services (via selector)
+# 2. Finds Pods behind Services (via Kubernetes API)
+# 3. Configures Prometheus to scrape Pod IPs
+# 
+# Important: Prometheus scrapes PODS directly, not the Service!
+# ServiceMonitor uses Service only for discovery.
+
+metadata:
+  name: vllm
+  # ServiceMonitor name
+  # Does NOT need to match Service name
+  # We keep it short: "vllm" instead of "vllm-service-monitor"
+  
+  namespace: ml-models
+  # Same namespace as Service and Pods
+  # 
+  # ServiceMonitor must be in same namespace as Service
+  # (or Prometheus must be configured to watch other namespaces)
+  
+  labels:
+    app: vllm
+    component: monitoring
+    # Labels for organization
+    # kubectl get servicemonitor -l app=vllm
+
+spec:
+  selector:
+    matchLabels:
+      app: vllm
+  # Which Services this ServiceMonitor targets
+  #
+  # Finds Services with label "app: vllm"
+  # Our Service (vllm-service) has this label
+  #
+  # IMPORTANT: This matches the Service, not the Pods!
+  # Service → Pods mapping happens via Service's selector
+  
+  endpoints:
+  - port: metrics
+    # Which port to scrape
+    # 
+    # "metrics" is the port NAME from Service definition:
+    # ports:
+    #   - name: metrics  ← This name
+    #     port: 9090
+    #     targetPort: 8000
+    #
+    # Using name instead of number is more robust:
+    # - Port number can change, name stays same
+    # - Self-documenting
+    
+    path: /metrics
+    # HTTP path for metrics endpoint
+    #
+    # vLLM exposes Prometheus metrics at /metrics
+    # Other common paths: /actuator/prometheus, /debug/metrics
+    #
+    # These metrics include:
+    # - vllm:num_requests_running (concurrent requests)
+    # - vllm:num_requests_waiting (queue depth)
+    # - vllm:gpu_cache_usage_perc (KV cache utilization)
+    # - vllm:avg_generation_throughput_toks_per_s
+    # - vllm:avg_prompt_throughput_toks_per_s
+    # - And many more...
+    
+    interval: 30s
+    # How often Prometheus scrapes this endpoint
+    #
+    # Trade-off:
+    # - Shorter interval = more granular data, more load
+    # - Longer interval = less data, less load
+    #
+    # 30s is good balance for LLM serving:
+    # - Fast enough to catch issues
+    # - Not so frequent that it impacts performance
+    #
+    # For high-traffic production: Consider 15s
+    # For low-traffic/development: 60s is fine
+    
+    scrapeTimeout: 10s
+    # How long Prometheus waits for response
+    #
+    # Must be less than interval (30s)
+    # 
+    # If vLLM is under heavy load, /metrics might be slow
+    # 10s timeout prevents Prometheus from hanging
+    # 
+    # If you see "context deadline exceeded" errors:
+    # - vLLM is overloaded, OR
+    # - Increase timeout (but investigate root cause)
+  
+  namespaceSelector:
+    matchNames:
+    - ml-models
+  # Which namespaces to look for Services in
+  #
+  # Even though ServiceMonitor is in ml-models,
+  # we explicitly specify to be clear.
+  #
+  # Alternative: matchNames: [] (all namespaces)
+  # But that requires Prometheus RBAC permissions
+
+# =============================================================================
+# How ServiceMonitor Discovery Works
+# =============================================================================
+#
+# 1. ServiceMonitor created in ml-models namespace
+# 2. Prometheus Operator sees new ServiceMonitor
+# 3. Operator finds Services matching selector (app: vllm)
+# 4. Operator gets Pod IPs from Service endpoints
+# 5. Operator generates scrape_config for Prometheus
+# 6. Prometheus starts scraping Pod IPs directly
+#
+# To debug:
+# - kubectl get servicemonitor -n ml-models
+# - kubectl get endpoints vllm-service -n ml-models
+# - Check Prometheus UI → Status → Targets
+#
+# =============================================================================
+# Common Issues and Debugging
+# =============================================================================
+#
+# Issue: Target not showing in Prometheus
+# - Check: Service selector matches Pod labels?
+# - Check: ServiceMonitor selector matches Service labels?
+# - Check: Prometheus has RBAC to read ml-models namespace?
+# - Check: endpoints shows Pod IPs? (kubectl get endpoints)
+#
+# Issue: Target shows "down"
+# - Check: Pod is running? (kubectl get pods)
+# - Check: /metrics endpoint accessible? (curl from within cluster)
+# - Check: NetworkPolicy allows Prometheus → vllm traffic?
+#
+# Issue: No metrics after target is "up"
+# - Check: Correct path? (/metrics vs /actuator/prometheus)
+# - Check: Correct port? (metrics port name matches?)
+#
+# =============================================================================

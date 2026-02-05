@@ -52,7 +52,7 @@ Die Serie folgt einem klaren didaktischen Bogen — vom ersten funktionierenden 
 **Post 1: [Warum Self-Hosting? Der Business Case für Datensouveränität](posts/01-warum-self-hosting.html)**
 Das Problem, die Lösung und wann Self-Hosting sinnvoll ist. Entscheidungsmatrix: Cloud-API vs. Self-Hosted.
 
-**Post 2: vLLM auf Kubernetes — Dein erstes selbst gehostetes LLM**
+**Post 2: [vLLM auf Kubernetes — Dein erstes selbst gehostetes LLM](posts/02-vllm-kubernetes-basics.html)**
 Mistral-7B auf Kubernetes deployen mit vLLM. Nach diesem Post läuft ein LLM auf deiner Infrastruktur.
 
 ### Phase 2: Anpassung durch Fine-tuning

@@ -1,0 +1,190 @@
+# vLLM Base Model Deployment
+# 
+# This manifest deploys vLLM with Mistral-7B-AWQ as a standalone LLM server.
+# No LoRA adapters are configured - this is the foundation deployment.
+#
+# For LoRA-enabled deployment, see: deployment-lora.yaml
+#
+# Prerequisites:
+#   - GPU Node Group with label: workload=gpu-vllm
+#   - GPU Node Group with taint: nvidia.com/gpu=true:NoSchedule
+#   - Namespace: ml-models
+#
+# Usage:
+#   kubectl apply -f deployment-base.yaml
+#   kubectl get pods -n ml-models -l app=vllm
+#   kubectl logs -n ml-models -l app=vllm --follow
+#
+# Access:
+#   kubectl port-forward -n ml-models svc/vllm-service 8000:8000
+#   curl http://localhost:8000/health
+#
+# Related manifests:
+#   - networkpolicy.yaml (egress rules for HuggingFace access)
+#   - service.yaml (ClusterIP service for internal access)
+#   - servicemonitor.yaml (Prometheus scraping configuration)
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: ml-models
+  labels:
+    app: vllm
+    component: inference
+    model: mistral-7b-awq
+    version: base  # Distinguishes from LoRA-enabled deployment
+spec:
+  # Single replica for cost optimization in development.
+  # For production HA, increase replicas and add PodDisruptionBudget.
+  replicas: 1
+  
+  selector:
+    matchLabels:
+      app: vllm
+  
+  template:
+    metadata:
+      labels:
+        app: vllm
+        component: inference
+        model: mistral-7b-awq
+      annotations:
+        # Force pod recreation when config changes
+        # Update this manually or via CI/CD when changing configuration
+        configVersion: "v1"
+    spec:
+      # ─────────────────────────────────────────────────────────────────────
+      # CONTAINER CONFIGURATION
+      # ─────────────────────────────────────────────────────────────────────
+      containers:
+      - name: vllm
+        # Pin to specific version - NEVER use :latest
+        # See blog post for the painful lesson learned here
+        image: vllm/vllm-openai:v0.14.1-cu130
+        
+        # vLLM server command with optimized settings for L4 GPU
+        args:
+        - "serve"
+        # ┌─────────────────────────────────────────────────────────────────┐
+        # │ MODEL CONFIGURATION                                             │
+        # └─────────────────────────────────────────────────────────────────┘
+        # 4-bit quantized Mistral-7B from TheBloke
+        # AWQ quantization preserves quality while reducing memory ~4x
+        - "TheBloke/Mistral-7B-v0.1-AWQ"
+        
+        # ┌─────────────────────────────────────────────────────────────────┐
+        # │ SERVER CONFIGURATION                                            │
+        # └─────────────────────────────────────────────────────────────────┘
+        - "--port=8000"
+        
+        # ┌─────────────────────────────────────────────────────────────────┐
+        # │ MEMORY & PERFORMANCE TUNING                                     │
+        # └─────────────────────────────────────────────────────────────────┘
+        # Context window: 4096 tokens balances capacity vs memory
+        # Larger values increase KV-cache memory requirements
+        - "--max-model-len=4096"
+        
+        # GPU memory utilization: 0.88 enables CUDA Graphs (critical!)
+        # At 0.95: CUDA Graphs disabled → 2x slower inference
+        # Memory breakdown at 0.88:
+        #   - Model weights (AWQ): 3.96 GB
+        #   - KV-Cache: 15.07 GB  
+        #   - CUDA Graphs: 1.13 GB
+        #   - Headroom: 2.88 GB
+        - "--gpu-memory-utilization=0.88"
+        
+        # ┌─────────────────────────────────────────────────────────────────┐
+        # │ NOTE: LoRA Configuration                                        │
+        # │                                                                 │
+        # │ This base deployment does NOT include LoRA support.             │
+        # │ For LoRA-enabled deployment, use deployment-lora.yaml which     │
+        # │ adds:                                                           │
+        # │   - "--enable-lora"                                             │
+        # │   - "--lora-modules" with adapter paths                         │
+        # │   - Init container for S3 adapter download                      │
+        # │   - ServiceAccount with IRSA for S3 access                      │
+        # └─────────────────────────────────────────────────────────────────┘
+        
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        
+        env:
+        # HuggingFace cache directory
+        # Using /tmp means model re-download on pod restart
+        # For production, consider PersistentVolume for faster restarts
+        - name: HF_HOME
+          value: "/tmp/huggingface"
+        
+        # ┌─────────────────────────────────────────────────────────────────┐
+        # │ RESOURCE CONFIGURATION                                          │
+        # └─────────────────────────────────────────────────────────────────┘
+        resources:
+          requests:
+            # CPU for tokenization, scheduling, metrics export
+            cpu: "3"
+            # Memory must fit within node's allocatable capacity
+            # g6.xlarge has 16GB total, ~13GB allocatable after system pods
+            memory: "12Gi"
+            # Full GPU required - no sharing
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "4"
+            memory: "14Gi"
+            nvidia.com/gpu: "1"
+        
+        # ┌─────────────────────────────────────────────────────────────────┐
+        # │ HEALTH CHECKS                                                   │
+        # └─────────────────────────────────────────────────────────────────┘
+        # Startup probe: Allow time for model loading + CUDA graph capture
+        # Model loading: ~60s, CUDA graphs: ~26s, buffer: ~30s
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 30  # 30 * 10s = 5 minutes max startup
+        
+        # Liveness probe: Restart if server becomes unresponsive
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          failureThreshold: 3
+        
+        # Readiness probe: Remove from service if not ready for traffic
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+      
+      # ─────────────────────────────────────────────────────────────────────
+      # NODE SCHEDULING
+      # ─────────────────────────────────────────────────────────────────────
+      # Only schedule on nodes with GPU workload label
+      nodeSelector:
+        workload: gpu-vllm
+      
+      # Allow scheduling on GPU-tainted nodes
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+      
+      # ─────────────────────────────────────────────────────────────────────
+      # POD LIFECYCLE
+      # ─────────────────────────────────────────────────────────────────────
+      # Give vLLM time to complete in-flight requests before termination
+      terminationGracePeriodSeconds: 60
+      
+      # Restart policy for deployment pods
+      restartPolicy: Always
