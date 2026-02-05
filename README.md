@@ -65,7 +65,7 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | **Phase 2: Fine-tuning** | | | |
 | 3 | Warum Fine-tuning? Wenn RAG und Prompting nicht reichen | ✅ Done | When and why to fine-tune |
 | 4 | Dataset Engineering: Von Dokumenten zu Trainingsdaten | 🚧 In Progress | Chunking, QA generation, quality control |
-| 5 | LoRA Training: 7B Model auf 16GB GPU | 📝 Planned | QLoRA fine-tuning on consumer hardware |
+| 5 | LoRA Training: 7B Model auf 24GB GPU | 📝 Planned | QLoRA fine-tuning on consumer hardware |
 | 5.5 | Training Infrastructure: HuggingFace Trainer + MLflow | 📝 Planned | Production-ready training setup |
 | 6 | Der pad_token Bug: Eine Debugging-Geschichte | 📝 Planned | 20h debugging journey, community anti-pattern |
 | **Phase 3: Production & Sovereignty** | | | |

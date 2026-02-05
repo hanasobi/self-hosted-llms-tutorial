@@ -65,7 +65,7 @@ Prompting vs. RAG vs. Fine-tuning — wann welcher Ansatz passt und warum wir Fi
 **Post 4: Dataset Engineering — Von Dokumenten zu Trainingsdaten**
 Die Pipeline von Rohdokumenten zu QA-Paaren: Chunking, Synthetic Data Generation, Quality Control. *80% der eigentlichen Arbeit.*
 
-**Post 5: LoRA Training — 7B Model auf 16GB GPU**
+**Post 5: LoRA Training — 7B Model auf 24GB GPU**
 QLoRA macht große Modelle auf Consumer-Hardware trainierbar. Mit MLflow Experiment Tracking.
 
 **Post 5.5: Training Infrastructure — HuggingFace Trainer + MLflow**
