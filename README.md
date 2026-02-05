@@ -63,8 +63,8 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 1 | Warum Self-Hosting? Der Business Case für Datensouveränität | ✅ Done | Why self-host, decision framework, series overview |
 | 2 | vLLM auf Kubernetes: Dein erstes selbst gehostetes LLM | ✅ Done | Deploy Mistral-7B, K8s basics, first inference |
 | **Phase 2: Fine-tuning** | | | |
-| 3 | Warum Fine-tuning? Wenn RAG und Prompting nicht reichen | 📝 Planned | When and why to fine-tune |
-| 4 | Dataset Engineering: Von Dokumenten zu Trainingsdaten | 📝 Planned | Chunking, QA generation, quality control |
+| 3 | Warum Fine-tuning? Wenn RAG und Prompting nicht reichen | ✅ Done | When and why to fine-tune |
+| 4 | Dataset Engineering: Von Dokumenten zu Trainingsdaten | 🚧 In Progress | Chunking, QA generation, quality control |
 | 5 | LoRA Training: 7B Model auf 16GB GPU | 📝 Planned | QLoRA fine-tuning on consumer hardware |
 | 5.5 | Training Infrastructure: HuggingFace Trainer + MLflow | 📝 Planned | Production-ready training setup |
 | 6 | Der pad_token Bug: Eine Debugging-Geschichte | 📝 Planned | 20h debugging journey, community anti-pattern |

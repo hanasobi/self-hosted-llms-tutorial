@@ -59,7 +59,7 @@ Mistral-7B auf Kubernetes deployen mit vLLM. Nach diesem Post läuft ein LLM auf
 
 > *"Wie mache ich es besser für meinen Use Case?"*
 
-**Post 3: Warum Fine-tuning? Wenn RAG und Prompting nicht reichen**
+**Post 3: [Warum Fine-tuning? Wenn RAG und Prompting nicht reichen](posts/03-warum-finetuning.html)**
 Prompting vs. RAG vs. Fine-tuning — wann welcher Ansatz passt und warum wir Fine-tuning brauchen.
 
 **Post 4: Dataset Engineering — Von Dokumenten zu Trainingsdaten**
