@@ -15,7 +15,7 @@
 
 **Tech-Stack:** vLLM 0.14.1, Mistral-7B-AWQ, Kubernetes (EKS), g6.xlarge (L4 GPU)
 
-**Code:** [Alle Manifeste auf GitHub](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes) | **Willst du mehr?** [Inhaltsverzeichnis](#inhaltsverzeichnis)
+**Code:** [Alle Manifeste auf GitHub](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes) | **Willst du mehr?** [Inhaltsverzeichnis](#inhaltsverzeichnis)
 
 ---
 
@@ -42,7 +42,7 @@
 - [Fazit & Ausblick](#fazit-und-ausblick)
 
 **Ressourcen:**
-- [Alle Manifeste auf GitHub](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes)
+- [Alle Manifeste auf GitHub](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes)
 
 ---
 
@@ -326,7 +326,7 @@ Viele Teams haben ähnliche Situationen – NetworkPolicies werden geschrieben a
 
 ---
 
-**NetworkPolicy Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/networkpolicy.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/networkpolicy.annotated.yaml)
+**NetworkPolicy Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/networkpolicy.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/networkpolicy.annotated.yaml)
 
 Das annotierte Manifest enthält ausführliche Kommentare zu jedem Parameter und erklärt Trade-offs im Detail.
 
@@ -640,7 +640,7 @@ Häufige Ursachen:
 
 ---
 
-**Deployment Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/deployment-base.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/deployment-base.annotated.yaml)
+**Deployment Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/deployment-base.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/deployment-base.annotated.yaml)
 
 Das annotierte Manifest enthält ausführliche Kommentare zu jedem Parameter und erklärt Trade-offs im Detail.
 
@@ -789,7 +789,7 @@ Ursachen:
 
 ---
 
-**Service Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/service.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/service.annotated.yaml)
+**Service Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/service.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/service.annotated.yaml)
 
 ---
 
@@ -979,7 +979,7 @@ In der Prometheus-UI unter "Status → Targets" sollte `ml-models/vllm` auftauch
 
 ---
 
-**ServiceMonitor Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/servicemonitor.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorialtree/main/serving/vllm/kubernetes/servicemonitor.annotated.yaml)
+**ServiceMonitor Manifest:** [Production Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/servicemonitor.yaml) | [Annotierte Version](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/servicemonitor.annotated.yaml)
 
 ---
 
