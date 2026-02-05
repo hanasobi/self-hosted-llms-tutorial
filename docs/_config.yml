@@ -1,6 +1,11 @@
-title: LLM Fine-tuning End-to-End
-description: Production-grade LLM fine-tuning tutorial - completely self-hosted
-theme: jekyll-theme-dinky
+title: Self-Hosted LLMs für Datensouveränität
+description: Von der ersten Installation über Fine-tuning bis zur vollständigen Datensouveränität
+theme: jekyll-theme-cayman
 show_downloads: true
-github:
-  repository_url: https://github.com/hanasobi/llm-finetuning-end-to-end
+repository: hanasobi/self-hosted-llms-tutorial
+defaults:
+  - scope:
+      path: "posts"
+    values:
+      layout: default
+      title: Self-Hosted LLMs für Datensouveränität

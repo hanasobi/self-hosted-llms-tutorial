@@ -1,136 +1,160 @@
----
-layout: default
-title: LLM Fine-tuning End-to-End Tutorial
----
 
-# LLM Fine-tuning End-to-End
 
-> **Production-grade LLM fine-tuning tutorial - completely self-hosted**
+> **Das erste deutschsprachige Tutorial, das zeigt wie Self-Hosted LLMs WIRKLICH funktionieren: Von der ersten Installation über Fine-tuning bis zur vollständigen Datensouveränität — mit allen Debugging-Stories und Trade-offs.**
 
 <div style="background: #f6f8fa; padding: 20px; border-radius: 6px; margin: 20px 0;">
-  <strong>🚧 Status:</strong> Week 1 - Active Development<br>
-  <strong>📖 Tutorial:</strong> Coming Soon<br>
-  <strong>⭐ GitHub:</strong> <a href="https://github.com/hanasobi/llm-finetuning-end-to-end">llm-finetuning-end-to-end</a>
+  <strong>📖 Status:</strong> Tutorial-Serie in aktiver Entwicklung<br>
+  <strong>🎯 Zielgruppe:</strong> ML Engineers, Data Scientists, Tech Leads im DACH-Raum<br>
+  <strong>⭐ GitHub:</strong> <a href="https://github.com/hanasobi/self-hosted-llms-tutorial">self-hosted-llms-tutorial</a>
 </div>
 
 ---
 
-## What This Tutorial Covers
+## Warum diese Tutorial-Serie?
 
-This is **not** your typical "load dataset, run trainer, done" tutorial. We show the **real work** behind production LLM fine-tuning:
+Unternehmen im DACH-Raum stehen vor einem Dilemma: Sie wollen generative KI nutzen, aber sensible Daten dürfen nicht an externe APIs fließen — sei es aus DSGVO-Gründen, Branchenregulierung oder zum Schutz von Betriebsgeheimnissen.
 
-**Dataset Engineering**
-- Generate synthetic QA pairs from scratch (no pre-existing datasets)
-- Quality control and stratification
-- Handle EOS tokens and padding correctly
-
-**LoRA Fine-tuning**
-- Train 7B models on consumer GPU (NVIDIA T4, 16GB VRAM)
-- Parameter-efficient fine-tuning with QLoRA
-- MLflow experiment tracking
-
-**Real Debugging**
-- The 20-hour EOS token debugging journey
-- Why `pad_token = eos_token` breaks everything
-- Systematic ML debugging methodology
-
-**Production Deployment**
-- vLLM serving on Kubernetes
-- Monitoring with Prometheus + Grafana
-- Cost optimization (scale-to-zero GPU nodes)
-
-**Complete Data Sovereignty**
-- Self-hosted everything (no OpenAI API calls)
-- Your data never leaves your infrastructure
-
----
-
-## Why This Tutorial Is Different
+Diese Tutorial-Serie zeigt den vollständigen Weg von der ersten LLM-Installation bis zur **kompletten Datensouveränität** — ohne externe Abhängigkeiten. Jeder Post hat ein klares, erreichbares Ziel, und wir dokumentieren echte Probleme und Debugging-Journeys statt nur den "Happy Path".
 
 <table>
   <tr>
-    <th>Most Tutorials</th>
-    <th>This Tutorial</th>
+    <th>Andere Tutorials</th>
+    <th>Diese Serie</th>
   </tr>
   <tr>
-    <td>❌ "Load dataset, done"</td>
-    <td>✅ Generate dataset from scratch</td>
+    <td>❌ "Deploy this YAML, done"</td>
+    <td>✅ Schrittweiser Aufbau mit Erklärungen</td>
   </tr>
   <tr>
-    <td>❌ Copy-paste code</td>
-    <td>✅ Explain every design decision</td>
+    <td>❌ Copy-Paste ohne Kontext</td>
+    <td>✅ Design-Entscheidungen & Trade-offs</td>
   </tr>
   <tr>
-    <td>❌ Hide problems</td>
-    <td>✅ Show real debugging (20h journey)</td>
+    <td>❌ Nur der Happy Path</td>
+    <td>✅ Echte Debugging-Stories (20h EOS Token Journey)</td>
   </tr>
   <tr>
-    <td>❌ Cloud/API dependent</td>
-    <td>✅ 100% self-hosted</td>
-  </tr>
-  <tr>
-    <td>❌ Happy path only</td>
-    <td>✅ Trade-offs & constraints</td>
+    <td>❌ Cloud/API-abhängig</td>
+    <td>✅ Vollständige Datensouveränität als Ziel</td>
   </tr>
 </table>
 
 ---
 
-## Project Structure
-```
-llm-finetuning-end-to-end/
-├── data/              Dataset generation & processing
-├── training/          LoRA fine-tuning scripts
-├── serving/           vLLM deployment (Kubernetes)
-├── evaluation/        Multi-modal evaluation framework
-├── experiments/       Config sweeps & hyperparameter tuning
-├── pipelines/         Argo Workflows (optional)
-└── docs/              Tutorial blog posts
-```
+## Der Weg zur Datensouveränität
+
+Die Serie folgt einem klaren didaktischen Bogen — vom ersten funktionierenden LLM bis zur vollständigen Unabhängigkeit von externen Anbietern.
+
+### Phase 1: Self-Hosting Basics
+
+> *"Kann ich ein LLM überhaupt selbst betreiben?"*
+
+**Post 1: [Warum Self-Hosting? Der Business Case für Datensouveränität](posts/01-warum-self-hosting.html)**
+Das Problem, die Lösung und wann Self-Hosting sinnvoll ist. Entscheidungsmatrix: Cloud-API vs. Self-Hosted.
+
+**Post 2: vLLM auf Kubernetes — Dein erstes selbst gehostetes LLM**
+Mistral-7B auf Kubernetes deployen mit vLLM. Nach diesem Post läuft ein LLM auf deiner Infrastruktur.
+
+### Phase 2: Anpassung durch Fine-tuning
+
+> *"Wie mache ich es besser für meinen Use Case?"*
+
+**Post 3: Warum Fine-tuning? Wenn RAG und Prompting nicht reichen**
+Prompting vs. RAG vs. Fine-tuning — wann welcher Ansatz passt und warum wir Fine-tuning brauchen.
+
+**Post 4: Dataset Engineering — Von Dokumenten zu Trainingsdaten**
+Die Pipeline von Rohdokumenten zu QA-Paaren: Chunking, Synthetic Data Generation, Quality Control. *80% der eigentlichen Arbeit.*
+
+**Post 5: LoRA Training — 7B Model auf 16GB GPU**
+QLoRA macht große Modelle auf Consumer-Hardware trainierbar. Mit MLflow Experiment Tracking.
+
+**Post 5.5: Training Infrastructure — HuggingFace Trainer + MLflow**
+Von manuellen Training-Loops zu Production-ready Infrastructure mit Custom Callbacks.
+
+**Post 6: Der pad_token Bug — Eine Debugging-Geschichte ⭐**
+20 Stunden Debugging dokumentiert: Warum `pad_token = eos_token` alles kaputt macht und wie systematisches Debugging funktioniert.
+
+### Phase 3: Production & Souveränität
+
+> *"Wie bringe ich es in Produktion — ohne externe Abhängigkeiten?"*
+
+**Post 7: LoRA Serving — Fine-tuned Models in Produktion**
+LoRA-Adapter auf dem Base Model laden, Multi-LoRA Serving und Performance-Vergleiche.
+
+**Post 8: Evaluation ohne externe APIs — LLM-as-Judge Self-Hosted**
+Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks.
+
+**Post 9: Dataset-Generierung ohne OpenAI**
+Die letzte externe Abhängigkeit eliminieren. Nach diesem Post ist die gesamte Pipeline self-hosted: Dokumente → QA-Paare → Training → Serving → Evaluation.
+
+### Phase 4: Skalierung & Automation
+
+> *"Wie skaliere ich das Ganze?"*
+
+**Post 10: Multi-LoRA in der Praxis — Ein Server, viele Use Cases**
+Architektur für Multi-Tenant-Setups, Request Routing und Kostenoptimierung.
+
+**Post 11+: Production Pipelines**
+Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
 
 ---
 
-## Current Progress
+## Datensouveränität als roter Faden
 
-**Week 1** (Current)
-- Repository setup ✅
-- vLLM deployment (in progress)
+<div style="background: #e8f5e9; padding: 20px; border-left: 4px solid #4caf50; margin: 20px 0;">
 
-**Week 2** (Next)
-- Optimization & monitoring
-- Cost analysis
+<strong>🔒 Von pragmatisch zu souverän</strong><br><br>
 
-**Week 3+** (Upcoming)
-- Blog post series
-- Code cleanup & documentation
+Die Serie geht ehrlich mit externen Abhängigkeiten um. In <strong>Post 4</strong> nutzen wir GPT-4o-mini für die Dataset-Generierung — ein bewusster Kompromiss, der transparent gemacht wird. In <strong>Post 9</strong> zeigen wir dann die self-hosted Alternative.<br><br>
 
----
+<strong>Nach Post 9 ist die gesamte Pipeline datensouverän:</strong> Kein API-Call verlässt deine Infrastruktur — weder für Training, Serving, Evaluation noch für Dataset-Generierung.
 
-## Coming Soon: Blog Post Series
-
-1. **Why Fine-tune?** When RAG & prompting aren't enough
-2. **Dataset Engineering Reality** From chunks to QA pairs
-3. **LoRA Training** 7B model on consumer GPU
-4. **The pad_token Bug** A debugging story (the viral one!)
-5. **Production Serving** vLLM on Kubernetes
-6. **Evaluation Beyond Loss** Multi-modal assessment
-7. **Design Interdependencies** Context → Training → Hardware
-
----
-
-## Follow Along
-
-- **GitHub Repository:** [llm-finetuning-end-to-end](https://github.com/hanasobi/llm-finetuning-end-to-end)
-- **Author:** [@hanasobi](https://github.com/hanasobi)
-- **Started:** January 2026
-
-<div style="background: #fffbdd; padding: 15px; border-left: 4px solid #f9c513; margin: 20px 0;">
-  <strong>⚠️ Note:</strong> This project is under active development. 
-  Code and documentation are being added weekly. Star the repo to follow progress!
 </div>
 
 ---
 
-## License
+## Für wen ist diese Serie?
 
-MIT License - Free to use, modify, and distribute.
+Diese Tutorial-Serie richtet sich an technische Fachkräfte und Entscheider, die Self-Hosted LLMs evaluieren oder implementieren wollen:
+
+- **ML Engineers & Data Scientists**, die den Schritt von Notebooks zu Production-Deployments machen wollen
+- **Tech Leads & Architekten**, die einen Self-Hosted AI-Stack evaluieren und Trade-offs verstehen müssen
+- **Technische Entscheider (CTO, Head of Data)**, die Machbarkeit und Aufwand für Datensouveränität einschätzen wollen
+- **Implementierungspartner (Freelancer, Agenturen)**, die eine Referenzimplementierung für Kundenprojekte suchen
+
+---
+
+## Projekt-Struktur
+
+```
+self-hosted-llms-tutorial/
+├── docs/                  Blog Posts (Deutsch)
+│   ├── index.md           Serien-Übersicht (diese Seite)
+│   └── posts/             Einzelne Blog Posts
+├── serving/               vLLM Deployment (Posts 2, 7)
+├── data/                  Dataset Engineering (Post 4)
+├── training/              LoRA Training (Posts 5, 6)
+├── evaluation/            Evaluation Framework (Post 8)
+└── monitoring/            Prometheus + Grafana
+```
+
+**Sprache:** Blog Posts auf Deutsch, Code und technische Dokumentation auf Englisch.
+
+---
+
+## Mitmachen & Folgen
+
+- **GitHub Repository:** [self-hosted-llms-tutorial](https://github.com/hanasobi/self-hosted-llms-tutorial)
+- **Autor:** [@hanasobi](https://github.com/hanasobi)
+- **Gestartet:** Januar 2026
+
+<div style="background: #fffbdd; padding: 15px; border-left: 4px solid #f9c513; margin: 20px 0;">
+  <strong>⚠️ Hinweis:</strong> Dieses Projekt ist in aktiver Entwicklung. Posts und Code werden regelmäßig ergänzt. Star das Repo, um auf dem Laufenden zu bleiben!
+</div>
+
+---
+
+## Lizenz
+
+- **Code:** MIT License — frei nutzbar, modifizierbar und verteilbar
+- **Blog Content:** CC BY 4.0 — mit Namensnennung
