@@ -1019,9 +1019,12 @@ kubectl get endpoints -n ml-models vllm-service
 
 **3. Health-Check:**
 ```bash
-kubectl port-forward -n ml-models svc/vllm-service 8000:8000 &
-curl http://localhost:8000/health
-# {"status":"healthy"}
+kubectl port-forward -n ml-models svc/vllm-service 8000:8000 
+curl -i http://localhost:8000/health
+# HTTP/1.1 200 OK
+# date: Thu, 05 Feb 2026 16:35:45 GMT
+# server: uvicorn
+# content-length: 0
 ```
 
 **4. Erster Inference-Request:**
