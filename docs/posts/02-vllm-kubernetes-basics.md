@@ -254,13 +254,6 @@ Auf einer T4 mit 16 GB VRAM wäre selbst mit Quantisierung der Platz knapp:
 
 Die L4 gibt uns den nötigen Headroom für Production-like Performance.
 
----
-
-**Fertig mit diesem Abschnitt?**  
-→ Weiter zu [Kubernetes Deployment](#bereitstellung-der-kubernetes-ressourcen)  
-→ Oder zurück zum [Inhaltsverzeichnis](#inhaltsverzeichnis)
-
----
 
 ## Bereitstellung der Kubernetes Ressourcen
 
