@@ -237,4 +237,6 @@ Diese Tutorial-Serie gibt dir das Werkzeug, um fundierte Entscheidungen zu treff
 
 ---
 
-**Nächster Post:** vLLM auf Kubernetes – Dein erstes selbst gehostetes LLM
+**📚 Serie: Self-Hosted LLMs für Datensouveränität**
+
+[Serienübersicht](../index.md) | [Post 3: Warum Self-Hosting?](./02-vllm-kubernetes-basics.md) →

@@ -1120,6 +1120,11 @@ Aber zuerst müssen wir verstehen, warum Fine-tuning überhaupt nötig ist und w
 - Prometheus Kubernetes Service Discovery: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#kubernetes_sd_config
 - CUDA Graphs Overview: https://developer.nvidia.com/blog/cuda-graphs/
 
-**Nächster Blog-Post:** Warum Fine-tuning? RAG allein reicht nicht
+---
+
+
+**📚 Serie: Self-Hosted LLMs für Datensouveränität**
+
+← [Post 1: Warum Self-Hosting?](./01-warum-self-hosting.md) | [Serienübersicht](../index.md) | [Post 3: Warum Fine-tuning?](./03-warum-fine-tuning.md) →
 
 ---
