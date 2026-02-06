@@ -1,6 +1,29 @@
-# Blog Post 4: Dataset Engineering - Von Dokumenten zu Trainingsdaten
+# Dataset Engineering: Von Dokumenten zu Trainingsdaten
+
+**Lesezeit:** ~20 Minuten | **Level:** Intermediate-Advanced  
+**Serie:** Self-Hosted LLMs für Datensouveränität | **Code:** [GitHub](https://github.com/hanasobi/self-hosted-llms-tutorial.git)
+
+---
 
 *Dies ist Teil 4 unserer Serie "Self-Hosted LLMs für Datensouveränität". In den vorherigen Posts haben wir den [Business Case für Self-Hosting](01-warum-self-hosting.md) besprochen, ein [erstes LLM auf Kubernetes deployed](02-vllm-kubernetes-basics.md) und erklärt, [wann Fine-tuning sinnvoll ist](03-warum-finetuning.md). Jetzt geht es ans Eingemachte: Woher kommen eigentlich die Trainingsdaten?*
+
+---
+
+## Inhaltsverzeichnis
+
+- [Das Problem: Keine Daten, kein Training](#das-problem-keine-daten-kein-training)
+- [Die Pipeline im Überblick](#die-pipeline-im-überblick)
+- [Was wir bauen: Ein Instruction Dataset für RAG-QA](#was-wir-bauen-ein-instruction-dataset-für-rag-qa)
+- [Schritt 1: Document Loading und Chunking](#schritt-1-document-loading-und-chunking)
+- [Schritt 2: QA-Pair Generation mit GPT-4o-mini](#schritt-2-qa-pair-generation-mit-gpt-4o-mini)
+- [Schritt 3: Quality Control – Der unterschätzte Schritt](#schritt-3-quality-control--der-unterschätzte-schritt)
+- [Schritt 4: Dataset Generation - Vom QA-Pair zum Instruction Sample](#schritt-4-dataset-generation---vom-qa-pair-zum-instruction-sample)
+- [Schritt 5: Train/Val/Eval Split](#schritt-5-trainvaleval-split)
+- [Lessons Learned](#lessons-learned)
+- [Was wir beim nächsten Mal besser machen würden](#was-wir-beim-nächsten-mal-besser-machen-würden)
+- [Zusammenfassung](#zusammenfassung)
+- [Nächster Schritt: LoRA Training](#nächster-schritt-lora-training)
+- [Code & Ressourcen](#code--ressourcen)
 
 ---
 
