@@ -204,6 +204,6 @@ Der Schlüssel zum Erfolg liegt nicht im Training selbst, sondern in der Vorbere
 
 **📚 Serie: Self-Hosted LLMs für Datensouveränität**
 
-← [Post 2: vLLM & Kubernetes Basics](./02-vllm-kubernetes-basics.md)| [Serienübersicht](../index.md) | [Post 4: Dataset Engineering](./04-dataset-engineering.md)
+← [Post 2: vLLM & Kubernetes Basics](./02-vllm-kubernetes-basics.md)| [Serienübersicht](../index.md) | [Post 4: Dataset Engineering](./04-dataset-engineering.md) →
 
 ---
