@@ -59,8 +59,6 @@ models/*/
 
 # Data
 data/raw/
-data/processed/*.jsonl
-!data/processed/README.md
 *.csv
 *.tsv
 
