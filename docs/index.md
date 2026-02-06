@@ -62,7 +62,7 @@ Mistral-7B auf Kubernetes deployen mit vLLM. Nach diesem Post läuft ein LLM auf
 **Post 3: [Warum Fine-tuning? Wenn RAG und Prompting nicht reichen](posts/03-warum-finetuning.html)**
 Prompting vs. RAG vs. Fine-tuning — wann welcher Ansatz passt und warum wir Fine-tuning brauchen.
 
-**Post 4: Dataset Engineering — Von Dokumenten zu Trainingsdaten**
+**Post 4: [Dataset Engineering — Von Dokumenten zu Trainingsdaten**](posts/04-dataset-engineering.html)**
 Die Pipeline von Rohdokumenten zu QA-Paaren: Chunking, Synthetic Data Generation, Quality Control. *80% der eigentlichen Arbeit.*
 
 **Post 5: LoRA Training — 7B Model auf 24GB GPU**
@@ -79,7 +79,7 @@ Von manuellen Training-Loops zu Production-ready Infrastructure mit Custom Callb
 > *"Wie bringe ich es in Produktion — ohne externe Abhängigkeiten?"*
 
 **Post 7: LoRA Serving — Fine-tuned Models in Produktion**
-LoRA-Adapter auf dem Base Model laden, Multi-LoRA Serving und Performance-Vergleiche.
+LoRA-Adapter auf dem Base Model laden, Performance-Vergleiche.
 
 **Post 8: Evaluation ohne externe APIs — LLM-as-Judge Self-Hosted**
 Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks.

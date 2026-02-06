@@ -1,0 +1,844 @@
+================================================================================
+HALLUCINATION CHECK - MANUAL REVIEW
+================================================================================
+
+Total chunks: 1,875
+Total QA pairs: 5,796
+Sampled chunks: 10
+
+For each sample, compare:
+  1. Original chunk content (source of truth)
+  2. Generated questions - are they relevant to chunk?
+  3. Generated answers - do they match chunk content?
+
+Red flags:
+  - Answer contains info NOT in chunk
+  - Answer contradicts chunk
+  - Answer uses external knowledge
+  - Question can't be answered from chunk
+
+
+================================================================================
+SAMPLE #1
+================================================================================
+
+Chunk ID:      sns-faq-23
+Service:       SNS
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  502
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+No, they do not. End-users opt-in to receive push notifications when they
+first run an app, whether or not SNS delivers the push notifications.
+
+SNS does not require you to modify your client app. Baidu Cloud Push requires
+Baidu-specific components to be added to your client code in order to work
+properly, whether or not you choose to use SNS.
+
+SNS topics can have subscribers from any supported push notifications
+platform, as well as any other endpoint type such as SMS or email. When you
+publish a notification to a topic, SNS will send identical copies of that
+message to each endpoint subscribed to the topic. If you use platform-specific
+payloads to define the exact payload sent to each push platform, the publish
+will fail if it exceeds the maximum payload size imposed by the relevant push
+notifications platform.
+
+SNS will support maximum payload size that is supported by the underlying
+native platform. Customers can use a JSON object to send platform specific
+messages. See Using SNS Mobile Push API for additional details.
+
+When you publish to a topic and want to have customized messages sent to
+endpoints for the different push notification platforms then you need to
+select “Use different message body for different protocols” option on the
+Publish dialog box and then update the messages. You can use platform-specific
+payloads to specify the exact API string that is relayed to each push
+notifications service. For example, you can use platform-specific payloads to
+manipulate the badge count of your iOS application via APNS. For more
+information, see Using Amazon SNS Mobile Push Notifications .
+
+Yes. Each token can be subscribed to an unlimited number of SNS topics.
+
+Direct addressing allows you to deliver notifications directly to a single
+endpoint, rather than sending identical messages to all subscribers of a
+topic. This is useful if you want to deliver precisely targeted messages to
+each recipient. When you register device tokens with SNS, SNS creates an
+endpoint that corresponds to the token. You can publish to the token endpoint
+just as you would publish to a topic. You can direct publish either the text
+of your notification, or a platform-specific payload that takes advantage of
+platform-specific features such as updating the badge count of your app.
+Direct addressing is currently only available for push notifications
+endpoints.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: Do end-users need to modify their client app to receive push notifications using SNS?
+
+A: No, end-users do not need to modify their client app to receive push
+   notifications when using SNS. They opt-in to receive push notifications
+   when they first run the app, regardless of whether SNS delivers the
+   notifications.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: What is the advantage of using direct addressing in SNS for push notifications?
+
+A: The advantage of using direct addressing in SNS for push notifications is
+   that it allows you to deliver notifications directly to a single endpoint.
+   This is useful for delivering precisely targeted messages to each
+   recipient, rather than sending identical messages to all subscribers of a
+   topic.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How does SNS differ from Baidu Cloud Push in terms of client app modification requirements?
+
+A: SNS does not require you to modify your client app to work properly,
+   whereas Baidu Cloud Push requires Baidu-specific components to be added to
+   your client code for it to function correctly.
+
+
+
+================================================================================
+SAMPLE #2
+================================================================================
+
+Chunk ID:      s3-faq-75
+Service:       S3
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  462
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+The Amazon S3 Glacier storage classes are purpose-built for data archiving,
+providing you with the highest performance, most retrieval flexibility, and
+the lowest cost archive storage in the cloud. You can now choose from three
+archive storage classes optimized for different access patterns and storage
+duration. For archive data that needs immediate access, such as medical
+images, news media assets, or genomics data, choose the S3 Glacier Instant
+Retrieval storage class, an archive storage class that delivers the lowest
+cost storage with milliseconds retrieval. For archive data that does not
+require immediate access but needs the flexibility to retrieve large sets of
+data at no cost, such as backup or disaster recovery use cases, choose S3
+Glacier Flexible Retrieval, with retrieval in minutes or free bulk retrievals
+in 5—12 hours. To save even more on long-lived archive storage such as
+compliance archives and digital media preservation, choose S3 Glacier Deep
+Archive, the lowest cost storage in the cloud with data retrieval within 12
+hours.
+
+We prefer to focus on the customer outcomes of performance, durability,
+availability, and security. However, this question is often asked by our
+customers. We use a number of different technologies which allow us to offer
+the prices we do to our customers. Our services are built using common data
+storage technologies specifically assembled into purpose-built, cost-optimized
+systems using AWS-developed software. The S3 Glacier storage classes benefit
+from our ability to optimize the sequence of inputs and outputs to maximize
+efficiency accessing the underlying storage.
+
+S3 Glacier Deep Archive is an Amazon S3 storage class that provides secure
+and durable object storage for long-term retention of data that is accessed
+once or twice in a year. From just $0.00099 per GB-month (less than one-tenth
+of one cent, or about $1 per TB-month), S3 Glacier Deep Archive offers the
+lowest cost storage in the cloud, at prices significantly lower than storing
+and maintaining data in on-premises magnetic tape libraries or archiving data
+off-site.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What is the retrieval time for the S3 Glacier Instant Retrieval storage class?
+
+A: The S3 Glacier Instant Retrieval storage class delivers data retrieval in
+   milliseconds.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: What are the advantages of using the S3 Glacier storage classes for data archiving?
+
+A: The advantages of using the S3 Glacier storage classes for data archiving
+   include the highest performance, most retrieval flexibility, and the lowest
+   cost archive storage in the cloud.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How does S3 Glacier Deep Archive compare to S3 Glacier Flexible Retrieval in terms of retrieval time and cost?
+
+A: S3 Glacier Deep Archive provides data retrieval within 12 hours and offers
+   the lowest cost storage at $0.00099 per GB-month, while S3 Glacier Flexible
+   Retrieval allows for retrieval in minutes or free bulk retrievals in 5—12
+   hours but does not specify a cost comparable to Deep Archive.
+
+
+
+================================================================================
+SAMPLE #3
+================================================================================
+
+Chunk ID:      dms-faq-3
+Service:       DMS
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  357
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+AWS DMS and AWS SCT work in conjunction to both migrate databases and support
+ongoing replication for a variety of uses such as populating data lakes and
+warehouses, synchronizing systems, and so on. AWS SCT can copy database
+schemas for homogeneous migrations and convert them for heterogeneous
+migrations. The schemas can be between databases (for example, Oracle to
+PostgreSQL), or between data warehouses (for example, Netezza to Amazon
+Redshift). Once a schema has been created on an empty target, depending on the
+volume of data and/or supported engines, either AWS DMS or AWS SCT are then
+used to move the data. AWS DMS traditionally moves smaller relational
+workloads (<10 TB), whereas AWS SCT is primarily used to migrate large data
+warehouse workloads. AWS DMS supports ongoing replication to keep the target
+in sync with the source; AWS SCT does not.
+
+AWS Database Migration Service (AWS DMS) Serverless automatically provisions,
+monitors, and scales resources to make database and analytics migrations to
+AWS easier and more cost effective. With AWS DMS Serverless, you no longer
+have to overprovision migration resources or manually monitor and scale
+resources for continuous data replication. AWS DMS Serverless optimizes
+resources to meet demand, so you’re only paying for the resources used. This
+makes it helpful for popular use cases such as continuous data replication, as
+well as complex heterogeneous migrations between different source and target
+engines.
+
+Yes, AWS DMS Serverless can be used for continuous replication. DMS
+Serverless supports both Single-AZ and Multi-AZ deployment options.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What types of migrations are supported by AWS SCT?
+
+A: AWS SCT can copy database schemas for homogeneous migrations and convert
+   them for heterogeneous migrations. The migrations can be between databases,
+   such as Oracle to PostgreSQL, or between data warehouses, like Netezza to
+   Amazon Redshift.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: How does AWS DMS Serverless optimize resource usage during migrations?
+
+A: AWS DMS Serverless optimizes resources to meet demand, which means you
+   only pay for the resources used. It automatically provisions, monitors, and
+   scales resources, eliminating the need to overprovision or manually monitor
+   resources for continuous data replication.
+
+[QA Pair 3 - Type: comparison]
+
+Q: What is the main difference between AWS DMS and AWS SCT in terms of their support for ongoing replication?
+
+A: AWS DMS supports ongoing replication to keep the target in sync with the
+   source, whereas AWS SCT does not provide support for ongoing replication.
+
+
+
+================================================================================
+SAMPLE #4
+================================================================================
+
+Chunk ID:      lambda-faq-8
+Service:       LAMBDA
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  506
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+AWS Lambda offers discounted pricing tiers for monthly on-demand function
+duration above certain thresholds. Tiered pricing is available for functions
+running on both x86 and Arm architectures. Lambda pricing tiers are applied to
+aggregate monthly on-demand duration of your functions running on the same
+architecture (x86 or Arm, respectively), in the same region, within the
+account. If you’re using consolidated billing in AWS Organizations, pricing
+tiers are applied to the aggregate monthly duration of your functions running
+on the same architecture, in the same region, across the accounts in the
+organization. For example, if you are running x86 Lambda functions in the US
+East (Ohio) region, you will pay $0.0000166667 for every GB-second for the
+first 6 billion GB-seconds per month, $0.0000150000 for every GB-second for
+the next 9 billion GB-seconds per month, and $0.0000133334 for every GB-second
+over 15 billion GB-seconds per month, in that region. Pricing for Requests,
+Provisioned Concurrency, and Provisioned Concurrency Duration remains
+unchanged. For more information, please see AWS Lambda Pricing
+
+Yes. Lambda usage that is covered by your hourly savings plan commitment is
+billed at the applicable CSP rate and discount . The remaining usage that is
+not covered by this commitment will be billed at the rate corresponding to the
+tier your monthly aggregate function duration falls in.
+
+An event source is an AWS service or developer-created application that
+produces events that trigger an AWS Lambda function to run. Some services
+publish these events to Lambda by invoking the cloud function directly (for
+example, Amazon S3). Lambda can also poll resources in other services that do
+not publish events to Lambda. For example, Lambda can pull records from an
+Amazon Kinesis stream or an Amazon SQS queue and execute a Lambda function for
+each fetched message.Many other services, such as AWS CloudTrail, can act as
+event sources simply by logging to Amazon S3 and using S3 bucket notifications
+to trigger AWS Lambda functions
+
+Please see our documentation for a complete list of event sources.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What are the pricing tiers for AWS Lambda functions running on x86 architecture in the US East (Ohio) region?
+
+A: For AWS Lambda functions running on x86 architecture in the US East (Ohio)
+   region, the pricing tiers are as follows: You will pay $0.0000166667 for
+   every GB-second for the first 6 billion GB-seconds per month, $0.0000150000
+   for every GB-second for the next 9 billion GB-seconds per month, and
+   $0.0000133334 for every GB-second over 15 billion GB-seconds per month.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: How does AWS Lambda handle pricing for functions running under consolidated billing in AWS Organizations?
+
+A: Under consolidated billing in AWS Organizations, the pricing tiers for AWS
+   Lambda are applied to the aggregate monthly duration of functions running
+   on the same architecture, in the same region, across all accounts in the
+   organization.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How does the event source for AWS Lambda differ between services that directly invoke functions and those that require polling?
+
+A: Event sources for AWS Lambda differ in that some services, like Amazon S3,
+   publish events directly to Lambda by invoking the cloud function, while
+   other services, such as Amazon Kinesis and Amazon SQS, require Lambda to
+   poll resources to pull records and execute a function for each fetched
+   message.
+
+
+
+================================================================================
+SAMPLE #5
+================================================================================
+
+Chunk ID:      cloudfront-faq-27
+Service:       CLOUDFRONT
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  461
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+No. CloudFront Anycast will only be available with IPs spread across
+geographic regions.
+
+As CloudFront adds new edge locations, your Anycast Static IP list will
+continue to remain valid. We will announce your IPs from the new edge
+locations, as appropriate.
+
+All CloudFront features work with Anycast with three notable exceptions: 1/
+Anycast Static IPs will not support legacy clients that cannot support SNI, 2/
+You are required to use Price Class All when using Anycast Static IPs, and 3/
+You must disable IPv6 when using Anycast Static IPs. Anycast Static IPs works
+at the DNS resolution stage and once the request reaches a host, all existing
+features and integrations with other AWS services will continue to be
+available to your distributions.
+
+You can use the Anycast Static IPs with multiple distributions, but they must
+be in the same account. CloudFront Anycast Static IPs can be associated across
+multiple distributions in the account. CloudFront Anycast Static IP will
+support Server Name Indication (SNI) so that correct certificate is returned
+from any number of distributions associated with their Anycast Static IP
+Policy. If you desire to have distinct static IPs for multiple distributions
+within your account, you can create an additional Anycast Static IP list and
+associate them to specific distributions.
+
+When creating a new distribution in an account with Anycast Static IPs
+enabled, you must explicitly associate the new distribution with your existing
+Anycast Static IP list. By default, it will use dynamic IP addresses until you
+link it to your static IP list.
+
+Yes. Complete our request for higher limits here , and we will add more
+capacity to your account within two business days.
+
+For the current limit on the number of distributions that you can create for
+each AWS account, see Amazon CloudFront Limits in the Amazon Web Services
+General Reference. To request a higher limit, please go to the CloudFront
+Limit Increase Form .
+
+The maximum size of a single file that can be delivered through Amazon
+CloudFront is 30 GB. This limit applies to all Amazon CloudFront
+distributions.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What is the maximum size of a single file that can be delivered through Amazon CloudFront?
+
+A: The maximum size of a single file that can be delivered through Amazon
+   CloudFront is 30 GB. This limit applies to all Amazon CloudFront
+   distributions.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: What are the notable exceptions when using Anycast Static IPs with CloudFront?
+
+A: There are three notable exceptions when using Anycast Static IPs with
+   CloudFront: 1) Anycast Static IPs will not support legacy clients that
+   cannot support SNI, 2) you are required to use Price Class All when using
+   Anycast Static IPs, and 3) you must disable IPv6 when using Anycast Static
+   IPs.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How do Anycast Static IPs differ from dynamic IP addresses in CloudFront distributions?
+
+A: Anycast Static IPs are explicitly associated with distributions in an AWS
+   account, while dynamic IP addresses are used by default until a
+   distribution is linked to an existing Anycast Static IP list. Anycast
+   Static IPs also support Server Name Indication (SNI), allowing correct
+   certificates to be returned, which is not mentioned for dynamic IP
+   addresses.
+
+
+
+================================================================================
+SAMPLE #6
+================================================================================
+
+Chunk ID:      aws-faq-7
+Service:       AWS
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  416
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+Yes. File transfers traversing a firewall or a router are supported by
+default using extended passive connection mode (EPSV). If you are using an
+FTPS/FTP client that does not support EPSV mode, visit this blog post to
+configure your server in PASV mode to expand your server’s compatibility to a
+broad range of clients.
+
+AWS Transfer Family web apps are fully managed, customizable, secure, and
+reliable portals that enable you to provide your end users with a simple
+interface for transferring data to and from Amazon S3 over a web browser.
+
+You can start using web apps to enable a simple web interface so your
+end-users can browse, upload, and download data stored in Amazon S3 in three
+simple steps. First, create an Identity Center instance using the Identity
+Center directory, Microsoft Active (AD), or third party identity provider
+(IdP) such as Okta or Entra ID. Then, in the Transfer Family console, create a
+web app and assign your users and groups from your directory to use your
+application. Finally, set up user or group permissions in S3 Access Grants.
+For more details, visit our blog or documentation .
+
+No. Transfer Family web apps and servers are separate, standalone resources
+that are not connected. You create a web app independent of a server.
+
+Web apps support AWS IAM Identity Center. With IAM Identity Center, you can
+create and manage user identities in IAM Identity Center’s identity store or
+easily connect to your existing identity source, such as Microsoft Active
+Directory, Okta Universal Directory, Microsoft Entra ID (formerly Azure AD),
+or another supported IdP . You can connect IAM Identity Center to most SAML
+2.0 IdPs, such as Okta Universal Directory or Microsoft Entra ID (formerly
+Azure AD). Visit the IAM Identity Center documentation to learn more.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What mode is used by default for file transfers traversing a firewall or router?
+
+A: File transfers traversing a firewall or a router are supported by default
+   using extended passive connection mode (EPSV).
+
+[QA Pair 2 - Type: conceptual]
+
+Q: What are AWS Transfer Family web apps designed to provide to end users?
+
+A: AWS Transfer Family web apps are designed to provide end users with a
+   simple interface for transferring data to and from Amazon S3 over a web
+   browser.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How do AWS Transfer Family web apps and servers relate to each other?
+
+A: AWS Transfer Family web apps and servers are separate, standalone
+   resources that are not connected. You create a web app independent of a
+   server.
+
+
+
+================================================================================
+SAMPLE #7
+================================================================================
+
+Chunk ID:      rekognition-faq-6
+Service:       REKOGNITION
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  509
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+Rekognition supports thousands of labels belonging to common categories
+including, but not limited to: People and Events: ‘Wedding’, ‘Bride’, ‘Baby’,
+‘Birthday Cake’, ‘Guitarist’, etc. Food and Drink: ‘Apple’, ‘Sandwich’,
+‘Wine’, ‘Cake’, ‘Pizza’, etc. Nature and Outdoors: ‘Beach’, ‘Mountains’,
+‘Lake’, ‘Sunset’, ‘Rainbow’, etc. Animals and Pets: ‘Dog’, ‘Cat’, ‘Horse’,
+‘Tiger’, ‘Turtle’, etc. Home and Garden: ‘Bed’, ‘Table’, ‘Backyard’,
+‘Chandelier’, ‘Bedroom’, etc. Sports and Leisure: ‘Golf’, ‘Basketball’,
+‘Hockey’, ‘Tennis’, ‘Hiking’, etc. Plants and Flowers: ‘Rose’, ‘Tulip’, ‘Palm
+Tree’, ‘Forest’, ‘Bamboo’, etc. Art and Entertainment: ‘Sculpture’,
+‘Painting’, ‘Guitar’, ‘Ballet’, ‘Mosaic’, etc. Transportation and Vehicles:
+‘Airplane’, ‘Car’, ‘Bicycle’, ‘Motorcycle’, ‘Truck’, etc. Electronics:
+‘Computer’, ‘Mobile Phone’, ‘Video Camera’, ‘TV’, ‘Headphones’, etc.
+Landmarks: 'Brooklyn Bridge', 'Colosseum', 'Eiffel Tower', 'Machu Picchu',
+'Taj Mahal', etc.
+
+Rekognition Video enables you to automatically identify thousands of objects
+- such as vehicles or pets - and activities - such as celebrating or dancing -
+and provides you with timestamps and a confidence score for each label. It
+also relies on motion and time context in the video to accurately identify
+complex activities, such as “blowing a candle” or “extinguishing fire”.
+
+Please send us your label requests through the Amazon Rekognition Console by
+typing the label name in the input field of the 'Search all labels' section
+and click 'Request Rekognition to detect' the requested label. Amazon
+Rekognition continuously expands its catalog of labels based on customer
+feedback.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What categories of labels does Rekognition support?
+
+A: Rekognition supports labels belonging to several common categories
+   including People and Events, Food and Drink, Nature and Outdoors, Animals
+   and Pets, Home and Garden, Sports and Leisure, Plants and Flowers, Art and
+   Entertainment, Transportation and Vehicles, Electronics, and Landmarks.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: How does Rekognition Video identify complex activities in videos?
+
+A: Rekognition Video identifies complex activities by relying on motion and
+   time context in the video, which helps in accurately identifying activities
+   such as 'blowing a candle' or 'extinguishing fire'.
+
+[QA Pair 3 - Type: comparison]
+
+Q: In what way does the label detection feature of Rekognition Video differ from the general label support in Rekognition?
+
+A: The label detection feature of Rekognition Video focuses on automatically
+   identifying objects and activities in videos and provides timestamps and
+   confidence scores for each label, while the general label support in
+   Rekognition encompasses a wide range of static labels across different
+   categories, without specific mention of video context.
+
+
+
+================================================================================
+SAMPLE #8
+================================================================================
+
+Chunk ID:      managed-faq-16
+Service:       MANAGED
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  385
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+Yes, Amazon MSK uses Apache ZooKeeper for metadata management. Additionally,
+starting from Apache Kafka version 3.7, you can create clusters in either
+ZooKeeper mode or KRaft mode. A cluster created with KRaft mode uses KRaft
+controllers for metadata management instead of ZooKeeper nodes.
+
+Apache KRaft is the consensus protocol that shifts metadata management in
+Kafka clusters from external Apache ZooKeeper nodes to a group of controllers
+within Kafka. This change allows metadata to be stored and replicated as
+topics within Kafka brokers, resulting in faster propagation of metadata. To
+learn more, refer to our Apache KRaft documentation .
+
+There are no API changes required to use KRaft mode on Amazon MSK. However,
+if your clients still use the --zookeeper connection string today, you should
+update your clients to use the --bootstrap-server connection string to connect
+to your cluster and perform admin actions. The --zookeeper flag is deprecated
+in Apache Kafka version 2.5 and is removed starting with Kafka 3.0. Therefore,
+we recommend you use recent Apache Kafka client versions and the
+--bootstrap-server connection string.
+
+You should check that any tools you use are capable of using Kafka Admin APIs
+without ZooKeeper connections. See our updated documentation on using Cruise
+Control for KRaft mode clusters . Cruise Control has also published steps to
+follow to run Kafka without ZooKeeper connection.
+
+The number of partitions per broker is the same on Kraft- and ZooKeeper-based
+clusters. However, KRaft allows you to host more partitions per cluster by
+provisioning more brokers in a cluster.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What protocol does Amazon MSK use for metadata management?
+
+A: Amazon MSK uses Apache ZooKeeper for metadata management.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: What is the main advantage of using KRaft mode over ZooKeeper mode in Kafka clusters?
+
+A: The main advantage of using KRaft mode over ZooKeeper mode is that it
+   allows metadata to be stored and replicated as topics within Kafka brokers,
+   resulting in faster propagation of metadata.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How does the number of partitions per broker compare between KRaft-based clusters and ZooKeeper-based clusters?
+
+A: The number of partitions per broker is the same on KRaft- and
+   ZooKeeper-based clusters. However, KRaft allows you to host more partitions
+   per cluster by provisioning more brokers in a cluster.
+
+
+
+================================================================================
+SAMPLE #9
+================================================================================
+
+Chunk ID:      managed-faq-11
+Service:       MANAGED
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  476
+QA Pairs:      6
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+MSK Serverless is a cluster type for Amazon MSK that makes it easy for you to
+run Apache Kafka clusters without having to manage compute and storage
+capacity. With MSK Serverless, you can run your applications without having to
+provision, configure, or optimize clusters, and you pay for the data volume
+you stream and retain.
+
+Yes, MSK Serverless fully manages partitions, including monitoring and moving
+them to even load across a cluster.
+
+MSK Serverless provides up to 200 MBps of write capacity and 400 MBps of read
+capacity per cluster. Additionally, to ensure sufficient throughput
+availability for all partitions in a cluster, MSK Serverless allocates up to 5
+MBps of instant write capacity and 10 MBps of instant read capacity per
+partition.
+
+MSK Serverless encrypts all traffic in transit and all data at rest using
+service-managed keys issued through AWS KMS. Clients connect to MSK Serverless
+over a private connection using AWS PrivateLink without exposing your traffic
+to the public internet. Additionally, MSK Serverless offers AWS Identity and
+Access Management (IAM) access control, which you can use to manage client
+authentication and client authorization to Apache Kafka resources such as
+topics.
+
+When you create an MSK Serverless cluster, you provide subnets of one or more
+Amazon Virtual Private Clouds (Amazon VPCs) that host the clients of the
+cluster. Clients hosted in any of these Amazon VPCs can connect to the MSK
+Serverless cluster using its bootstrap broker string.
+
+For up-to-date Regional availability, refer to the Amazon MSK pricing page .
+
+MSK Serverless currently supports IAM (Identity Access Management) for client
+authentication and authorization. Your clients can assume an IAM role for
+authentication, and you can enforce access control using an associated IAM
+policy.
+
+You can use any Apache Kafka compatible tools to process data in your MSK
+Serverless cluster topics. MSK Serverless integrates with Amazon Managed
+Service for Apache Flink for stateful stream processing and AWS Lambda for
+event processing. You can also use Apache Kafka Connect sink connectors to
+send data to any desired destination.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (6):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What does Amazon Managed Service for Apache Flink allow you to do with snapshots?
+
+A: Amazon Managed Service for Apache Flink allows you to create and restore
+   your application to a previous point in time using snapshots. You can
+   maintain previous application state and roll back your application at any
+   time. Additionally, you control how many snapshots you have at any given
+   time, from zero to thousands.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: How does Amazon Managed Service for Apache Flink handle data security in snapshots?
+
+A: Amazon Managed Service for Apache Flink encrypts data saved in snapshots
+   by default, ensuring that your application data is secure.
+
+[QA Pair 3 - Type: comparison]
+
+Q: What is the relationship between Apache Beam and Amazon Managed Service for Apache Flink?
+
+A: Amazon Managed Service for Apache Flink supports streaming applications
+   built using Apache Beam. You can build Apache Beam streaming applications
+   in Java and run them on Amazon Managed Service for Apache Flink, among
+   other engines and services.
+
+[QA Pair 4 - Type: factual]
+
+Q: What type of capacity management does MSK Serverless provide for Apache Kafka clusters?
+
+A: MSK Serverless makes it easy to run Apache Kafka clusters without having
+   to manage compute and storage capacity, allowing you to run applications
+   without the need to provision, configure, or optimize clusters.
+
+[QA Pair 5 - Type: conceptual]
+
+Q: How does MSK Serverless ensure data security and access control?
+
+A: MSK Serverless encrypts all traffic in transit and all data at rest using
+   service-managed keys issued through AWS KMS. It also offers AWS Identity
+   and Access Management (IAM) access control for managing client
+   authentication and authorization to Apache Kafka resources such as topics.
+
+[QA Pair 6 - Type: comparison]
+
+Q: What are the differences in write and read capacity allocations in MSK Serverless?
+
+A: MSK Serverless provides up to 200 MBps of write capacity and 400 MBps of
+   read capacity per cluster. Additionally, it allocates up to 5 MBps of
+   instant write capacity and 10 MBps of instant read capacity per partition
+   to ensure sufficient throughput availability.
+
+
+
+================================================================================
+SAMPLE #10
+================================================================================
+
+Chunk ID:      documentdb-faq-9
+Service:       DOCUMENTDB
+Doc Type:      Guide
+Source File:   faq.html
+Chunk Tokens:  478
+QA Pairs:      3
+
+--------------------------------------------------------------------------------
+ORIGINAL CHUNK CONTENT:
+--------------------------------------------------------------------------------
+Yes. Amazon DocumentDB gives you the ability to create snapshots of your
+cluster , which you can use later to restore a cluster. You can share a
+snapshot with a different AWS account, and the owner of the recipient account
+can use your snapshot to restore a cluster that contains your data. You can
+even choose to make your snapshots public – that is, anybody can restore a
+cluster containing your (public) data. You can use this feature to share data
+between your various environments (production, dev/test, staging, etc.) that
+have different AWS accounts, as well as keep backups of all your data secure
+in a separate account in case your main AWS account is ever compromised.
+
+There is no charge for sharing snapshots between accounts. However, you may
+be charged for the snapshots themselves, as well as any clusters that you
+restore from shared snapshots.
+
+We do not support sharing automatic cluster snapshots. To share an automatic
+snapshot, you must manually create a copy of the snapshot, and then share the
+copy.
+
+No. Your shared Amazon DocumentDB snapshots will only be accessible by
+accounts in the same region as the account that shares them.
+
+Yes. You can share encrypted Amazon DocumentDB snapshots . The recipient of
+the shared snapshot must have access to the KMS key that was used to encrypt
+the snapshot.
+
+No. Amazon DocumentDB snapshots can only be used inside of the service.
+
+You can choose to create a final snapshot when deleting your cluster . If you
+do, you can use this snapshot to restore the deleted cluster at a later date.
+Amazon DocumentDB retains this final user-created snapshot along with all
+other manually created snapshots after the cluster is deleted.
+
+Amazon DocumentDB automatically divides your storage volume into 10 GiB
+segments spread across many disks. We make your data durable across three
+Availability Zones (AZs) and you only pay for one copy. Amazon DocumentDB is
+designed to transparently handle the loss of up to two copies of data without
+affecting write availability and up to three copies without affecting read
+availability. Amazon DocumentDB storage volume is also self-healing. Data
+blocks and disks are continuously scanned for errors and repaired
+automatically.
+
+--------------------------------------------------------------------------------
+GENERATED QA PAIRS (3):
+--------------------------------------------------------------------------------
+
+[QA Pair 1 - Type: factual]
+
+Q: What feature does Amazon DocumentDB provide to help restore a cluster?
+
+A: Amazon DocumentDB allows you to create snapshots of your cluster, which
+   can be used later to restore the cluster.
+
+[QA Pair 2 - Type: conceptual]
+
+Q: What are the benefits of sharing Amazon DocumentDB snapshots between different AWS accounts?
+
+A: Sharing Amazon DocumentDB snapshots allows you to share data between
+   various environments such as production, dev/test, and staging that have
+   different AWS accounts. It also enables you to keep backups of all your
+   data secure in a separate account in case your main AWS account is ever
+   compromised.
+
+[QA Pair 3 - Type: comparison]
+
+Q: How do the accessibility and sharing capabilities of Amazon DocumentDB snapshots differ for user-created snapshots and automatic snapshots?
+
+A: User-created snapshots can be shared with other AWS accounts, but
+   automatic cluster snapshots cannot be shared directly. To share an
+   automatic snapshot, you must first manually create a copy of it and then
+   share the copy.
+
+

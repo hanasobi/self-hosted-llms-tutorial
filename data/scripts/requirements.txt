@@ -1,0 +1,8 @@
+# Dataset Engineering Pipeline (Blog Post 2)
+# Install: pip install -r requirements.txt
+
+beautifulsoup4>=4.12    # HTML parsing (document_loader)
+PyMuPDF>=1.24           # PDF parsing (pdf_parser)
+transformers>=4.40      # Tokenizer for chunk sizing
+scikit-learn>=1.5       # Stratified train/val/test split
+openai>=1.0             # QA-pair generation (temporary - replaced by self-hosted in Post 8)
