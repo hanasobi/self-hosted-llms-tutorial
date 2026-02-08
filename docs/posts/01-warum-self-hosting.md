@@ -1,4 +1,3 @@
-
 # Blog Post 1: Warum Self-Hosting? Der Business Case für Datensouveränität
 
 **Lesezeit:** ~10 Minuten | **Level:** Einsteiger  
@@ -29,9 +28,7 @@
 - [Wann Self-Hosting? Die Entscheidungsmatrix](#wann-self-hosting-die-entscheidungsmatrix)
 - [Infrastruktur-Voraussetzungen](#infrastruktur-voraussetzungen)
 - [Was diese Tutorial-Serie bietet](#was-diese-tutorial-serie-bietet)
-- [Die Blog-Posts im Überblick](#die-blog-posts-im-überblick)
-- [Für wen ist diese Serie?](#für-wen-ist-diese-serie)
-- [Fazit und nächster Schritt](#fazit-und-nächster-schritt)
+- [Fazit](#fazit)
 
 ---
 
@@ -151,75 +148,7 @@ Production-Grade Infrastructure. Kubernetes, vLLM, MLflow, Prometheus, Grafana �
 
 ---
 
-## Die Blog-Posts im Überblick
-
-Diese Serie führt dich Schritt für Schritt durch den gesamten Prozess – von der ersten Installation bis zur vollständigen Unabhängigkeit von externen APIs.
-
-| Phase | Post | Thema | Meilenstein |
-|---|---|---|---|
-| **1: Basics** | 1 | Warum Self-Hosting? | ← du bist hier |
-| | 2 | vLLM auf Kubernetes | 🎯 Erstes LLM läuft |
-| **2: Fine-tuning** | 3 | Warum Fine-tuning? | |
-| | 4 | Dataset Engineering | |
-| | 5 | LoRA Training | |
-| | 5.5 | Training Infrastructure | *optional* |
-| | 6 | Debugging Deep Dive | |
-| **3: Souveränität** | 7 | LoRA Serving | |
-| | 8 | Self-Hosted Evaluation | |
-| | 9 | Self-Hosted Datasets | 🎯 Volle Datensouveränität |
-| **4: Skalierung** | 10+ | Multi-LoRA, Pipelines | *geplant* |
-
-<br>
-
-Im Folgenden ein kurzer Überblick zu jedem Post:
-
-### Phase 1: Self-Hosting Basics
-
-**Post 1 (dieser Post)** etabliert den Business Case. Warum Self-Hosting? Wann ist es sinnvoll? Was sind die Voraussetzungen?
-
-**Post 2: vLLM auf Kubernetes** bringt dein erstes LLM zum Laufen. Nach diesem Post hast du ein funktionierendes System auf deiner eigenen Infrastruktur – mit einem pre-trained Base Model, ohne Fine-tuning.
-
-### Phase 2: Anpassung durch Fine-tuning
-
-**Post 3: Warum Fine-tuning?** erklärt, wann und warum Fine-tuning sinnvoll ist. Prompting vs. RAG vs. Fine-tuning – die richtige Wahl für deinen Use Case.
-
-**Post 4: Dataset Engineering** zeigt die Erstellung hochwertiger Trainingsdaten. Oft der wichtigste und unterschätzteste Schritt im gesamten Prozess.
-
-**Post 5: LoRA Fine-tuning** führt durch das eigentliche Training. Hyperparameter, Experiment-Tracking mit MLflow, praktische Tipps.
-
-**Post 5.5: Training Infrastructure** ist ein optionaler Deep Dive in saubere Training-Code-Strukturierung.
-
-**Post 6: Debugging Deep Dive** dokumentiert unser größtes Debugging-Abenteuer – das EOS-Token-Problem. 20 Stunden komprimiert auf eine lehrreiche Lektüre.
-
-### Phase 3: Production & Souveränität
-
-**Post 7: LoRA Serving** zeigt, wie du dein Fine-tuned Model in Produktion bringst – inklusive Multi-Adapter-Setups für A/B-Tests.
-
-**Post 8: Self-Hosted Evaluation** ermöglicht Qualitätsmessung ohne externe LLM-as-Judge-APIs.
-
-**Post 9: Self-Hosted Dataset-Generierung** schließt den Kreis zur vollständigen Datensouveränität – auch die Trainingsdaten-Erstellung ohne externe Dienste.
-
-### Phase 4: Skalierung (geplant)
-
-**Post 10+** behandelt Multi-LoRA Serving, automatisierte Pipelines und weitere fortgeschrittene Themen.
-
----
-
-## Für wen ist diese Serie?
-
-Diese Tutorial-Serie richtet sich an verschiedene Zielgruppen mit unterschiedlichen Perspektiven.
-
-**ML Engineers und Data Scientists** finden hier praktisches Wissen für Produktions-ML. Nicht "wie trainiere ich ein Modell", sondern "wie bringe ich ein trainiertes Modell zuverlässig in Produktion". Die Debugging-Stories zeigen systematisches Problemlösen, nicht nur Lösungen.
-
-**Tech Leads und Architekten** bekommen ein konkretes Beispiel für einen Self-Hosted LLM-Stack. Die Trade-off-Diskussionen helfen bei der Bewertung von Build-vs-Buy-Entscheidungen. Die Kosten- und Performance-Daten aus unseren Tests liefern Referenzpunkte für eigene Planungen.
-
-**Technische Entscheider** erhalten einen realistischen Überblick über Aufwand und Komplexität. Was braucht man wirklich für Self-Hosted LLMs? Welche Expertise ist nötig? Welche Infrastruktur? Die Serie hilft bei der Einschätzung, ob Self-Hosting für den eigenen Kontext sinnvoll ist.
-
-**Implementierungspartner** – Freelancer, Agenturen, interne ML-Teams – finden eine Referenzimplementierung. Der Code ist Open Source (MIT-Lizenz), dokumentiert, und als Ausgangspunkt für eigene Projekte nutzbar.
-
----
-
-## Fazit und nächster Schritt
+## Fazit
 
 Self-Hosted LLMs sind kein Allheilmittel. Sie erfordern Investition in Infrastruktur, Expertise und Zeit. Aber für viele Unternehmen sind sie der einzige gangbare Weg, generative KI mit sensiblen Daten zu nutzen.
 
@@ -227,16 +156,5 @@ Diese Tutorial-Serie gibt dir das Werkzeug, um fundierte Entscheidungen zu treff
 
 **Im nächsten Post** deployen wir dein erstes selbst gehostetes LLM. Mistral-7B auf Kubernetes mit vLLM – Schritt für Schritt, bis du ein funktionierendes System hast, das du über eine OpenAI-kompatible API ansprechen kannst.
 
-**Code und Materialien sind verfügbar im [Repository](https://github.com/hanasobi/self-hosted-llms-tutorial).** Die Blog-Posts erscheinen auf Deutsch, der Code und die technische Dokumentation auf Englisch – für maximale Zugänglichkeit im DACH-Raum und darüber hinaus.
 
----
-
-**Feedback?** Fragen, Anmerkungen, Erfahrungsberichte – wir freuen uns über Issues und Diskussionen im GitHub-Repository.
-
-→ [GitHub Issues](https://github.com/hanasobi/self-hosted-llms-tutorial/issues)
-
----
-
-**📚 Serie: Self-Hosted LLMs für Datensouveränität**
-
-[Serienübersicht](../index.md) | [Post 2: vLLM & Kubernetes Basics](./02-vllm-kubernetes-basics.md) →
+{% include blog_nav.html current="01-warum-self-hosting" %}

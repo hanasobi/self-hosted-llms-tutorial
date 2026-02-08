@@ -32,7 +32,7 @@
 - [Wann reicht Prompting oder RAG?](#wann-reicht-prompting-oder-rag)
 - [Unser Use Case: AWS Documentation Q&A](#unser-use-case-aws-documentation-qa)
 - [Der Fine-tuning-Ansatz: LoRA und Instruction Tuning](#der-fine-tuning-ansatz-lora-und-instruction-tuning)
-- [Wie es weitergeht](#wie-es-weitergeht)
+- [Fazit](#fazit)
 
 ---
 
@@ -168,42 +168,10 @@ Für unseren Use Case starten wir mit einem Base Model, weil wir sehr spezifisch
 
 ---
 
-## Wie es weitergeht
-
-Du weißt jetzt, wann Fine-tuning sinnvoll ist und welchen Ansatz wir verfolgen. Die nächsten Posts führen dich durch die praktische Umsetzung.
-
-**Post 4: Dataset Engineering** zeigt, wie du hochwertige Trainingsdaten erstellst. Von Rohdokumenten zu Instruction-Paaren, mit allen Schritten dazwischen: Chunking, QA-Generierung, Qualitätskontrolle. Das ist ein signifikanter Teil der Arbeit – und oft unterschätzt.
-
-**Post 5: LoRA Fine-tuning** führt durch das eigentliche Training. Hyperparameter, Experiment-Tracking mit MLflow, praktische Tipps aus unserer Erfahrung.
-
-**Post 5.5: Training Infrastructure** ist ein optionaler Deep Dive für alle, die sauberen, wartbaren Training-Code schreiben wollen.
-
-**Post 6: Debugging Deep Dive** dokumentiert unser größtes Debugging-Abenteuer – das EOS-Token-Problem. 20 Stunden Problemlösung, komprimiert auf eine lehrreiche Lektüre.
-
-**Post 7: LoRA Serving** zeigt, wie du dein fine-tuned Model in Produktion bringst – mit dem vLLM-Setup aus Post 2 als Basis, erweitert um LoRA-Support.
-
----
-
 ## Fazit
 
-Fine-tuning ist nicht die Antwort auf alles. Aber wenn du konsistentes Verhalten brauchst, strikte Regeleinhaltung, oder spezialisierte Performance aus einem kleineren Modell – dann ist Fine-tuning das richtige Werkzeug.
+Fine-tuning ist das richtige Werkzeug, wenn du konsistentes Verhalten brauchst, strikte Regeleinhaltung durchsetzen willst, oder spezialisierte Performance aus einem kleineren Modell herausholen musst. Der Schlüssel zum Erfolg liegt nicht im Training selbst, sondern in der Vorbereitung: den richtigen Ansatz wählen und vor allem hochwertige Trainingsdaten erstellen.
 
-Der Schlüssel zum Erfolg liegt nicht im Training selbst, sondern in der Vorbereitung: Verstehen, was du erreichen willst. Den richtigen Ansatz wählen. Und vor allem: Gute Trainingsdaten erstellen.
+**Im nächsten Post** zeigen wir genau das: wie du von Rohdokumenten zu einem hochwertigen Instruction-Dataset kommst – Token-aware Chunking, synthetische QA-Generierung und automatisierte Quality Checks.
 
-**Im nächsten Post** zeigen wir genau das: Wie du von Rohdokumenten zu einem hochwertigen Instruction-Dataset kommst.
-
----
-
-**Feedback?** Fragen, Anmerkungen, Erfahrungsberichte – wir freuen uns über Issues und Diskussionen im GitHub-Repository.
-
-→ [GitHub Issues](https://github.com/hanasobi/self-hosted-llms-tutorial/issues)
-
----
-
-**Nächster Post:** Dataset Engineering – Von Dokumenten zu Trainingsdaten
-
-**📚 Serie: Self-Hosted LLMs für Datensouveränität**
-
-← [Post 2: vLLM & Kubernetes Basics](./02-vllm-kubernetes-basics.md)| [Serienübersicht](../index.md) | [Post 4: Dataset Engineering](./04-dataset-engineering.md) →
-
----
+{% include blog_nav.html current="03-warum-finetuning" %}

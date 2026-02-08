@@ -39,7 +39,7 @@
 
 **Teil 3: Testing & Validation**
 - [Smoke Test](#smoke-test-funktioniert-alles)
-- [Fazit & Ausblick](#fazit-und-ausblick)
+- [Fazit](#fazit)
 
 **Ressourcen:**
 - [Alle Manifeste auf GitHub](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes)
@@ -1065,47 +1065,6 @@ Wenn alle 5 Checks bestanden sind: **Glückwunsch! Du hast einen funktionierende
 
 ---
 
-## Fazit und Ausblick
-
-**Was wir erreicht haben:**
-
-- ✅ vLLM läuft auf Kubernetes mit Mistral-7B
-- ✅ OpenAI-kompatible API für einfache Integration
-- ✅ Monitoring mit Prometheus/Grafana
-- ✅ Kostenoptimiert mit scale-to-zero
-- ✅ Solide Basis für weitere Entwicklung
-
-**Die wichtigsten Learnings:**
-
-1. **Quantisierung ist essentiell**: Ohne AWQ würde Mistral-7B nicht auf eine L4 passen
-2. **CUDA Graphs sind den Overhead wert**: 2x schnellere Inference für 26s Startup-Delay
-3. **Resource Requests müssen realistisch sein**: Theoretische Instance-Size ≠ verfügbare Capacity
-4. **Pinned Versions vermeiden Überraschungen**: Nie `:latest` in Production (oder Dev)
-
-**Was kommt als nächstes?**
-
-Dieses Setup ist die Basis für alles was folgt:
-
-- **Blog Post 3**:   Warum Fine-tuning? Wenn RAG und Prompting nicht reichen
-- **Blog Post 4**:   Dataset Engineering – Von Rohdaten zu Training-Data
-- **Blog Post 5**:   LoRA Training – Mistral-7B auf unsere Domäne anpassen
-- **Blog Post 5.5**: Training Infrastructure — HuggingFace Trainer + MLflow
-- **Blog Post 6**:   Der pad_token Bug — Eine Debugging-Geschichte
-- **Blog Post 7**:   LoRA-Adapter in Production – Fine-tuned Models mit vLLM serven
-
-In Blog Post 7 werden wir das hier gebaute Deployment erweitern: Ein Init-Container lädt den trainierten LoRA-Adapter von S3, vLLM aktiviert Multi-LoRA-Support, und wir vergleichen die Qualität zwischen Base Model und Fine-tuned Model.
-
-Aber zuerst müssen wir verstehen, warum Fine-tuning überhaupt nötig ist und wie wir ein gutes Training-Dataset erstellen.
-
-**Code, Manifeste, und Test-Scripts sind verfügbar im [Repository](https://github.com/hanasobi/llm-finetuning-end-to-end.git).**
-
----
-
-**Feedback?** Habt ihr Fragen oder Anmerkungen zu diesem Setup? 
-→ [GitHub Issues](https://github.com/hanasobi/llm-finetuning-end-to-end/issues)  
-
----
-
 **Weiterführende Ressourcen:**
 
 - vLLM Documentation: https://docs.vllm.ai/
@@ -1115,9 +1074,10 @@ Aber zuerst müssen wir verstehen, warum Fine-tuning überhaupt nötig ist und w
 
 ---
 
+## Fazit
 
-**📚 Serie: Self-Hosted LLMs für Datensouveränität**
+Wir haben ein produktionsreifes Self-Hosted LLM aufgesetzt: Mistral-7B läuft auf Kubernetes mit vLLM, ist über eine OpenAI-kompatible API erreichbar, und wird mit Prometheus überwacht. Die wichtigsten Erkenntnisse: Quantisierung (AWQ) ist essentiell für GPU-Effizienz, CUDA Graphs verdoppeln die Inference-Geschwindigkeit, und realistische Resource Requests verhindern Scheduling-Probleme.
 
-← [Post 1: Warum Self-Hosting?](./01-warum-self-hosting.md) | [Serienübersicht](../index.md) | [Post 3: Warum Fine-tuning?](./03-warum-finetuning.md) →
+**Im nächsten Post** klären wir, wann Fine-tuning sinnvoll ist – und wann Prompting oder RAG die bessere Wahl sind.
 
----
+{% include blog_nav.html current="02-vllm-kubernetes-basics" %}

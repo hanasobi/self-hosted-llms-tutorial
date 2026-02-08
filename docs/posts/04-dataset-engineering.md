@@ -21,9 +21,8 @@
 - [Schritt 5: Train/Val/Eval Split](#schritt-5-trainvaleval-split)
 - [Lessons Learned](#lessons-learned)
 - [Was wir beim nächsten Mal besser machen würden](#was-wir-beim-nächsten-mal-besser-machen-würden)
-- [Zusammenfassung](#zusammenfassung)
-- [Nächster Schritt: LoRA Training](#nächster-schritt-lora-training)
 - [Code & Ressourcen](#code--ressourcen)
+- [Fazit](#fazit)
 
 ---
 
@@ -831,27 +830,6 @@ Wir arbeiten ohne Overlap zwischen Chunks. In einem echten RAG-System würde man
 
 ---
 
-## Zusammenfassung
-
-In diesem Post haben wir gezeigt:
-
-1. **Document Loading und Chunking** — HTML parsen mit Heading-Hierarchie, Token-basiertes Chunking mit semantischen Grenzen
-2. **QA-Generation** — Synthetic Data mit GPT-4o-mini und kritischem Prompt-Design
-3. **Quality Control** — Automatische Flags und manuelle Hallucination-Checks
-4. **Train/Val/Eval Split** — Stratified nach Question-Type
-5. **Dataset Generation** — Instruction Samples aus Chunks + QA-Paaren zusammenbauen
-
-Das Ergebnis: **5,796 QA-Paare** aus 1,932 Chunks, aufgeteilt in Train (3,477), Validation (1,159) und Evaluation (1,160).
-
----
-
-## Nächster Schritt: LoRA Training
-
-Wir haben jetzt Daten. Im nächsten Post geht es ans Training: Wie bekommt man ein 7B-Parameter-Modell auf eine 24GB-GPU? Die Antwort: QLoRA. Das behandeln wir in unserem nächsten Post *LoRA Training — 7B Model auf 24GB GPU*.
-
-
----
-
 ## Code & Ressourcen
 
 ### Scripts
@@ -886,14 +864,10 @@ Damit kannst du direkt mit dem Training in *Post 5* starten. Wenn du den Dataset
 
 ---
 
-*Fragen oder Feedback? Öffne ein [Issue im Repository](https://github.com/hanasobi/self-hosted-llms-tutorial/issues).*
+## Fazit
 
----
+Dataset Engineering ist ein signifikanter Teil der Arbeit in einem LLM-Projekt – und wird häufig unterschätzt. Wir haben gezeigt, wie du von Rohdokumenten zu hochwertigen QA-Paaren kommst: Token-aware Chunking für optimale Kontextnutzung, GPT-4o-mini für kosteneffiziente QA-Generierung, und automatisierte Quality Checks für konsistente Datenqualität. Das Ergebnis: 5,796 QA-Paare aus 1,932 Chunks, aufgeteilt in Train (3,477), Validation (1,159) und Evaluation (1,160).
 
-**Nächster Post:** LoRA Training – 7B Model auf 24GB GPU
+**Im nächsten Post** zeigen wir, wie du mit diesen Daten ein 7B-Modell auf einer 24GB-GPU trainierst – dank QLoRA und den richtigen Hyperparametern.
 
-**📚 Serie: Self-Hosted LLMs für Datensouveränität**
-
-← [Post 3: Warum Fine-tuning?](./03-warum-finetuning.md)| [Serienübersicht](../index.md) 
-
----
+{% include blog_nav.html current="04-dataset-engineering" %}
