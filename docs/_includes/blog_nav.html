@@ -1,0 +1,34 @@
+{% assign posts = site.data.blog_series.posts %}
+{% assign current_index = nil %}
+
+{% comment %}Finde den aktuellen Post{% endcomment %}
+{% for post in posts %}
+  {% if post.slug == include.current %}
+    {% assign current_index = forloop.index0 %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if current_index != nil %}
+<hr>
+<div class="blog-navigation" style="text-align: center; margin: 2em 0;">
+  {% assign prev_index = current_index | minus: 1 %}
+  {% assign next_index = current_index | plus: 1 %}
+  
+  {% if prev_index >= 0 %}
+    {% assign prev = posts[prev_index] %}
+    <a href="./{{ prev.slug }}.html">← Post {{ prev.number }}: {{ prev.title }}</a>
+  {% else %}
+    <span style="visibility: hidden;">←</span>
+  {% endif %}
+  
+  | <a href="../index.html">Serienübersicht</a> | 
+  
+  {% if next_index < posts.size %}
+    {% assign next = posts[next_index] %}
+    <a href="./{{ next.slug }}.html">Post {{ next.number }}: {{ next.title }} →</a>
+  {% else %}
+    <span style="visibility: hidden;">→</span>
+  {% endif %}
+</div>
+{% endif %}
