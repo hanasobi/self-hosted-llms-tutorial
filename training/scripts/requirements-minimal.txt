@@ -1,0 +1,7 @@
+transformers>=4.36.0
+accelerate>=0.25.0
+peft>=0.7.0
+bitsandbytes>=0.41.0
+datasets>=2.16.0
+mlflow>=3.8.1
+tqdm>=4.65.0

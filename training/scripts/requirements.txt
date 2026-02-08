@@ -1,0 +1,93 @@
+# LoRA Fine-tuning Requirements
+# For Blog Post 5: LoRA Training - 7B Model auf 16GB GPU
+
+# Core ML Libraries
+torch>=2.0.0,<3.0.0           # PyTorch (CUDA version required, see below)
+transformers>=4.36.0          # HuggingFace Transformers
+accelerate>=0.25.0            # Training acceleration
+peft>=0.7.0                   # Parameter-Efficient Fine-Tuning (LoRA)
+bitsandbytes>=0.41.0          # 4-bit quantization (QLoRA)
+
+# Dataset handling
+datasets>=2.16.0              # HuggingFace Datasets
+
+# Experiment tracking
+mlflow>=3.8.1                 # Experiment tracking
+
+# Utilities
+tqdm>=4.65.0                  # Progress bars
+numpy>=1.24.0                 # Numerical operations
+scipy>=1.10.0                 # Scientific computing
+
+# Optional but recommended
+wandb>=0.16.0                 # Alternative experiment tracking (optional)
+tensorboard>=2.15.0           # TensorBoard logging (optional)
+
+# Development tools (optional)
+ipython>=8.12.0               # Better Python shell
+jupyter>=1.0.0                # Jupyter notebooks
+
+# ==============================================================================
+# IMPORTANT NOTES:
+# ==============================================================================
+#
+# 1. CUDA/PyTorch Installation:
+#    This requirements.txt uses the CPU version of PyTorch by default.
+#    For GPU training (REQUIRED for this tutorial), you need the CUDA version.
+#
+#    Install PyTorch with CUDA BEFORE installing this requirements.txt:
+#
+#    # For CUDA 11.8 (most common on cloud GPUs):
+#    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+#    # For CUDA 12.1:
+#    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#
+#    Then install the rest:
+#    pip install -r requirements.txt
+#
+#    Verify CUDA is working:
+#    python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
+#
+# 2. bitsandbytes requires CUDA:
+#    The bitsandbytes library (used for 4-bit quantization) only works with CUDA.
+#    If you get import errors, ensure you have:
+#    - CUDA installed on your system
+#    - PyTorch with CUDA support
+#    - A compatible GPU (T4, A10, A100, etc.)
+#
+# 3. Memory Requirements:
+#    - Minimum: 16GB GPU VRAM (T4, RTX 4060 Ti)
+#    - Recommended: 24GB+ (A10, RTX 3090, A100)
+#    - This tutorial is tested on AWS T4 instances
+#
+# 4. Tested Environment:
+#    - Python 3.10
+#    - CUDA 11.8
+#    - Ubuntu 22.04
+#    - AWS EC2 g4dn.xlarge (T4 GPU, 16GB VRAM)
+#
+# ==============================================================================
+# Installation Commands (Complete Setup):
+# ==============================================================================
+#
+# # 1. Create virtual environment
+# python -m venv venv
+# source venv/bin/activate  # On Windows: venv\Scripts\activate
+#
+# # 2. Upgrade pip
+# pip install --upgrade pip
+#
+# # 3. Install PyTorch with CUDA (IMPORTANT: Do this first!)
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+# # 4. Verify CUDA
+# python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}, Version: {torch.version.cuda}')"
+#
+# # 5. Install remaining dependencies
+# pip install -r requirements.txt
+#
+# # 6. Verify environment
+# python verify_environment.py
+#
+# ==============================================================================
