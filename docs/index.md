@@ -62,39 +62,42 @@ Mistral-7B auf Kubernetes deployen mit vLLM. Nach diesem Post läuft ein LLM auf
 **Post 3: [Warum Fine-tuning? Wenn RAG und Prompting nicht reichen](posts/03-warum-finetuning.html)**
 Prompting vs. RAG vs. Fine-tuning — wann welcher Ansatz passt und warum wir Fine-tuning brauchen.
 
-**Post 4: [Dataset Engineering — Von Dokumenten zu Trainingsdaten**](posts/04-dataset-engineering.html)**
+**Post 4: [Dataset Engineering — Von Dokumenten zu Trainingsdaten](posts/04-dataset-engineering.html)**
 Die Pipeline von Rohdokumenten zu QA-Paaren: Chunking, Synthetic Data Generation, Quality Control. *80% der eigentlichen Arbeit.*
 
-**Post 5: LoRA Training — 7B Model auf 24GB GPU**
+**Post 5: [LoRA Training — 7B Model auf 24GB GPU](posts/05-lora-training.html)**
 QLoRA macht große Modelle auf Consumer-Hardware trainierbar. Mit MLflow Experiment Tracking.
 
-**Post 5.5: Training Infrastructure — HuggingFace Trainer + MLflow**
-Von manuellen Training-Loops zu Production-ready Infrastructure mit Custom Callbacks.
+**Post 5.1: Experiment Tracking mit MLflow (Optional)**
+Self-hosted MLflow für Datensouveränität. Custom Callbacks für HuggingFace Trainer. Parameters & Metrics loggen – ohne externe Cloud-Dienste.
 
-**Post 6: Der pad_token Bug — Eine Debugging-Geschichte ⭐**
+**Post 5.2: Model Evaluation (Optional)**
+Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Baseline Comparison mit Mistral-Instruct. Multi-modale Bewertung.
+
+**Post 5.3: Der pad_token Bug – Eine Debugging-Geschichte ⭐ (Optional)**
 20 Stunden Debugging dokumentiert: Warum `pad_token = eos_token` alles kaputt macht und wie systematisches Debugging funktioniert.
 
 ### Phase 3: Production & Souveränität
 
 > *"Wie bringe ich es in Produktion — ohne externe Abhängigkeiten?"*
 
-**Post 7: LoRA Serving — Fine-tuned Models in Produktion**
-LoRA-Adapter auf dem Base Model laden, Performance-Vergleiche.
+**Post 6: vLLM Deployment mit LoRA – Fine-tuned Models in Produktion**
+LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performance-Vergleiche.
 
-**Post 8: Evaluation ohne externe APIs — LLM-as-Judge Self-Hosted**
+**Post 7: Evaluation ohne externe APIs — LLM-as-Judge Self-Hosted**
 Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks.
 
-**Post 9: Dataset-Generierung ohne OpenAI**
+**Post 8: Dataset-Generierung ohne OpenAI**
 Die letzte externe Abhängigkeit eliminieren. Nach diesem Post ist die gesamte Pipeline self-hosted: Dokumente → QA-Paare → Training → Serving → Evaluation.
 
 ### Phase 4: Skalierung & Automation
 
 > *"Wie skaliere ich das Ganze?"*
 
-**Post 10: Multi-LoRA in der Praxis — Ein Server, viele Use Cases**
+**Post 9: Multi-LoRA in der Praxis — Ein Server, viele Use Cases**
 Architektur für Multi-Tenant-Setups, Request Routing und Kostenoptimierung.
 
-**Post 11+: Production Pipelines**
+**Post 10+: Production Pipelines**
 Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
 
 ---
@@ -131,9 +134,9 @@ self-hosted-llms-tutorial/
 ├── docs/                  Blog Posts (Deutsch)
 │   ├── index.md           Serien-Übersicht (diese Seite)
 │   └── posts/             Einzelne Blog Posts
-├── serving/               vLLM Deployment (Posts 2, 7)
+├── serving/               vLLM Deployment (Posts 2, 6)
 ├── data/                  Dataset Engineering (Post 4)
-├── training/              LoRA Training (Posts 5, 6)
+├── training/              LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
 ├── evaluation/            Evaluation Framework (Post 8)
 └── monitoring/            Prometheus + Grafana
 ```

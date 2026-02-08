@@ -124,11 +124,12 @@ self-hosted-llms-tutorial/
 │       ├── 03-warum-fine-tuning.md
 │       ├── 04-dataset-engineering.md
 │       ├── 05-lora-training.md
-│       ├── 05.5-training-infrastructure.md
-│       ├── 06-pad-token-debugging.md
-│       ├── 07-lora-serving.md
-│       ├── 08-self-hosted-evaluation.md
-│       └── 09-self-hosted-dataset-generation.md
+│       ├── 05.1-mlflow-tracking.md
+│       ├── 05.2-model-evaluation.md
+│       ├── 05.3-debugging-story.md
+│       ├── 06-lora-serving.md
+│       ├── 07-self-hosted-evaluation.md
+│       └── 08-self-hosted-dataset-generation.md
 │
 ├── serving/                       # vLLM deployment (Posts 2, 7)
 │   ├── base-model/                # Post 2: Basic vLLM setup
@@ -159,7 +160,7 @@ self-hosted-llms-tutorial/
 │   │   └── qa_pairs_generated.jsonl
 │   └── README.md
 │
-├── training/                      # LoRA training (Posts 5, 5.5, 6)
+├── training/                      # Posts 5, 5.1, 5.2, 5.3: Training & Evaluation
 │   ├── train_lora.py
 │   ├── config.py
 │   ├── utils.py
