@@ -128,10 +128,10 @@ self-hosted-llms-tutorial/
 │   └── posts/             Einzelne Blog Posts
 ├── serving/               vLLM Deployment (Posts 2, 6)
 ├── data/                  Dataset Engineering (Post 4)
-├── 05-lora-training/      LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
-├── 05.1-mlflow-tracking/  LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
-├── 05.2-model-evaluation/ LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
-├── 05.3-debugging-story/  LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
+├── 05-lora-training/      LoRA Training 
+├── 05.1-mlflow-tracking/  Experiment Tracking mit MLFlow
+├── 05.2-model-evaluation/ Model Evalution
+├── 05.3-debugging-story/  Eine Deubugging-Geschichte
 └── .../                   Weitere Posts
 ```
 
