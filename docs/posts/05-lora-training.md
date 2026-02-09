@@ -676,7 +676,7 @@ Für Production würdest du weniger frequent evaluieren. Für Development/Debugg
 
 Nach dem Training findest du folgende Struktur:
 ```
-training/models/
+05-lora-training/models/
 └── standard_r8_qkvo/
     ├── README.md                    # Automatisch generiert von HuggingFace
     ├── adapter_config.json          # LoRA Konfiguration (Rank, Alpha, Target Modules)
@@ -703,13 +703,9 @@ In unserer `TrainingArguments` haben wir gesetzt:
 
 Das bedeutet: Während des Trainings (218 Steps) wurden 4 Checkpoints erstellt (50, 100, 150, 200, 218), aber nur die letzten 3 werden behalten (150, 200, 218). Das spart Speicherplatz.
 
-**Der `adapter/` Ordner**
-
-Dieser Ordner enthält den **finalen** LoRA-Adapter (identisch zu `checkpoint-218/`). Das ist ein Convenience-Feature von HuggingFace Trainer: Der beste/letzte Adapter wird zusätzlich in einen separaten Ordner kopiert, sodass du nicht den Checkpoint-Namen kennen musst.
-
 **Was kommt in Post LoRA Serving:**
 
-Im Post LoRA Serving werden wir diesen `adapter/` Ordner nutzen, um den Fine-tuned Adapter auf dem vLLM Server zu laden. vLLM erwartet exakt diese Struktur: `adapter_config.json` + `adapter_model.safetensors`.
+Im Post LoRA Serving werden wir `adapter_config.json` und `adapter_model.safetensors` in den vLLM Server zu laden. vLLM erwartet exakt diese Struktur: `adapter_config.json` + `adapter_model.safetensors`.
 
 ---
 
