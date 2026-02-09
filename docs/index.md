@@ -1,6 +1,7 @@
 
 
-> **Das erste deutschsprachige Tutorial, das zeigt wie Self-Hosted LLMs WIRKLICH funktionieren: Von der ersten Installation über Fine-tuning bis zur vollständigen Datensouveränität — mit allen Debugging-Stories und Trade-offs.**
+> **Ein deutschsprachiges Tutorial, das Schritt für Schritt zeigt, wie Unternehmen mit Self-Hosted LLMs ihre Datensouveränität bewahren: Von der Installation über 
+Fine-tuning bis zur vollständigen Unabhängigkeit – inklusive echter Debugging-Stories und transparenten Trade-offs.**
 
 <div style="background: #f6f8fa; padding: 20px; border-radius: 6px; margin: 20px 0;">
   <strong>📖 Status:</strong> Tutorial-Serie in aktiver Entwicklung<br>
@@ -16,28 +17,19 @@ Unternehmen im DACH-Raum stehen vor einem Dilemma: Sie wollen generative KI nutz
 
 Diese Tutorial-Serie zeigt den vollständigen Weg von der ersten LLM-Installation bis zur **kompletten Datensouveränität** — ohne externe Abhängigkeiten. Jeder Post hat ein klares, erreichbares Ziel, und wir dokumentieren echte Probleme und Debugging-Journeys statt nur den "Happy Path".
 
-<table>
-  <tr>
-    <th>Andere Tutorials</th>
-    <th>Diese Serie</th>
-  </tr>
-  <tr>
-    <td>❌ "Deploy this YAML, done"</td>
-    <td>✅ Schrittweiser Aufbau mit Erklärungen</td>
-  </tr>
-  <tr>
-    <td>❌ Copy-Paste ohne Kontext</td>
-    <td>✅ Design-Entscheidungen & Trade-offs</td>
-  </tr>
-  <tr>
-    <td>❌ Nur der Happy Path</td>
-    <td>✅ Echte Debugging-Stories (20h EOS Token Journey)</td>
-  </tr>
-  <tr>
-    <td>❌ Cloud/API-abhängig</td>
-    <td>✅ Vollständige Datensouveränität als Ziel</td>
-  </tr>
-</table>
+## Was diese Serie auszeichnet
+
+**Schrittweiser Aufbau statt Fertiglösungen**  
+Jeder Schritt wird erklärt und begründet. Statt YAML-Dateien zum Copy-Paste erhältst du das Verständnis, um eigene Entscheidungen zu treffen.
+
+**Design-Entscheidungen transparent gemacht**  
+Wir zeigen nicht nur *wie*, sondern auch *warum*. Jede Architektur-Entscheidung wird mit ihren Trade-offs erklärt.
+
+**Debugging-Journeys inklusive**  
+Echte Probleme und ihre Lösungen – wie die 20-stündige EOS-Token-Debugging-Story. Hier lernst du, was Tutorials normalerweise auslassen.
+
+**Vollständige Datensouveränität als Ziel**  
+Der komplette Weg zur Unabhängigkeit von externen APIs – von der ersten Installation bis zur selbst gehosteten Dataset-Generierung.
 
 ---
 
@@ -68,13 +60,13 @@ Die Pipeline von Rohdokumenten zu QA-Paaren: Chunking, Synthetic Data Generation
 **Post 5: [LoRA Training — 7B Model auf 24GB GPU](posts/05-lora-training.html)**
 QLoRA macht große Modelle auf Consumer-Hardware trainierbar. Mit MLflow Experiment Tracking.
 
-**Post 5.1: Experiment Tracking mit MLflow (Optional)**
+**Post 5.1: [Experiment Tracking mit MLflow (Optional)](posts/05.1-mlflow-tracking.html)**
 Self-hosted MLflow für Datensouveränität. Custom Callbacks für HuggingFace Trainer. Parameters & Metrics loggen – ohne externe Cloud-Dienste.
 
 **Post 5.2: Model Evaluation (Optional)**
 Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Baseline Comparison mit Mistral-Instruct. Multi-modale Bewertung.
 
-**Post 5.3: Der pad_token Bug – Eine Debugging-Geschichte ⭐ (Optional)**
+**Post 5.3: Der pad_token Bug – Eine Debugging-Geschichte (Optional)**
 20 Stunden Debugging dokumentiert: Warum `pad_token = eos_token` alles kaputt macht und wie systematisches Debugging funktioniert.
 
 ### Phase 3: Production & Souveränität
@@ -110,7 +102,7 @@ Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
 
 Die Serie geht ehrlich mit externen Abhängigkeiten um. In <strong>Post 4</strong> nutzen wir GPT-4o-mini für die Dataset-Generierung — ein bewusster Kompromiss, der transparent gemacht wird. In <strong>Post 9</strong> zeigen wir dann die self-hosted Alternative.<br><br>
 
-<strong>Nach Post 9 ist die gesamte Pipeline datensouverän:</strong> Kein API-Call verlässt deine Infrastruktur — weder für Training, Serving, Evaluation noch für Dataset-Generierung.
+<strong>Nach Post 8 ist die gesamte Pipeline datensouverän:</strong> Kein API-Call verlässt deine Infrastruktur — weder für Training, Serving, Evaluation noch für Dataset-Generierung.
 
 </div>
 
@@ -136,9 +128,11 @@ self-hosted-llms-tutorial/
 │   └── posts/             Einzelne Blog Posts
 ├── serving/               vLLM Deployment (Posts 2, 6)
 ├── data/                  Dataset Engineering (Post 4)
-├── training/              LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
-├── evaluation/            Evaluation Framework (Post 8)
-└── monitoring/            Prometheus + Grafana
+├── 05-lora-training/      LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
+├── 05.1-mlflow-tracking/  LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
+├── 05.2-model-evaluation/ LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
+├── 05.3-debugging-story/  LoRA Training & Evaluation (Posts 5, 5.1, 5.2, 5.3)
+└── .../                   Weitere Posts
 ```
 
 **Sprache:** Blog Posts auf Deutsch, Code und technische Dokumentation auf Englisch.
