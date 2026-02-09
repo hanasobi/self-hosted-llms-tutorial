@@ -63,7 +63,7 @@ QLoRA macht große Modelle auf Consumer-Hardware trainierbar. Mit MLflow Experim
 **Post 5.1: [Experiment Tracking mit MLflow (Optional)](posts/05.1-mlflow-tracking.html)**
 Self-hosted MLflow für Datensouveränität. Custom Callbacks für HuggingFace Trainer. Parameters & Metrics loggen – ohne externe Cloud-Dienste.
 
-**Post 5.2: Model Evaluation (Optional)**
+**Post 5.2: [Model Evaluation (Optional)](posts/05.2-model-evaluation.html)**
 Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Baseline Comparison mit Mistral-Instruct. Multi-modale Bewertung.
 
 **Post 5.3: Der pad_token Bug – Eine Debugging-Geschichte (Optional)**
