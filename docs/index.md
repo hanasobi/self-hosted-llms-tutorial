@@ -66,7 +66,7 @@ Self-hosted MLflow für Datensouveränität. Custom Callbacks für HuggingFace T
 **Post 5.2: [Model Evaluation (Optional)](posts/05.2-model-evaluation.html)**
 Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Baseline Comparison mit Mistral-Instruct. Multi-modale Bewertung.
 
-**Post 5.3: Der pad_token Bug – Eine Debugging-Geschichte (Optional)**
+**Post 5.3: [Der pad_token Bug – Eine Debugging-Geschichte (Optional)](posts/05.3-debugging-story.html)**
 20 Stunden Debugging dokumentiert: Warum `pad_token = eos_token` alles kaputt macht und wie systematisches Debugging funktioniert.
 
 ### Phase 3: Production & Souveränität
