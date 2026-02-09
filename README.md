@@ -66,11 +66,11 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 3 | Warum Fine-tuning? Wenn RAG und Prompting nicht reichen | ✅ Done | When and why to fine-tune |
 | 4 | Dataset Engineering: Von Dokumenten zu Trainingsdaten | ✅ Done | Chunking, QA generation, quality control |
 | 5 | LoRA Training: 7B Model auf 24GB GPU | ✅ Done| QLoRA fine-tuning on consumer hardware |
-| 5.1 | Experiment Tracking with MLflow (Optional) | 🚧 In Progress | Self-hosted MLflow |
-| 5.2 | Model Evaluation (Optional)| 📝 Planned | Qualitative evaluation and baseline comparison |
-| 5.3 | The pad_token Bug – A Debugging Story| 📝 Planned | 20h debugging journey, community anti-pattern |
+| 5.1 | Experiment Tracking with MLflow (Optional) | ✅ Done | Self-hosted MLflow |
+| 5.2 | Model Evaluation (Optional)| ✅ Done | Qualitative evaluation and baseline comparison |
+| 5.3 | The pad_token Bug – A Debugging Story| ✅ Done | 20h debugging journey, community anti-pattern |
 | **Phase 3: Production & Sovereignty** | | | |
-| 6 | LoRA Serving: Fine-tuned Models in Produktion | 📝 Planned | Adapter loading, Multi-LoRA, performance |
+| 6 | LoRA Serving: Fine-tuned Models in Produktion | 🚧 In Progress | Adapter loading, Multi-LoRA, performance |
 | 7 | Evaluation without external APIs: Self-Hosted LLM-as-Judge | 📝 Planned | Self-hosted quality assessment |
 | 8 | Dataset Generation without OpenAI | 📝 Planned | Complete independence from external APIs |
 | **Phase 4: Scaling** | | | |
