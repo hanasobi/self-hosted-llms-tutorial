@@ -40,13 +40,13 @@ Phase 1: "Can I even run an LLM myself?"
     → Posts 1-2: Business case + first working LLM on your infrastructure
     
 Phase 2: "How do I make it better for my use case?"
-    → Posts 3-6: Dataset engineering → Training → Debugging
+    → Posts 3-5 (incl. 5.1, 5.2, 5.3): Dataset engineering → Training → Tracking → Evaluation → Debugging
     
 Phase 3: "How do I run this in production — without external dependencies?"
-    → Posts 7-9: LoRA serving, self-hosted evaluation, self-hosted data generation
+    → Posts 6-8: LoRA serving, self-hosted dataset generation, self-hosted evaluation
     
-Phase 4: "How do I scale this?"
-    → Posts 10+: Multi-LoRA, pipelines, automation
+Phase 4: "How do I iterate and scale this?"
+    → Posts 9+: Multi-LoRA A/B-testing, pipelines, automation
 ```
 
 After Post 2, you have a **working system**. That's motivating. Then you learn step by step how to improve it and become fully independent.
@@ -70,11 +70,12 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 5.2 | Model Evaluation (Optional)| ✅ Done | Qualitative evaluation and baseline comparison |
 | 5.3 | The pad_token Bug – A Debugging Story| ✅ Done | 20h debugging journey, community anti-pattern |
 | **Phase 3: Production & Sovereignty** | | | |
-| 6 | LoRA Serving: Fine-tuned Models in Produktion | ✅ Done | Adapter loading, Multi-LoRA, performance |
-| 7 | Evaluation without external APIs: Self-Hosted LLM-as-Judge | 🚧 In Progress | Self-hosted quality assessment |
-| 8 | Dataset Generation without OpenAI | 📝 Planned | Complete independence from external APIs |
-| **Phase 4: Scaling** | | | |
-| 9+ | Multi-LoRA, Production Pipelines | 📝 Planned | Scaling and automation |
+| 6 | LoRA Serving: Fine-tuned Models in Production | ✅ Done | Adapter loading, Multi-LoRA, performance |
+| 7 | Dataset Generation without OpenAI | 📝 Planned | Self-hosted synthetic data with negative examples |
+| 8 | Self-Hosted LLM-as-Judge | 📝 Planned | Evaluate new adapters without external APIs |
+| **Phase 4: Iteration & Scaling** | | | |
+| 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |
+| 10+ | Production Pipelines | 📝 Planned | Argo Workflows, CI/CD, automation |
 
 **Legend:** ✅ Done | 🚧 In Progress | 📝 Planned
 
@@ -102,9 +103,10 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 - Self-hosted dataset generation (no GPT-4 dependency)
 - Monitoring with Prometheus and Grafana
 
-**Phase 4: Scaling & Automation**
-- Multi-tenant serving architectures
-- Training pipelines with orchestration
+**Phase 4: Iteration & Scaling**
+- Multi-LoRA serving and A/B-testing
+- Data-driven adapter iteration
+- Training pipelines with orchestration (Argo Workflows)
 - CI/CD for model updates
 
 ---
@@ -278,12 +280,12 @@ This tutorial specifically addresses the needs of organizations that cannot or p
 | Post | External Dependency | Self-Hosted Alternative |
 |------|--------------------|-----------------------|
 | 2 | None | Base model inference |
-| 4 | GPT-4o-mini for QA generation | Shown in Post 9 |
-| 7 | None | Fine-tuned model inference |
+| 4 | GPT-4o-mini for QA generation | Shown in Post 7 |
+| 6 | None | Fine-tuned model inference |
+| 7 | OpenAI for dataset creation | Self-hosted generation |
 | 8 | GPT-4 as Judge | Self-hosted LLM-as-Judge |
-| 9 | OpenAI for dataset creation | Self-hosted generation |
 
-By the end of this tutorial series (Post 9), you'll have **zero external API dependencies**.
+By the end of this tutorial series (Post 8), you'll have **zero external API dependencies**.
 
 ---
 
