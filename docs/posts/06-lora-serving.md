@@ -144,8 +144,8 @@ Ein `emptyDir` existiert nur solange der Pod lebt. Bei jedem Pod-Restart lädt d
 **Memory Overhead:** Der LoRA-Adapter ist 27MB auf Disk und belegt auch im GPU-Speicher nur wenig zusätzlichen Platz – vernachlässigbar bei 24GB VRAM auf der L4. Die `gpu-memory-utilization=0.88` Einstellung aus Post 2 bleibt unverändert, es ist genug Headroom vorhanden.
 
 **Das vollständige Manifest** findest du in zwei Versionen im Repository:
-- [deployment.yaml](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/deployment.yaml) – Production-Version (clean, ohne Kommentare)
-- [deployment.annotated.yaml](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/serving/vllm/kubernetes/deployment.annotated.yaml) – Lernversion mit detaillierten Kommentaren zu jeder Entscheidung
+- [deployment.yaml](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/06-lora-serving/kubernetes/deployment.yaml) – Production-Version (clean, ohne Kommentare)
+- [deployment.annotated.yaml](https://github.com/hanasobi/self-hosted-llms-tutorial/tree/main/06-lora-serving/kubernetes/deployment.annotated.yaml) – Lernversion mit detaillierten Kommentaren zu jeder Entscheidung
 
 ---
 
