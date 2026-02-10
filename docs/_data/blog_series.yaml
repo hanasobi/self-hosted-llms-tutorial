@@ -23,7 +23,6 @@ posts:
   - number: "5.3"
     slug: "05.3-debugging-story"
     title: "LoRA Training"
-  # Später einfach weitere Posts anhängen:
-  # - number: 6
-  #   slug: "06-debugging-stories"
-  #   title: "Debugging Stories"
+  - number: 6
+    slug: "06-lora-serving"
+    title: "LoRA Serving"

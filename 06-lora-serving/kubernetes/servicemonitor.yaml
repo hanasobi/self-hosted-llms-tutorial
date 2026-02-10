@@ -1,0 +1,22 @@
+---
+# MLflow Metrics
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: vllm
+  namespace: ml-models
+  labels:
+    app: vllm
+    component: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: vllm
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
+  namespaceSelector:
+    matchNames:
+    - ml-models

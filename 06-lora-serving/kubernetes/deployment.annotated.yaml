@@ -1,0 +1,267 @@
+# =============================================================================
+# vLLM Deployment - Annotated Version for Learning
+# =============================================================================
+# This file is identical to deployment.yaml but includes detailed comments
+# explaining each decision and parameter.
+#
+# For Production: Use deployment.yaml (clean, without comments)
+# For Learning: Use this file
+# =============================================================================
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: vllm
+  # Deployment name. Referenced in kubectl, logs, and monitoring.
+  # We keep it short and simple: "vllm" instead of "vllm-inference-server"
+  
+  namespace: ml-models
+  # Namespace for all ML inference services. Separated from:
+  # - ai-platform (MLflow, Prometheus, Grafana)
+  # - kube-system (Kubernetes core components)
+  # Reason: Logical separation, NetworkPolicies, Resource Quotas
+  
+  labels:
+    app: vllm
+    # PRIMARY label for Service selection. Service uses "app: vllm" to find pods.
+    # IMPORTANT: Must match Pod labels (spec.template.metadata.labels)!
+    
+    component: inference
+    # Additional label for organization. Helps with queries like:
+    # kubectl get pods -l component=inference
+    # Distinguishes inference from training, preprocessing, etc.
+
+spec:
+  replicas: 1
+  # Number of pod replicas.
+  # 
+  # Why only 1?
+  # - Each replica needs a full GPU (~$0.80/hour for L4)
+  # - Our use case: Tutorial development, not high-availability production
+  # - Scale-to-zero when not needed saves ~$500/month
+  #
+  # For production: Consider replicas: 2+ with PodDisruptionBudget
+  
+  selector:
+    matchLabels:
+      app: vllm
+    # Selector MUST match Pod labels (spec.template.metadata.labels)
+    # Kubernetes uses this to know which pods belong to this Deployment
+    # If they don't match: Deployment creates pods but doesn't manage them!
+
+  template:
+    # Pod Template - defines what each replica looks like
+    metadata:
+      labels:
+        app: vllm
+        # MUST match spec.selector.matchLabels!
+        # Service also uses this label to route traffic
+        
+        version: v1
+        # Optional version label for canary deployments
+        # Allows running v1 and v2 side-by-side
+    
+    spec:
+      serviceAccountName: workflow-sa
+      # Service Account with IRSA (IAM Roles for Service Accounts)
+      # 
+      # What is IRSA?
+      # - Kubernetes SA gets AWS IAM role automatically
+      # - No AWS credentials in environment variables or secrets
+      # - Secure, auditable, follows least-privilege
+      #
+      # This SA has permissions for:
+      # - S3 read access to model artifacts bucket
+      # - ECR pull access for container images
+      
+      # =========================================================================
+      # Init Container: Download LoRA Adapter from S3
+      # =========================================================================
+      initContainers:
+      - name: download-adapter
+        image: amazon/aws-cli:latest
+        # AWS CLI image for S3 operations
+        # Runs BEFORE the main container starts
+        # 
+        # Why Init Container instead of baking into image?
+        # - Separation of concerns (vLLM image stays generic)
+        # - Easy to update adapter without rebuilding image
+        # - Same pattern works for multiple adapters
+        
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Downloading LoRA adapter from S3..."
+          aws s3 cp s3://hanasobi-ai-triton-models/llm-models/mistral-7b-aws-rag-qa/v1/adapter_config.json /mnt/adapters/aws-rag-qa/adapter_config.json
+          aws s3 cp s3://hanasobi-ai-triton-models/llm-models/mistral-7b-aws-rag-qa/v1/adapter_model.safetensors /mnt/adapters/aws-rag-qa/adapter_model.safetensors
+          echo "Download complete!"
+          ls -lh /mnt/adapters/aws-rag-qa/
+        # Downloads two files:
+        # 1. adapter_config.json (~1KB) - LoRA configuration
+        # 2. adapter_model.safetensors (~27MB) - LoRA weights
+        #
+        # S3 path structure: bucket/llm-models/{model-name}/{version}/
+        # This structure allows versioning and multiple models
+        
+        volumeMounts:
+        - name: adapter-storage
+          mountPath: /mnt/adapters
+        # Shared volume with main container
+        # Init container writes, main container reads
+          
+      # =========================================================================
+      # Main Container: vLLM Server
+      # =========================================================================
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:v0.14.1-cu130
+        # Official vLLM image with OpenAI-compatible API
+        # 
+        # Version selection considerations:
+        # - v0.14.1: Stable, tested with our setup
+        # - cu130: CUDA 13.0 support (matches L4 GPU driver)
+        # - :latest is OK for development, pin version for production
+        
+        command: ["vllm"]
+        args:
+        - "serve"
+        - "TheBloke/Mistral-7B-v0.1-AWQ"
+        # Base model from HuggingFace Hub
+        # 
+        # Why AWQ quantization?
+        # - 4-bit quantized: ~4GB instead of ~14GB
+        # - Fits on L4 GPU (24GB VRAM) with room for KV cache
+        # - Minimal quality loss with AWQ (Activation-aware Weight Quantization)
+        # - TheBloke: Trusted quantization provider
+        
+        - "--port=8000"
+        # HTTP port for OpenAI-compatible API
+        # Also serves /metrics endpoint for Prometheus
+        
+        - "--enable-lora"
+        # Enable LoRA adapter support
+        # Required for serving fine-tuned models
+        
+        - "--lora-modules"
+        - "aws-rag-qa=/mnt/adapters/aws-rag-qa"
+        # Register LoRA adapter with name "aws-rag-qa"
+        # Path points to volume where init container downloaded files
+        #
+        # Usage in API calls:
+        # {"model": "aws-rag-qa", "messages": [...]}
+        #
+        # Can register multiple adapters:
+        # --lora-modules adapter1=/path1 adapter2=/path2
+        
+        - "--max-model-len=4096"
+        # Maximum sequence length (input + output tokens)
+        # 
+        # Trade-off:
+        # - Higher = longer contexts possible
+        # - Higher = more KV cache memory needed
+        # - 4096 is good balance for RAG-QA use case
+        #
+        # Memory calculation:
+        # KV cache per token ≈ 0.5MB for Mistral-7B
+        # 4096 tokens × 0.5MB = ~2GB KV cache
+        
+        - "--gpu-memory-utilization=0.88"
+        # Fraction of GPU memory vLLM can use
+        #
+        # Why 0.88 instead of 0.95?
+        # - CUDA Graphs need memory headroom for graph capture
+        # - 0.95 causes "CUDA out of memory" during warmup
+        # - 0.88 leaves ~2.9GB for CUDA Graphs and OS overhead
+        #
+        # This was discovered through trial and error!
+        # See: eos_token_debugging_journey.md for details
+        
+        env:
+        - name: HF_HOME
+          value: "/tmp/huggingface"
+        # HuggingFace cache directory
+        # 
+        # Using /tmp means:
+        # - Cache is lost when pod restarts
+        # - Model re-downloads on each pod start (~2-3 min)
+        # - OK for development, consider PVC for production
+        
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        # Named port for Service reference
+        # Service can use port name instead of number
+        
+        resources:
+          requests:
+            cpu: "3"
+            memory: "12Gi"
+            nvidia.com/gpu: "1"
+          # Requests = guaranteed resources
+          # Scheduler uses these to place pod
+          #
+          # GPU request triggers:
+          # - Node pool scale-up (if no GPU node available)
+          # - GPU device plugin allocation
+          
+          limits:
+            cpu: "4"
+            memory: "14Gi"
+            nvidia.com/gpu: "1"
+          # Limits = maximum resources
+          #
+          # CPU: Soft limit, can burst above if available
+          # Memory: Hard limit, OOMKilled if exceeded
+          # GPU: Always equals request (GPUs aren't shared)
+          
+        volumeMounts:
+        - name: adapter-storage
+          mountPath: /mnt/adapters
+        # Mount shared volume with adapter files
+        
+      # =========================================================================
+      # Node Selection: GPU Node Pool
+      # =========================================================================
+      nodeSelector:
+        workload: gpu-vllm
+      # Select nodes with this label
+      # 
+      # Our cluster has node pools:
+      # - default: CPU workloads
+      # - gpu-vllm: g6.xlarge with L4 GPU
+      #
+      # Label is set via node pool configuration in EKS
+      
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+      # GPU nodes have taint: nvidia.com/gpu=true:NoSchedule
+      # 
+      # Why taint GPU nodes?
+      # - Prevents non-GPU workloads from accidentally landing there
+      # - GPU nodes are expensive (~$0.80/hour vs $0.05/hour)
+      # - Only pods with matching toleration can schedule
+      #
+      # This toleration says: "I accept nodes with GPU taint"
+      
+      # =========================================================================
+      # Volumes
+      # =========================================================================
+      volumes:
+      - name: adapter-storage
+        emptyDir: {}
+      # EmptyDir: temporary storage that exists for pod lifetime
+      # 
+      # Lifecycle:
+      # 1. Pod starts → empty directory created
+      # 2. Init container downloads adapter files
+      # 3. Main container reads adapter files
+      # 4. Pod terminates → directory deleted
+      #
+      # For persistent storage: Use PersistentVolumeClaim (PVC)
+      # But emptyDir is fine here since we download fresh each time

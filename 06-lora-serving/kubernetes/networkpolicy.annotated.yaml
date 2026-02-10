@@ -1,0 +1,167 @@
+# =============================================================================
+# vLLM NetworkPolicy - Annotated Version for Learning
+# =============================================================================
+# This file is identical to networkpolicy.yaml but includes detailed comments
+# explaining each decision and parameter.
+#
+# For Production: Use networkpolicy.yaml (clean, without comments)
+# For Learning: Use this file
+# =============================================================================
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+
+metadata:
+  name: allow-vllm-external-access
+  # Descriptive name indicating what this policy allows
+  # 
+  # Naming convention: {action}-{app}-{purpose}
+  # - allow/deny: What the policy does
+  # - vllm: Which pods it affects
+  # - external-access: What it permits
+  
+  namespace: ml-models
+  # NetworkPolicies are namespace-scoped
+  # This policy only affects pods in ml-models namespace
+  
+  labels:
+    app: vllm
+    component: networking
+    # Labels for organization
+    # kubectl get networkpolicy -l app=vllm
+
+spec:
+  podSelector:
+    matchLabels:
+      app: vllm
+  # Which pods this policy applies to
+  #
+  # Only pods with label "app: vllm" are affected
+  # Other pods in ml-models namespace are NOT affected
+  #
+  # Empty podSelector {} would affect ALL pods in namespace
+  
+  policyTypes:
+    - Egress
+  # Which traffic directions this policy controls
+  #
+  # Egress: Outbound traffic FROM vllm pods
+  # Ingress: Inbound traffic TO vllm pods (not specified here)
+  #
+  # Why only Egress?
+  # - We need vllm to reach HuggingFace (model download) and S3 (adapter)
+  # - Ingress is handled by default Kubernetes networking
+  # - Adding Ingress rules would require specifying all allowed sources
+  #
+  # IMPORTANT: When a NetworkPolicy exists, all traffic not explicitly
+  # allowed is DENIED. This is "default deny" behavior.
+  
+  egress:
+  # =========================================================================
+  # Rule 1: HTTPS Access for HuggingFace and S3
+  # =========================================================================
+  - to:
+    - namespaceSelector: {}
+    # Empty namespaceSelector {} means: any namespace
+    # Combined with port 443: Allow HTTPS to anywhere
+    #
+    # Why so permissive?
+    # - HuggingFace CDN uses many IPs (hard to whitelist)
+    # - S3 endpoints vary by region
+    # - Port 443 is already restrictive (only HTTPS)
+    #
+    # More restrictive alternative (if you know exact endpoints):
+    # - ipBlock: cidr: 52.216.0.0/15  # S3 IP range
+    # But this is fragile and maintenance-heavy
+    
+    ports:
+    - protocol: TCP
+      port: 443
+    # HTTPS port only
+    # This blocks HTTP (80), SSH (22), etc.
+    
+  # =========================================================================
+  # Rule 2: DNS Resolution via CoreDNS
+  # =========================================================================
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    # Very specific target:
+    # - Namespace: kube-system (where CoreDNS runs)
+    # - Pods: labeled k8s-app=kube-dns (CoreDNS pods)
+    #
+    # Why so specific?
+    # - DNS is critical for all name resolution
+    # - But we only need to reach CoreDNS, nothing else in kube-system
+    # - Principle of least privilege
+    #
+    # COMMON MISTAKE: Forgetting DNS rule!
+    # Without this, pod can't resolve huggingface.co or S3 endpoints
+    # Error: "name resolution failed" or "could not resolve host"
+    
+    ports:
+    - protocol: UDP
+      port: 53
+    # DNS uses UDP port 53
+    # (TCP 53 is for zone transfers, not needed for queries)
+    
+  # =========================================================================
+  # Rule 3: MLflow Access (Optional, for Future Integration)
+  # =========================================================================
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ai-platform
+      podSelector:
+        matchLabels:
+          app: mlflow
+    # Target: MLflow pods in ai-platform namespace
+    #
+    # Why include this now?
+    # - Future: vLLM might log metrics to MLflow
+    # - Future: Automated adapter loading from MLflow artifacts
+    # - Having the rule ready avoids debugging later
+    #
+    # No harm in having unused rules (they just don't match any traffic)
+    
+    ports:
+    - protocol: TCP
+      port: 5000
+    # MLflow tracking server port
+    
+    - protocol: TCP
+      port: 80
+    # MLflow UI port (if served via ingress proxy)
+
+# =============================================================================
+# NetworkPolicy Best Practices
+# =============================================================================
+#
+# 1. Start permissive, then restrict
+#    - First deploy without NetworkPolicy
+#    - Everything works? Good!
+#    - Then add policy and verify nothing breaks
+#
+# 2. Don't forget DNS!
+#    - Every NetworkPolicy with external access needs DNS rule
+#    - Without DNS: "name resolution failed" errors
+#
+# 3. Test with and without policy
+#    - Deploy without policy → works
+#    - Apply policy → still works?
+#    - If not: Policy too restrictive
+#
+# 4. Document what policy allows
+#    - Comments help future-you understand
+#    - "Why port 5000?" → MLflow
+#
+# 5. Principle of least privilege
+#    - Only pods that need it (podSelector)
+#    - Only ports that are necessary (ports)
+#    - Only namespaces that are relevant (namespaceSelector)
+#
+# =============================================================================

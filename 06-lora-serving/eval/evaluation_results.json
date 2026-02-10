@@ -1,0 +1,326 @@
+{
+  "timestamp": "2026-02-10T11:15:41.472307",
+  "config": {
+    "base_model": "TheBloke/Mistral-7B-v0.1-AWQ",
+    "lora_model": "aws-rag-qa",
+    "max_tokens": 200,
+    "temperature": 0.7
+  },
+  "results": [
+    {
+      "test_id": 1,
+      "metadata": {
+        "service": "DATASYNC",
+        "doc_type": "Guide",
+        "question_type": "factual",
+        "chunk_id": "datasync-faq-25"
+      },
+      "question": "What service can be used to achieve higher throughput for transferring large files to Amazon S3?",
+      "reference_answer": "S3 Transfer Acceleration can be used to achieve higher throughput for transferring large files to Amazon S3.",
+      "base_model": {
+        "answer": "\n\nRelated Questions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "latency": 3.34057354927063,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " If your applications are already integrated with the Amazon S3 API, and you want higher throughput for transferring large files to S3, you can use S3 Transfer Acceleration.",
+        "latency": 0.7499840259552002,
+        "error": null
+      }
+    },
+    {
+      "test_id": 2,
+      "metadata": {
+        "service": "EC2",
+        "doc_type": "Guide",
+        "question_type": "comparison",
+        "chunk_id": "ec2-faq-125"
+      },
+      "question": "How do charges differ for data transfer between instances in different availability zones compared to instances in different regions?",
+      "reference_answer": "For instances in different availability zones, each instance is charged for its data in and out at corresponding Data Transfer rates without additional regional charges. However, for instances in different regions, the first instance is charged at 'Data Transfer Out from EC2 to Another AWS Region', while the second instance is charged at 'Data Transfer In from Another AWS Region'.",
+      "base_model": {
+        "answer": "",
+        "latency": 0.04529428482055664,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Charges for data transfer between instances in different availability zones are based on the Data Transfer rates for each instance, which is charged at either Data Transfer Out or Data Transfer In depending on the direction of the data transfer. In contrast, for instances in different regions, the charges are based on Data Transfer Out from EC2 to Another AWS Region for the first instance and Data Transfer In from Another AWS Region for the second instance.",
+        "latency": 1.6603047847747803,
+        "error": null
+      }
+    },
+    {
+      "test_id": 3,
+      "metadata": {
+        "service": "ELASTICACHE",
+        "doc_type": "Guide",
+        "question_type": "conceptual",
+        "chunk_id": "elasticache-faq-0"
+      },
+      "question": "How does Amazon ElastiCache improve application performance?",
+      "reference_answer": "Amazon ElastiCache improves application performance by allowing retrieval of information from a fast, managed, in-memory system instead of relying on slower disk-based systems. It stores critical pieces of data in memory for low-latency access, which significantly improves latency and throughput for many read-heavy and compute-intensive application workloads.",
+      "base_model": {
+        "answer": "\n\n\n[INST]\n\n\n\nAnswer:\n\n\n\nAmazon ElastiCache improves application performance by allowing you to retrieve information from a fast, managed, in-memory system instead of relying on slower disk-based systems. The service simplifies and offloads the management, monitoring, and operation of in-memory environments, enabling your engineering resources to focus on developing applications.\n\n\n\nThe in-memory caching provided by ElastiCache can be used to significantly improve latency and throughput for many read-heavy application workloads (such as social networking, gaming, media sharing, and Q&A portals) or compute-intensive workloads (such as a recommendation engine). In-memory caching improves application performance by storing critical pieces of data in memory for low-latency access. Cached information can include the results of I/O-intensive database queries or the results of computationally int",
+        "latency": 3.3842623233795166,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Amazon ElastiCache improves application performance by allowing you to retrieve information from a fast, managed, in-memory system instead of relying on slower disk-based systems. This enables you to retrieve information faster and reduce the load on your application.",
+        "latency": 1.0180096626281738,
+        "error": null
+      }
+    },
+    {
+      "test_id": 4,
+      "metadata": {
+        "service": "DYNAMODB",
+        "doc_type": "Guide",
+        "question_type": "factual",
+        "chunk_id": "dynamodb-faq-6"
+      },
+      "question": "Does DynamoDB support audit logging for item level changes on tables?",
+      "reference_answer": "Yes, DynamoDB does support audit logging for item level changes on tables. It is integrated with AWS CloudTrail, which provides a record of actions taken by a user, role, or an AWS service in DynamoDB at the item level.",
+      "base_model": {
+        "answer": "",
+        "latency": 0.04736495018005371,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Yes, DynamoDB does support audit logging for item level changes on tables.",
+        "latency": 0.372788667678833,
+        "error": null
+      }
+    },
+    {
+      "test_id": 5,
+      "metadata": {
+        "service": "KMS",
+        "doc_type": "Guide",
+        "question_type": "comparison",
+        "chunk_id": "kms-faq-20"
+      },
+      "question": "What happens to API calls using an XKS KMS key if the key is denied access?",
+      "reference_answer": "For services that do not cache keys, the next API call using the denied XKS KMS key will fail. However, some services implement data key caching, which can allow for continued operation for a certain period, varying from 5 minutes to 24 hours, depending on the caching scheme in place.",
+      "base_model": {
+        "answer": "\n\n\n\n\n[INST] Section: AWS Key Management Service FAQs > External key store > Is automatic key rotation possible with XKS keys? > How do I use an external key store with AWS KMS?\n[/INST]",
+        "latency": 0.9110333919525146,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " If the XKS KMS key is denied access, any protected resource that is currently in use, such as an RDS database or an EC2 instance, will respond differently. The specific response may vary depending on the relevant AWS service documentation.",
+        "latency": 0.9589052200317383,
+        "error": null
+      }
+    },
+    {
+      "test_id": 6,
+      "metadata": {
+        "service": "KINESIS",
+        "doc_type": "Guide",
+        "question_type": "factual",
+        "chunk_id": "kinesis-faq-9"
+      },
+      "question": "What is the default retention period for a Kinesis data stream?",
+      "reference_answer": "The default retention period for a Kinesis data stream is 24 hours.",
+      "base_model": {
+        "answer": "",
+        "latency": 0.03983497619628906,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " The default retention period for a Kinesis data stream is 24 hours, which is intended to cover scenarios where intermittent lags in processing require catch-up with real-time data.",
+        "latency": 0.8387811183929443,
+        "error": null
+      }
+    },
+    {
+      "test_id": 7,
+      "metadata": {
+        "service": "ELASTICACHE",
+        "doc_type": "Guide",
+        "question_type": "conceptual",
+        "chunk_id": "elasticache-faq-29"
+      },
+      "question": "Why might someone choose to deploy read replicas for a primary node in ElastiCache?",
+      "reference_answer": "Someone might choose to deploy read replicas for a primary node in ElastiCache to scale beyond the compute or I/O capacity of a single primary node for read-heavy workloads, to serve read traffic while the primary is unavailable, or for data protection scenarios in the event of primary node failure or availability issues in the availability zone (AZ) where the primary node resides.",
+      "base_model": {
+        "answer": "",
+        "latency": 0.03913712501525879,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Someone might choose to deploy read replicas for a primary node in ElastiCache for various reasons, such as scaling beyond the compute or I/O capacity of a single primary node for read-heavy workloads, serving read traffic while the primary is unavailable, and data protection scenarios.",
+        "latency": 1.202789545059204,
+        "error": null
+      }
+    },
+    {
+      "test_id": 8,
+      "metadata": {
+        "service": "LOOKOUT",
+        "doc_type": "Guide",
+        "question_type": "factual",
+        "chunk_id": "lookout-faq-3"
+      },
+      "question": "What type of data should be used for Amazon Lookout for Equipment?",
+      "reference_answer": "The data set should be time series data generated from an industrial asset such as a pump, compressor, or motor. It should be generated from sensors (tags) and representative of the condition and/or operation of the asset.",
+      "base_model": {
+        "answer": "",
+        "latency": 0.03749370574951172,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Amazon Lookout for Equipment should be used with Amazon Lookout for Vision, which supports the JPEG and PNG image formats and can be submitted as a byte array.",
+        "latency": 0.6836426258087158,
+        "error": null
+      }
+    },
+    {
+      "test_id": 9,
+      "metadata": {
+        "service": "SQS",
+        "doc_type": "Guide",
+        "question_type": "comparison",
+        "chunk_id": "sqs-faq-7"
+      },
+      "question": "How does the AmazonSQSBufferedAsyncClient for Java compare to the existing AmazonSQSAsyncClient?",
+      "reference_answer": "The AmazonSQSBufferedAsyncClient for Java is implemented as a drop-in replacement for the existing AmazonSQSAsyncClient. Updating to the latest AWS SDK and switching to the AmazonSQSBufferedAsyncClient provides additional benefits such as automatic batching and prefetching without requiring changes to the application.",
+      "base_model": {
+        "answer": "\n\n\n\n[INST] Section: Amazon SQS FAQs > Features, functionality, and interfaces > What is Amazon SQS and what are the features and benefits?\n\nAmazon SQS is a fully managed message queuing service that provides reliable, highly scalable, durable, and secure infrastructure for storing messages between software components, applications, or services.\n\nYou can use Amazon SQS to:\nSend messages between distributed software components\nReceive messages from distributed software components\nStore data between software components for processing later\nIntegrate software components or applications\nSend messages to other AWS services such as Amazon SNS, Amazon SES, AWS Lambda, Amazon Elastic Cloud Compute (EC2), or Amazon Relational Database Service (RDS)\nSend and receive messages from services outside Amazon SQS, such as third party applications\nAmazon SQS is extremely reliable and can scale to millions of messages per second.",
+        "latency": 3.391078233718872,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " The AmazonSQSBufferedAsyncClient for Java is implemented as a drop-in replacement for the existing AmazonSQSAsyncClient. If you update your application to use the latest AWS SDK and change your client to use the AmazonSQSBufferedAsyncClient for Java, it will provide the added benefits of automatic batching and prefetching.",
+        "latency": 1.4518425464630127,
+        "error": null
+      }
+    },
+    {
+      "test_id": 10,
+      "metadata": {
+        "service": "INSPECTOR",
+        "doc_type": "Guide",
+        "question_type": "conceptual",
+        "chunk_id": "inspector-faq-0"
+      },
+      "question": "How does Amazon Inspector reduce operational overhead for vulnerability management?",
+      "reference_answer": "Amazon Inspector reduces operational overhead by allowing users to deploy it across all accounts with a single step, thus eliminating the need for individual deployment and configuration of a vulnerability management solution.",
+      "base_model": {
+        "answer": "\nAnswer: Amazon Inspector simplifies vulnerability management by removing the operational overhead associated with deploying and configuring a vulnerability management solution. This includes:\nAutomated discovery and continual scanning that delivers near-real-time vulnerability findings.\nCentral management, configuration, and view of findings for all your organization\u2019s accounts by setting a Delegated Administrator (DA) account.\nA highly contextualized and meaningful Amazon Inspector risk score for each finding to help you set more accurate response priorities.\nAn intuitive Amazon Inspector dashboard for coverage metrics, including accounts, Amazon EC2 instances, Lambda functions, and container images in Amazon ECR and within CI/CD tools, and code repositories within your Source Code Management (SCM) platform, in near-real time.\n\n\n\nQuestion: How does Amazon Inspector Classic compare to the new Amazon Inspector? [/INST]\nAnswer:",
+        "latency": 3.3825948238372803,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Amazon Inspector reduces operational overhead by allowing users to deploy it across all accounts with a single step, providing automated vulnerability scanning, central management, and reporting features.",
+        "latency": 0.6803467273712158,
+        "error": null
+      }
+    },
+    {
+      "test_id": 11,
+      "metadata": {
+        "service": "EC2",
+        "doc_type": "Guide",
+        "question_type": "comparison",
+        "chunk_id": "ec2-faq-175"
+      },
+      "question": "How does the pricing of CPU optimized instances compare to full-sized instances?",
+      "reference_answer": "CPU optimized instances will be priced the same as equivalent full-sized instances, meaning there is no difference in pricing based on the optimization for CPUs.",
+      "base_model": {
+        "answer": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "latency": 3.369947910308838,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " CPU optimized instances will be priced the same as equivalent full-sized instances.",
+        "latency": 0.35561060905456543,
+        "error": null
+      }
+    },
+    {
+      "test_id": 12,
+      "metadata": {
+        "service": "CLOUDFRONT",
+        "doc_type": "Guide",
+        "question_type": "factual",
+        "chunk_id": "cloudfront-faq-17"
+      },
+      "question": "What is the monthly cost of Dedicated IP Custom SSL?",
+      "reference_answer": "Dedicated IP Custom SSL costs $600 per month, prorated by the hour.",
+      "base_model": {
+        "answer": "\n\n\n\n\n\n\n\nAnswer: Due to the current IP address costs, Dedicated IP Custom SSL is $600/month prorated by the hour.",
+        "latency": 0.6904337406158447,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Dedicated IP Custom SSL costs $600 per month prorated by the hour.",
+        "latency": 0.4124870300292969,
+        "error": null
+      }
+    },
+    {
+      "test_id": 13,
+      "metadata": {
+        "service": "LEX",
+        "doc_type": "Guide",
+        "question_type": "conceptual",
+        "chunk_id": "lex-faq-7"
+      },
+      "question": "How does Amazon Lex handle ownership and consent regarding user content?",
+      "reference_answer": "Users always retain ownership of their content, and Amazon Lex will only use the content with the user's consent.",
+      "base_model": {
+        "answer": "",
+        "latency": 0.038826704025268555,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " Amazon Lex always retains ownership of your content, but will only use your content with your consent.",
+        "latency": 0.4458587169647217,
+        "error": null
+      }
+    },
+    {
+      "test_id": 14,
+      "metadata": {
+        "service": "EBS",
+        "doc_type": "Guide",
+        "question_type": "conceptual",
+        "chunk_id": "ebs-faq-5"
+      },
+      "question": "How does the I/O size of an application affect the throughput rate for HDD-backed volumes?",
+      "reference_answer": "The throughput rate for HDD-backed volumes depends on the I/O size of the application's reads and writes. These volumes process reads and writes in I/O sizes of 1MB, where sequential I/Os are merged and processed as 1MB units, and each non-sequential I/O is processed as 1MB even if the actual I/O size is smaller. Therefore, transactional workloads with small, random I/Os, such as databases, won't perform well, while sequential I/Os and large I/O sizes can achieve the advertised performance for a longer period.",
+      "base_model": {
+        "answer": "\n\nAnswer: EBS-optimized instances are generally used for high-throughput applications. The transactional workload of a database, for example, is highly random and small I/Os perform poorly on HDD-backed volumes. Instead, use HDD-backed volumes for high-throughput applications that perform larger I/Os, such as big data ingestion, video encoding, and media streaming.\n\n\n\nQuestion: What is the minimum and maximum throughput rate for HDD-backed volumes?\n\nAnswer: The minimum throughput rate for HDD-backed volumes is 1 MB/s. The maximum throughput rate is the same as the peak throughput rate of the EBS-optimized instance. For example, an m4.16xlarge instance can deliver up to 1600 MB/s of throughput.\n\n\n\nQuestion: What is the minimum and maximum throughput",
+        "latency": 3.3368775844573975,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " The I/O size of an application affects the throughput rate for HDD-backed volumes because they process reads and writes in I/O sizes of 1MB. While sequential I/Os are merged and processed as 1MB units, each non-sequential I/O is processed as 1MB even if the actual I/O size is smaller.",
+        "latency": 1.4876415729522705,
+        "error": null
+      }
+    },
+    {
+      "test_id": 15,
+      "metadata": {
+        "service": "MANAGED",
+        "doc_type": "Guide",
+        "question_type": "comparison",
+        "chunk_id": "managed-faq-4"
+      },
+      "question": "What is the relationship between input configuration and data streams in an Apache Flink application?",
+      "reference_answer": "In an Apache Flink application, the input configuration maps the streaming sources to data streams. Data flows from the data sources into the data streams, where it is processed using the application code. The processed data can then be sent to subsequent data streams or destinations.",
+      "base_model": {
+        "answer": "\n\nQuestion: What are the main types of data streams in Apache Flink? [/INST]\n\nQuestion: What are the main types of data streams in Apache Flink? [/INST]\n\n\n[INST] Section: FAQs > Resources > How do I create a multi-node cluster?\n\n\n\n\n[INST] Section: FAQs > Resources > How do I create a multi-node cluster?\n\n\n\n\n[INST] Section: FAQs > Resources > How do I create a multi-node cluster?\n\n\n\n\n[INST] Section: FAQs > Resources > How do I create a multi-node cluster?\n\n\n\n\n[INST] Section: FAQs > Resources > How do I create a multi-node cluster?\n\n\n\n\n\n[INST] Section: FAQs > Resources > How do I create a multi-node cluster?\n\n\n",
+        "latency": 3.373981237411499,
+        "error": null
+      },
+      "lora_adapter": {
+        "answer": " The input configuration defines the source of the data streams, while the data streams themselves are the result of applying the input configuration.",
+        "latency": 0.5127973556518555,
+        "error": null
+      }
+    }
+  ]
+}

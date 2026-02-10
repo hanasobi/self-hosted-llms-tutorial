@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm-service
+  namespace: ml-models
+  labels:
+    app: vllm
+    component: service
+spec:
+  type: ClusterIP
+  selector:
+    app: vllm
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+  - name: metrics
+    protocol: TCP
+    port: 9090
+    targetPort: 8000

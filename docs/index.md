@@ -73,7 +73,7 @@ Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Basel
 
 > *"Wie bringe ich es in Produktion — ohne externe Abhängigkeiten?"*
 
-**Post 6: vLLM Deployment mit LoRA – Fine-tuned Models in Produktion**
+**Post 6: [vLLM Deployment mit LoRA – Fine-tuned Models in Produktion](posts/06-lora-serving.html)**
 LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performance-Vergleiche.
 
 **Post 7: Evaluation ohne externe APIs — LLM-as-Judge Self-Hosted**
@@ -126,12 +126,13 @@ self-hosted-llms-tutorial/
 ├── docs/                  Blog Posts (Deutsch)
 │   ├── index.md           Serien-Übersicht (diese Seite)
 │   └── posts/             Einzelne Blog Posts
-├── serving/               vLLM Deployment (Posts 2, 6)
+├── serving/               vLLM Deployment (Posts 2)
 ├── data/                  Dataset Engineering (Post 4)
 ├── 05-lora-training/      LoRA Training 
 ├── 05.1-mlflow-tracking/  Experiment Tracking mit MLFlow
 ├── 05.2-model-evaluation/ Model Evalution
-├── 05.3-debugging-story/  Eine Deubugging-Geschichte
+├── 05.3-debugging-story/  Eine Debugging-Geschichte
+├── 06-lora-serving/       LoRA Serving and Monitoring mit Grafana
 └── .../                   Weitere Posts
 ```
 

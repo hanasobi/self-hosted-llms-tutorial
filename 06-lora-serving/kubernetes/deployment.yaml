@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: ml-models
+  labels:
+    app: vllm
+    component: inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+  template:
+    metadata:
+      labels:
+        app: vllm
+        version: v1
+    spec:
+      serviceAccountName: workflow-sa
+      initContainers:
+      - name: download-adapter
+        image: amazon/aws-cli:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Downloading LoRA adapter from S3..."
+          aws s3 cp s3://hanasobi-ai-triton-models/llm-models/mistral-7b-aws-rag-qa/v1/adapter_config.json /mnt/adapters/aws-rag-qa/adapter_config.json
+          aws s3 cp s3://hanasobi-ai-triton-models/llm-models/mistral-7b-aws-rag-qa/v1/adapter_model.safetensors /mnt/adapters/aws-rag-qa/adapter_model.safetensors
+          echo "Download complete!"
+          ls -lh /mnt/adapters/aws-rag-qa/
+        volumeMounts:
+        - name: adapter-storage
+          mountPath: /mnt/adapters          
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:v0.14.1-cu130 # official vllm image with open-ai compatible api (:latest is ok for development)
+        command: ["vllm"]
+        args:
+        - "serve"
+        - "TheBloke/Mistral-7B-v0.1-AWQ"
+        - "--port=8000"
+        - "--enable-lora"
+        - "--lora-modules"
+        - "aws-rag-qa=/mnt/adapters/aws-rag-qa"
+        - "--max-model-len=4096"
+        - "--gpu-memory-utilization=0.88"
+        env:
+        # cache for downloaded model, will be deleted when pod goes down
+        # alternatively use a persistent volume
+        - name: HF_HOME
+          value: "/tmp/huggingsface"
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "3"
+            memory: "12Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "4"
+            memory: "14Gi"
+            nvidia.com/gpu: "1"
+        volumeMounts:
+        - name: adapter-storage
+          mountPath: /mnt/adapters
+      nodeSelector:
+        workload: gpu-vllm
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+      volumes:
+      - name: adapter-storage
+        emptyDir: {}

@@ -1,0 +1,103 @@
+# =============================================================================
+# vLLM Service - Annotated Version for Learning
+# =============================================================================
+# This file is identical to service.yaml but includes detailed comments
+# explaining each decision and parameter.
+#
+# For Production: Use service.yaml (clean, without comments)
+# For Learning: Use this file
+# =============================================================================
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: vllm-service
+  # Service name. Used for DNS resolution within cluster:
+  # http://vllm-service.ml-models.svc.cluster.local:8000
+  #
+  # Naming convention: {app}-service or just {app}
+  # We use vllm-service to distinguish from the Deployment named "vllm"
+  
+  namespace: ml-models
+  # Same namespace as the Deployment
+  # Services can only route to pods in the same namespace
+  # (unless using ExternalName or cross-namespace ServiceExport)
+  
+  labels:
+    app: vllm
+    component: service
+    # Labels for organization and querying
+    # kubectl get svc -l app=vllm
+
+spec:
+  type: ClusterIP
+  # Service type determines how it's exposed:
+  #
+  # ClusterIP (chosen):
+  # - Only accessible within cluster
+  # - No external IP or load balancer
+  # - Free (no cloud costs)
+  # - Access via kubectl port-forward for development
+  #
+  # LoadBalancer (alternative):
+  # - Gets external IP via cloud load balancer
+  # - Costs ~$20/month on AWS (NLB/ALB)
+  # - Needed for external access without port-forward
+  #
+  # NodePort (alternative):
+  # - Exposes on each node's IP at static port
+  # - Less elegant, security concerns
+  #
+  # Why ClusterIP?
+  # - Tutorial/development use case
+  # - Cost optimization (no LB costs)
+  # - kubectl port-forward -n ml-models svc/vllm-service 8000:8000
+  
+  selector:
+    app: vllm
+  # Pod selector - MUST match pod labels from Deployment
+  # 
+  # Service finds pods by labels, not by Deployment name!
+  # All pods with label "app: vllm" receive traffic from this Service
+  #
+  # Common mistake: Typo in selector → Service has no endpoints
+  # Debug: kubectl get endpoints vllm-service -n ml-models
+  
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+  # Primary API port
+  #
+  # port: Service listens on this port (what clients connect to)
+  # targetPort: Pod port to forward to (container port)
+  #
+  # These can differ! Example:
+  # port: 80, targetPort: 8000
+  # → Clients connect to :80, Service forwards to pod :8000
+  #
+  # Named port allows:
+  # - Reference by name in other configs
+  # - targetPort: "http" (matches container port name)
+    
+  - name: metrics
+    protocol: TCP
+    port: 9090
+    targetPort: 8000
+  # Metrics port for Prometheus scraping
+  #
+  # Wait, why different port (9090) but same targetPort (8000)?
+  #
+  # vLLM serves both API and metrics on port 8000:
+  # - /v1/chat/completions → API endpoint
+  # - /metrics → Prometheus metrics
+  #
+  # We expose it twice with different Service ports so:
+  # - ServiceMonitor can target "metrics" port specifically
+  # - Clear separation of concerns in configs
+  # - Could add different NetworkPolicies per port
+  #
+  # Alternative: Single port, reference by name in ServiceMonitor
+  # This approach is more explicit and self-documenting
