@@ -1,5 +1,3 @@
-
-
 > **Ein deutschsprachiges Tutorial, das Schritt für Schritt zeigt, wie Unternehmen mit Self-Hosted LLMs ihre Datensouveränität bewahren: Von der Installation über 
 Fine-tuning bis zur vollständigen Unabhängigkeit – inklusive echter Debugging-Stories und transparenten Trade-offs.**
 
@@ -76,18 +74,18 @@ Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Basel
 **Post 6: [vLLM Deployment mit LoRA – Fine-tuned Models in Produktion](posts/06-lora-serving.html)**
 LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performance-Vergleiche.
 
-**Post 7: Evaluation ohne externe APIs — LLM-as-Judge Self-Hosted**
-Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks.
+**Post 7: Dataset-Generierung ohne OpenAI**
+Self-hosted Synthetic Data Generation mit Negativ-Beispielen. Kein GPT-4o-mini mehr nötig.
 
-**Post 8: Dataset-Generierung ohne OpenAI**
-Die letzte externe Abhängigkeit eliminieren. Nach diesem Post ist die gesamte Pipeline self-hosted: Dokumente → QA-Paare → Training → Serving → Evaluation.
+**Post 8: LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs**
+Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
 
-### Phase 4: Skalierung & Automation
+### Phase 4: Iteration & Skalierung
 
-> *"Wie skaliere ich das Ganze?"*
+> *"Wie verbessere und skaliere ich das Ganze?"*
 
-**Post 9: Multi-LoRA in der Praxis — Ein Server, viele Use Cases**
-Architektur für Multi-Tenant-Setups, Request Routing und Kostenoptimierung.
+**Post 9: Multi-LoRA & A/B-Testing — Adapter iterativ verbessern**
+Datengetriebene Iteration: Zwei Adapter parallel testen, Metriken vergleichen, den besseren Adapter produktiv setzen. Systematisches Feedback-Loop für kontinuierliche Verbesserung.
 
 **Post 10+: Production Pipelines**
 Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
@@ -100,7 +98,7 @@ Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
 
 <strong>🔒 Von pragmatisch zu souverän</strong><br><br>
 
-Die Serie geht ehrlich mit externen Abhängigkeiten um. In <strong>Post 4</strong> nutzen wir GPT-4o-mini für die Dataset-Generierung — ein bewusster Kompromiss, der transparent gemacht wird. In <strong>Post 9</strong> zeigen wir dann die self-hosted Alternative.<br><br>
+Die Serie geht ehrlich mit externen Abhängigkeiten um. In <strong>Post 4</strong> nutzen wir GPT-4o-mini für die Dataset-Generierung — ein bewusster Kompromiss, der transparent gemacht wird. In <strong>Post 7</strong> zeigen wir dann die self-hosted Alternative.<br><br>
 
 <strong>Nach Post 8 ist die gesamte Pipeline datensouverän:</strong> Kein API-Call verlässt deine Infrastruktur — weder für Training, Serving, Evaluation noch für Dataset-Generierung.
 
