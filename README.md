@@ -1,6 +1,6 @@
-# Self-Hosted LLMs für Datensouveränität
+# Self-Hosted LLMs for Data Sovereignty
 
-> Von der ersten Installation bis zur vollständigen Unabhängigkeit: Self-Hosted LLM-Infrastruktur mit vLLM, Fine-tuning, und selbst gehosteter Evaluation — ohne externe API-Abhängigkeiten.
+> From first installation to complete independence: Self-hosted LLM infrastructure with vLLM, fine-tuning, and self-hosted evaluation — without external API dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Blog: German](https://img.shields.io/badge/Blog-German-blue.svg)](#tutorial-blog-posts)
