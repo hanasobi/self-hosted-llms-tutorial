@@ -26,8 +26,8 @@ spec:
         - -c
         - |
           echo "Downloading LoRA adapter from S3..."
-          aws s3 cp s3://hanasobi-ai-triton-models/llm-models/mistral-7b-aws-rag-qa/v1/adapter_config.json /mnt/adapters/aws-rag-qa/adapter_config.json
-          aws s3 cp s3://hanasobi-ai-triton-models/llm-models/mistral-7b-aws-rag-qa/v1/adapter_model.safetensors /mnt/adapters/aws-rag-qa/adapter_model.safetensors
+          aws s3 cp s3://<my-bucket>/llm-models/mistral-7b-aws-rag-qa/v1/adapter_config.json /mnt/adapters/aws-rag-qa/adapter_config.json
+          aws s3 cp s3://<my-bucket>/llm-models/mistral-7b-aws-rag-qa/v1/adapter_model.safetensors /mnt/adapters/aws-rag-qa/adapter_model.safetensors
           echo "Download complete!"
           ls -lh /mnt/adapters/aws-rag-qa/
         volumeMounts:
