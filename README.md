@@ -71,7 +71,7 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 5.3 | The pad_token Bug – A Debugging Story| ✅ Done | 20h debugging journey, community anti-pattern |
 | **Phase 3: Production & Sovereignty** | | | |
 | 6 | LoRA Serving: Fine-tuned Models in Production | ✅ Done | Adapter loading, Multi-LoRA, performance |
-| 7 | Dataset Generation without OpenAI | 📝 Planned | Self-hosted synthetic data with negative examples |
+| 7 | Dataset Generation without OpenAI | ✅ Done | Self-hosted synthetic data generation |
 | 8 | Self-Hosted LLM-as-Judge | 📝 Planned | Evaluate new adapters without external APIs |
 | **Phase 4: Iteration & Scaling** | | | |
 | 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |
@@ -108,82 +108,6 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 - Data-driven adapter iteration
 - Training pipelines with orchestration (Argo Workflows)
 - CI/CD for model updates
-
----
-
-## Project Structure
-
-```
-self-hosted-llms-tutorial/
-│
-├── README.md                      # This file (English)
-├── LICENSE                        # MIT License
-│
-├── docs/                          # Tutorial blog posts (German)
-│   ├── index.md                   # Series overview
-│   └── posts/
-│       ├── 01-warum-self-hosting.md
-│       ├── 02-vllm-kubernetes-basics.md
-│       ├── 03-warum-fine-tuning.md
-│       ├── 04-dataset-engineering.md
-│       ├── 05-lora-training.md
-│       ├── 05.1-mlflow-tracking.md
-│       ├── 05.2-model-evaluation.md
-│       ├── 05.3-debugging-story.md
-│       ├── 06-lora-serving.md
-│       ├── 07-self-hosted-evaluation.md
-│       └── 08-self-hosted-dataset-generation.md
-│
-├── serving/                       # vLLM deployment (Posts 2, 7)
-│   ├── base-model/                # Post 2: Basic vLLM setup
-│   │   ├── deployment.yaml
-│   │   ├── deployment.annotated.yaml
-│   │   ├── service.yaml
-│   │   └── README.md
-│   ├── lora-serving/              # Post 7: LoRA adapter serving
-│   │   ├── deployment.yaml
-│   │   ├── multi-lora-config.yaml
-│   │   └── README.md
-│   └── monitoring/
-│       ├── servicemonitor.yaml
-│       └── grafana-dashboard.json
-│
-├── data/                          # Dataset engineering (Post 4)
-│   ├── scripts/
-│   │   ├── html_parser.py
-│   │   ├── token_recursive_chunker.py
-│   │   ├── generate_qa_pairs.py
-│   │   ├── quality_check_qa.py
-│   │   └── generate_datasets.py
-│   ├── processed/                 # Pre-generated datasets (ready to use)
-│   │   ├── train.jsonl            # 3,477 training samples (20 MB)
-│   │   ├── val.jsonl              # 1,159 validation samples (6.5 MB)
-│   │   ├── eval.jsonl             # 1,160 evaluation samples (6.3 MB)
-│   │   ├── chunks_token_based.jsonl
-│   │   └── qa_pairs_generated.jsonl
-│   └── README.md
-│
-├── training/                      # Posts 5, 5.1, 5.2, 5.3: Training & Evaluation
-│   ├── train_lora.py
-│   ├── config.py
-│   ├── utils.py
-│   ├── mlflow_callback.py
-│   └── README.md
-│
-├── evaluation/                    # Evaluation framework (Post 8)
-│   ├── scripts/
-│   ├── metrics/
-│   └── README.md
-│
-├── monitoring/                    # Prometheus + Grafana
-│   └── grafana/
-│       └── dashboards/
-│
-└── examples/                      # Jupyter notebooks
-    └── README.md
-```
-
-**Note:** Each Kubernetes manifest has an `.annotated.yaml` version with extensive comments explaining every decision — perfect for learning.
 
 ---
 

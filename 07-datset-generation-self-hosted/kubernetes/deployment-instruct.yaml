@@ -1,0 +1,84 @@
+# vLLM Base Model Deployment (Production Version)
+# For detailed explanations, see: deployment-base.annotated.yaml
+# For LoRA-enabled deployment, see: deployment-lora.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: ml-models
+  labels:
+    app: vllm
+    component: inference
+    model: mistral-7b-awq
+    version: base
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+  template:
+    metadata:
+      labels:
+        app: vllm
+        component: inference
+        model: mistral-7b-instruct-awq
+      annotations:
+        configVersion: "v1"
+    spec:
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:v0.14.1-cu130
+        command: ["vllm"]
+        args:
+        - "serve"
+        - "TheBloke/Mistral-7B-Instruct-v0.2-AWQ"
+        - "--port=8000"
+        - "--max-model-len=4096"
+        - "--gpu-memory-utilization=0.88"
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        env:
+        - name: HF_HOME
+          value: "/tmp/huggingface"
+        resources:
+          requests:
+            cpu: "3"
+            memory: "12Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "4"
+            memory: "14Gi"
+            nvidia.com/gpu: "1"
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 30
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+      nodeSelector:
+        workload: gpu-vllm
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+      terminationGracePeriodSeconds: 60
+      restartPolicy: Always

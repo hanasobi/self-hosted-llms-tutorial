@@ -103,7 +103,7 @@ s3://bucket/llm-models/{model-name}/{version}/
   └── adapter_model.safetensors
 ```
 
-Wenn wir in Post 7 einen verbesserten Adapter trainieren (mit Negativbeispielen), laden wir ihn einfach als `v2/` hoch – der Init-Container zeigt dann auf den neuen Pfad.
+Wenn wir später einen verbesserten Adapter trainieren (mit Negativbeispielen), laden wir ihn einfach als `v2/` hoch – der Init-Container zeigt dann auf den neuen Pfad.
 
 ---
 
@@ -356,7 +356,7 @@ Test 15 stellt eine Frage über Apache Flink, aber der Kontext behandelt Amazon 
 
 Stattdessen gibt der LoRA-Adapter eine kurze, ungenaue Antwort. Er wurde nicht auf Negativbeispiele trainiert und erkennt den Mismatch zwischen Frage und Kontext nicht. Das Base Model halluziniert in diesem Fall sogar eine ausführliche Flink-Erklärung aus seinem parametrischen Wissen.
 
-**Dieses Problem adressieren wir in Post 7**, wo wir das Training-Dataset um Negativbeispiele erweitern und einen verbesserten Adapter (v2) trainieren.
+**Dieses Problem adressieren wir in einem späteren Post**, wo wir das Training-Dataset um Negativbeispiele erweitern und einen verbesserten Adapter (v2) trainieren.
 
 ---
 
@@ -456,6 +456,6 @@ Die Diskrepanz bei TTFT und KV-Cache ist bemerkenswert. Unsere Schätzungen basi
 
 LoRA Serving in vLLM ist erfreulich unkompliziert: Init-Container für den Adapter-Download, zwei CLI-Flags für die Aktivierung, und das System ist produktionsbereit. Die Evaluation mit 15 ungesehenen Testfragen bestätigt den dramatischen Qualitätsunterschied – 93% korrekte Antworten mit LoRA vs. ~40% ohne. Das Monitoring zeigt, dass das System unter Last stabil bleibt.
 
-**Im nächsten Post** generieren wir selbst neue Trainingsdaten – komplett Self-Hosted, ohne externe APIs. In Post 7 erweitern wir das Dataset um Negativbeispiele, bei denen das Model lernt, "insufficient information" zu antworten, und trainieren damit einen verbesserten Adapter (v2). In Post 8 schließen wir dann die letzte Lücke zur vollständigen Datensouveränität: Mit einem Self-Hosted LLM-as-Judge automatisieren wir die Evaluation, ohne auf externe APIs angewiesen zu sein.
+**Im nächsten Post** generieren wir selbst neue Trainingsdaten – komplett Self-Hosted, ohne externe APIs - ein weiterer Schritt in Richtung unseres Ziels "Vollständige Datensouveränität".
 
 {% include blog_nav.html current="06-lora-serving" %}

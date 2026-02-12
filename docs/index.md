@@ -74,8 +74,8 @@ Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Basel
 **Post 6: [vLLM Deployment mit LoRA – Fine-tuned Models in Produktion](posts/06-lora-serving.html)**
 LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performance-Vergleiche.
 
-**Post 7: Dataset-Generierung ohne OpenAI**
-Self-hosted Synthetic Data Generation mit Negativ-Beispielen. Kein GPT-4o-mini mehr nötig.
+**Post 7: [Dataset-Generierung selbst gehostet](posts/07-self-hosted-dataset-generation.html)**
+Können wir Dataset-Generierung selbst hosten - und zu welchen Trade-offs?
 
 **Post 8: LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs**
 Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
@@ -121,17 +121,18 @@ Diese Tutorial-Serie richtet sich an technische Fachkräfte und Entscheider, die
 
 ```
 self-hosted-llms-tutorial/
-├── docs/                  Blog Posts (Deutsch)
-│   ├── index.md           Serien-Übersicht (diese Seite)
-│   └── posts/             Einzelne Blog Posts
-├── serving/               vLLM Deployment (Posts 2)
-├── data/                  Dataset Engineering (Post 4)
-├── 05-lora-training/      LoRA Training 
-├── 05.1-mlflow-tracking/  Experiment Tracking mit MLFlow
-├── 05.2-model-evaluation/ Model Evalution
-├── 05.3-debugging-story/  Eine Debugging-Geschichte
-├── 06-lora-serving/       LoRA Serving and Monitoring mit Grafana
-└── .../                   Weitere Posts
+├── docs/                               Blog Posts (Deutsch)
+│   ├── index.md                        Serien-Übersicht (diese Seite)
+│   └── posts/                          Einzelne Blog Posts
+├── serving/                            vLLM Deployment (Posts 2)
+├── data/                               Dataset Engineering (Post 4)
+├── 05-lora-training/                   LoRA Training 
+├── 05.1-mlflow-tracking/               Experiment Tracking mit MLFlow
+├── 05.2-model-evaluation/              Model Evalution
+├── 05.3-debugging-story/               Eine Debugging-Geschichte
+├── 06-lora-serving/                    LoRA Serving and Monitoring mit Grafana
+├── 07-dataset-generation-self-hosted/  LoRA Serving and Monitoring mit Grafana
+└── .../                                Weitere Posts
 ```
 
 **Sprache:** Blog Posts auf Deutsch, Code und technische Dokumentation auf Englisch.
