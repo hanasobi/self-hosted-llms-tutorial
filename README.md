@@ -72,6 +72,7 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | **Phase 3: Production & Sovereignty** | | | |
 | 6 | LoRA Serving: Fine-tuned Models in Production | ✅ Done | Adapter loading, Multi-LoRA, performance |
 | 7 | Dataset Generation without OpenAI | ✅ Done | Self-hosted synthetic data generation |
+| 7.1 | Parallel Dataset Generation (Optional) | ✅ Done | Parallel Dataset Generation – 9× faster with Batching |
 | 8 | Self-Hosted LLM-as-Judge | 📝 Planned | Evaluate new adapters without external APIs |
 | **Phase 4: Iteration & Scaling** | | | |
 | 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |

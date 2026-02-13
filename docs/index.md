@@ -77,6 +77,9 @@ LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performan
 **Post 7: [Dataset-Generierung selbst gehostet](posts/07-self-hosted-dataset-generation.html)**
 Können wir Dataset-Generierung selbst hosten - und zu welchen Trade-offs?
 
+**Post 7.1: [Parallele Dataset-Generierung (Optional)](posts/07.1-parallelization.html)**
+Dataset-Generierung parallelisiert – 9× schneller durch Batching
+
 **Post 8: LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs**
 Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
 

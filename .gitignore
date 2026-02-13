@@ -63,8 +63,9 @@ data/raw/
 *.tsv
 
 # Logs
-logs/
 *.log
+!07.1-parallelization/results/full_run.log
+!07.1-parallelization/results/test_levels_1_5_10_20_complete.log
 tensorboard/
 mlruns/
 
@@ -95,3 +96,4 @@ docs/_site/
 
 # Docker
 docker-compose.yml
+

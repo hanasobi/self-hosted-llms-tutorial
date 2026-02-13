@@ -23,9 +23,12 @@ posts:
   - number: "5.3"
     slug: "05.3-debugging-story"
     title: "LoRA Training"
-  - number: 6
+  - number: "6"
     slug: "06-lora-serving"
     title: "LoRA Serving"
-  - number: 7
+  - number: "7"
     slug: "07-self-hosted-dataset-generation"
     title: "Dataset Generation Self-Hosted"
+  - number: "7.1"
+    slug: "07.1-parallelization"
+    title: "Dataset-Generierung parallelisiert"
