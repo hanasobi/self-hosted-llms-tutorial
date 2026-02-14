@@ -5,13 +5,17 @@
 
 > **Hinweis:** Dieser Post baut auf [Post 2 (vLLM Serving)](02-vllm-kubernetes-basics.md) und [Post 4 (Dataset Engineering)](04-dataset-engineering.md) auf. Alle Zahlen sind gemessen, nicht geschätzt.
 
+Unternehmen stehen vor einem Dilemma: Sie wollen, dass ihre Entwickler und Data Scientists Generative KI nutzen - für schnellere Entwicklung, bessere Lösungen, synthetische Trainingsdaten. Aber niemand will Firmendaten, interne Dokumentation oder Intellectual Property an OpenAI, Anthropic oder andere externe Provider schicken.
+
+Besonders kritisch: **Dataset Generation**. Entwickler brauchen synthetische QA-Pairs für Instruction Tuning, realistische Test-Daten für Evaluation, augmentierte Daten für Training. Genau die Art von Daten, die man NICHT extern generieren lassen möchte.
+
 In [Post 4](04-dataset-engineering.md) haben wir mit gpt-4o-mini ein hochwertiges Training-Dataset für unser RAG-System generiert. Die Qualität war exzellent - aber zu welchem Preis? Die Daten liegen bei OpenAI, die Generierung dauerte 3.5 Stunden, und wir sind von einem externen API-Provider abhängig.
 
 **Die zentrale Frage:** Können wir Dataset-Generierung selbst hosten - und zu welchen Trade-offs?
 
-In diesem Post testen wir Mistral-7B Instruct auf unserer AWS-Infrastruktur. Wir bewerten empirisch über drei Dimensionen: **Quality, Performance und Cost**. Keine Benchmarks, keine Spekulation - nur echte Daten auf unserem AWS FAQ Use Case.
+In diesem Post testen wir Mistral-7B Instruct auf unserer AWS EKS Infrastruktur. Wir messen empirisch: **Quality vs. gpt-4o-mini**, **Performance**, und **Cost**. Keine Benchmarks, keine Spekulation - nur echte Daten auf unserem AWS FAQ Use Case.
 
-**Spoiler:** Self-hosting funktioniert. Pro Run ist es schneller (47 Minuten gespart). Der API-Cost ist praktisch gleich ($2.21 Unterschied). Aber die Quality hat messbare Einbußen (77% vs. 93% A-Quality). Die Details bestimmen, wann welcher Ansatz sinnvoll ist.
+**Spoiler:** Self-hosting funktioniert für Dataset Generation. Es ist schneller (47 Minuten gespart), die Kosten sind vergleichbar ($2.21 Unterschied), aber die Qualität hat messbare Einbußen (77% vs. 93% A-Quality). Die Details - und ACHTUNG ein kritisches Methodologie-Problem - folgen in Post 7.2.
 
 ---
 

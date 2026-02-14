@@ -80,6 +80,9 @@ Können wir Dataset-Generierung selbst hosten - und zu welchen Trade-offs?
 **Post 7.1: [Parallele Dataset-Generierung (Optional)](posts/07.1-parallelization.html)**
 Dataset-Generierung parallelisiert – 9× schneller durch Batching
 
+**Post 7.2: [Modell Vergleich (Optional)](posts/07.2-quality-comparison-redux.html)**
+Quality Comparison Redux – Fairer Vergleich mit Llama-3.1-8B
+
 **Post 8: LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs**
 Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
 

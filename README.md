@@ -60,11 +60,11 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | # | Title | Status | Description |
 |---|-------|--------|-------------|
 | **Phase 1: Self-Hosting Basics** | | | |
-| 1 | Warum Self-Hosting? Der Business Case für Datensouveränität | ✅ Done | Why self-host, decision framework, series overview |
-| 2 | vLLM auf Kubernetes: Dein erstes selbst gehostetes LLM | ✅ Done | Deploy Mistral-7B, K8s basics, first inference |
+| 1 | Why Self-Hosting? A Business Case für Data Sovereignty | ✅ Done | Why self-host, decision framework, series overview |
+| 2 | vLLM on Kubernetes: Your first self-hosted LLM | ✅ Done | Deploy Mistral-7B, K8s basics, first inference |
 | **Phase 2: Fine-tuning** | | | |
-| 3 | Warum Fine-tuning? Wenn RAG und Prompting nicht reichen | ✅ Done | When and why to fine-tune |
-| 4 | Dataset Engineering: Von Dokumenten zu Trainingsdaten | ✅ Done | Chunking, QA generation, quality control |
+| 3 | Why Fine-tuning? When RAG and Prompting aren't sufficient | ✅ Done | When and why to fine-tune |
+| 4 | Dataset Engineering: From Documents to Training Data | ✅ Done | Chunking, QA generation, quality control |
 | 5 | LoRA Training: 7B Model auf 24GB GPU | ✅ Done| QLoRA fine-tuning on consumer hardware |
 | 5.1 | Experiment Tracking with MLflow (Optional) | ✅ Done | Self-hosted MLflow |
 | 5.2 | Model Evaluation (Optional)| ✅ Done | Qualitative evaluation and baseline comparison |
@@ -73,6 +73,7 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 6 | LoRA Serving: Fine-tuned Models in Production | ✅ Done | Adapter loading, Multi-LoRA, performance |
 | 7 | Dataset Generation without OpenAI | ✅ Done | Self-hosted synthetic data generation |
 | 7.1 | Parallel Dataset Generation (Optional) | ✅ Done | Parallel Dataset Generation – 9× faster with Batching |
+| 7.2 | Model Comparison (Optional) | ✅ Done | Quality Comparison Redux – A Fairer Comparison with Llama-3.1-8B |
 | 8 | Self-Hosted LLM-as-Judge | 📝 Planned | Evaluate new adapters without external APIs |
 | **Phase 4: Iteration & Scaling** | | | |
 | 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |
