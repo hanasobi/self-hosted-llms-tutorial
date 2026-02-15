@@ -197,6 +197,48 @@ High-Performance Inference-Server für LLMs. Nutzt PagedAttention und Continuous
 
 ## Evaluation & Metriken
 
+### Agreement / Agreement Rate
+Prozentsatz der Übereinstimmung zwischen zwei Ratern oder Judges. Berechnet als: `(Anzahl übereinstimmender Ratings) / (Gesamtzahl der Samples)`.
+
+**Beispiel:** Wenn zwei Judges bei 111 von 171 Samples das gleiche Rating vergeben, ist die Agreement Rate 65% (111/171).
+
+**Wichtig:** Simple Agreement korrigiert NICHT für zufällige Übereinstimmungen. Bei stark unbalancierten Verteilungen (z.B. 95% aller Samples sind "A") kann hohe Agreement irreführend sein – beide Judges könnten nur zufällig oft übereinstimmen. **Cohen's Kappa** korrigiert für dieses Problem und misst Agreement "beyond chance".
+
+**Verwendung:** Als erste schnelle Metrik nützlich, aber immer zusammen mit Cohen's Kappa interpretieren für robuste Aussagen über systematische Übereinstimmung.
+
+### Cohen's Kappa (κ)
+Statistisches Maß für die Übereinstimmung zwischen zwei Ratern (z.B. zwei Judges beim Rating von QA-Pairs). Korrigiert simple Agreement Rate um Zufallstreffer. Berechnung: `Kappa = (beobachtete Übereinstimmung - erwartete Zufallsübereinstimmung) / (1 - erwartete Zufallsübereinstimmung)`.
+
+**Interpretation:**
+- < 0.0: Schlechter als Zufall
+- 0.0-0.2: Slight Agreement
+- 0.2-0.4: Fair Agreement
+- 0.4-0.6: Moderate Agreement
+- 0.6-0.8: Substantial Agreement
+- 0.8-1.0: Almost Perfect Agreement
+
+**Beispiel:** Bei 75% Agreement und 50% erwarteter Zufallsübereinstimmung ergibt sich Kappa = 0.5 (moderate Agreement). Wichtig bei LLM-as-Judge Evaluation, um zu messen ob zwei Judges systematisch übereinstimmen oder nur zufällig.
+
+### Confusion Matrix
+Tabelle, die zeigt wie oft zwei Rater/Judges übereinstimmen oder unterschiedlich bewerten. Zeilen sind Ratings von Rater 1, Spalten sind Ratings von Rater 2. Diagonale = Übereinstimmung, Off-Diagonal = Disagreement.
+
+**Beispiel (LLM-as-Judge mit 3 Rating-Kategorien A/B/C):**
+```
+            Llama Judge
+             A    B    C   Total
+Claude A    105   5    1    111
+       B     45   3    2     50
+       C      8   1    1     10
+     Total  158   9    4    171
+```
+
+**Interpretation:** 
+- Diagonale (105+3+1 = 109): Übereinstimmung bei 109 Samples
+- Off-Diagonal: 62 Disagreements
+- Pattern erkennbar: Llama gibt oft A (158), Claude differenzierter (111 A, 50 B, 10 C)
+
+**Verwendung:** Zeigt nicht nur DASS Rater disagreen, sondern auch WIE (z.B. "Llama bewertet B-Samples als A"). Basis für Berechnung von Cohen's Kappa.
+
 ### Eval / Evaluation
 Bewertung eines Models auf einem separaten Validation oder Test Set. Zeigt, wie gut das Model auf unsichtbaren Daten generalisiert.
 
@@ -290,4 +332,4 @@ Aufteilung eines Datasets in:
 
 **Updates:**
 - Dieses Glossar wird kontinuierlich erweitert, wenn neue Begriffe in der Serie eingeführt werden
-- Letzte Aktualisierung: 2026-02-06
+- Letzte Aktualisierung: 2026-02-15

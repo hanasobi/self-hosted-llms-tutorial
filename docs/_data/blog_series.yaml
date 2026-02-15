@@ -35,5 +35,8 @@ posts:
   - number: "7.2"
     slug: "07.2-quality-comparison-redux"
     title: "Fairer Vergleich mit Llama-3.1-8B"
+  - number: "8"
+    slug: "08-llm-as-judge"
+    title: "Fairer Vergleich mit Llama-3.1-8B"
 
     

@@ -74,7 +74,7 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 7 | Dataset Generation without OpenAI | ✅ Done | Self-hosted synthetic data generation |
 | 7.1 | Parallel Dataset Generation (Optional) | ✅ Done | Parallel Dataset Generation – 9× faster with Batching |
 | 7.2 | Model Comparison (Optional) | ✅ Done | Quality Comparison Redux – A Fairer Comparison with Llama-3.1-8B |
-| 8 | Self-Hosted LLM-as-Judge | 📝 Planned | Evaluate new adapters without external APIs |
+| 8 | Self-Hosted LLM-as-Judge | ✅ Done | Evaluation without external APIs |
 | **Phase 4: Iteration & Scaling** | | | |
 | 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |
 | 10+ | Production Pipelines | 📝 Planned | Argo Workflows, CI/CD, automation |

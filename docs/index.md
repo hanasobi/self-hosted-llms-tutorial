@@ -83,8 +83,8 @@ Dataset-Generierung parallelisiert – 9× schneller durch Batching
 **Post 7.2: [Modell Vergleich (Optional)](posts/07.2-quality-comparison-redux.html)**
 Quality Comparison Redux – Fairer Vergleich mit Llama-3.1-8B
 
-**Post 8: LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs**
-Qualität messen ohne OpenAI oder Anthropic. Self-hosted LLM-as-Judge mit Rubrics und Consistency Checks. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
+**Post 8: [LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs](posts/08-llm-as-judge.html)**
+Qualität messen ohne OpenAI oder Anthropic - Self-hosted LLM-as-Judge. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
 
 ### Phase 4: Iteration & Skalierung
 
@@ -137,7 +137,10 @@ self-hosted-llms-tutorial/
 ├── 05.2-model-evaluation/              Model Evalution
 ├── 05.3-debugging-story/               Eine Debugging-Geschichte
 ├── 06-lora-serving/                    LoRA Serving and Monitoring mit Grafana
-├── 07-dataset-generation-self-hosted/  LoRA Serving and Monitoring mit Grafana
+├── 07-dataset-generation-self-hosted/  Dataset Generation Self-Hosted
+├── 07.1-parallelization/               Parallele Dataset-Generierung
+├── 07.2-quality-comparison-redux/      Modell Vergleich für Dataset-Generierung
+├── 08-llm-as-judge/                    LLM-as-Judge Self-Hosted
 └── .../                                Weitere Posts
 ```
 
