@@ -93,7 +93,6 @@ docs/.bundle/
 docs/vendor/
 docs/.jekyll-cache/
 docs/_site/
-
-# Jekyll startup command
 jekyll.md
+docker-compose.yml
 
