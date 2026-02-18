@@ -94,6 +94,6 @@ docs/vendor/
 docs/.jekyll-cache/
 docs/_site/
 
-# Docker
-docker-compose.yml
+# Jekyll startup command
+jekyll.md
 

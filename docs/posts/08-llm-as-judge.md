@@ -605,7 +605,7 @@ Ein 8B Model als self-hosted Judge erreicht Fair Agreement (Kappa 0.30, 65% Übe
 
 Die Frage bleibt: Wie viel besser ist Llama-3.1-70B (8.75× größer)? Das Framework steht, Scripts sind ready.
 
-**Post 8.1 (geplant):** Llama-70B Judge Evaluation - kann ein größeres self-hosted Model mit Claude mithalten?
+**Post 8.1:** Llama-70B Judge Evaluation - kann ein größeres self-hosted Model mit Claude mithalten?
 
 ---
 

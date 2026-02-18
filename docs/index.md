@@ -67,12 +67,12 @@ Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Basel
 **Post 5.3: [Der pad_token Bug – Eine Debugging-Geschichte (Optional)](posts/05.3-debugging-story.html)**
 20 Stunden Debugging dokumentiert: Warum `pad_token = eos_token` alles kaputt macht und wie systematisches Debugging funktioniert.
 
-### Phase 3: Production & Souveränität
-
-> *"Wie bringe ich es in Produktion — ohne externe Abhängigkeiten?"*
-
-**Post 6: [vLLM Deployment mit LoRA – Fine-tuned Models in Produktion](posts/06-lora-serving.html)**
+**Post 6: [vLLM Deployment mit LoRA – Fine-tuned Models deployen](posts/06-lora-serving.html)**
 LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performance-Vergleiche.
+
+### Phase 3: Deployment & Souveränität
+
+> *"Wie reduziere ich externe Abhängigkeiten?"*
 
 **Post 7: [Dataset-Generierung selbst gehostet](posts/07-self-hosted-dataset-generation.html)**
 Können wir Dataset-Generierung selbst hosten - und zu welchen Trade-offs?
@@ -85,6 +85,9 @@ Quality Comparison Redux – Fairer Vergleich mit Llama-3.1-8B
 
 **Post 8: [LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs](posts/08-llm-as-judge.html)**
 Qualität messen ohne OpenAI oder Anthropic - Self-hosted LLM-as-Judge. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
+
+**Post 8.1: [Llama-70B als Judge – Apple Silicon statt Cloud GPUs (Optional)](posts/08.1-llama-70b-judge.html)**
+Llama-70b-as-Judge auf Apple Silicon - Funktioniert das überhaupt?
 
 ### Phase 4: Iteration & Skalierung
 

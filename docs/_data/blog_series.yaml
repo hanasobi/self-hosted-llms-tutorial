@@ -38,5 +38,8 @@ posts:
   - number: "8"
     slug: "08-llm-as-judge"
     title: "Fairer Vergleich mit Llama-3.1-8B"
+  - number: "8.1"
+    slug: "08.1-llama-70b-judge"
+    title: "Llama-3.1-70b auf Apple Silicon"
 
     

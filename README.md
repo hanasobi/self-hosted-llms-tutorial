@@ -40,10 +40,10 @@ Phase 1: "Can I even run an LLM myself?"
     → Posts 1-2: Business case + first working LLM on your infrastructure
     
 Phase 2: "How do I make it better for my use case?"
-    → Posts 3-5 (incl. 5.1, 5.2, 5.3): Dataset engineering → Training → Tracking → Evaluation → Debugging
+    → Posts 3-6 (incl. 5.1, 5.2, 5.3, 6): Dataset engineering → Training → Tracking → Evaluation → Debugging → Deployment
     
-Phase 3: "How do I run this in production — without external dependencies?"
-    → Posts 6-8: LoRA serving, self-hosted dataset generation, self-hosted evaluation
+Phase 3: "How do reduce external dependencies?"
+    → Posts 7-8 (incl. 8.1): Self-hosted dataset generation, self-hosted evaluation
     
 Phase 4: "How do I iterate and scale this?"
     → Posts 9+: Multi-LoRA A/B-testing, pipelines, automation
@@ -69,12 +69,13 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 5.1 | Experiment Tracking with MLflow (Optional) | ✅ Done | Self-hosted MLflow |
 | 5.2 | Model Evaluation (Optional)| ✅ Done | Qualitative evaluation and baseline comparison |
 | 5.3 | The pad_token Bug – A Debugging Story| ✅ Done | 20h debugging journey, community anti-pattern |
-| **Phase 3: Production & Sovereignty** | | | |
 | 6 | LoRA Serving: Fine-tuned Models in Production | ✅ Done | Adapter loading, Multi-LoRA, performance |
+| **Phase 3: Increase Sovereignty** | | | |
 | 7 | Dataset Generation without OpenAI | ✅ Done | Self-hosted synthetic data generation |
 | 7.1 | Parallel Dataset Generation (Optional) | ✅ Done | Parallel Dataset Generation – 9× faster with Batching |
 | 7.2 | Model Comparison (Optional) | ✅ Done | Quality Comparison Redux – A Fairer Comparison with Llama-3.1-8B |
 | 8 | Self-Hosted LLM-as-Judge | ✅ Done | Evaluation without external APIs |
+| 8.1 | Llama-70b-as-Judge (Optional)| ✅ Done | Performance of Llama-3.1-70b in Apple Silicon |
 | **Phase 4: Iteration & Scaling** | | | |
 | 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |
 | 10+ | Production Pipelines | 📝 Planned | Argo Workflows, CI/CD, automation |
