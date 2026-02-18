@@ -34,12 +34,15 @@ posts:
     title: "Dataset-Generierung parallelisiert"
   - number: "7.2"
     slug: "07.2-quality-comparison-redux"
-    title: "Fairer Vergleich mit Llama-3.1-8B"
+    title: "Vergleich mit Llama-3.1-8B"
   - number: "8"
     slug: "08-llm-as-judge"
-    title: "Fairer Vergleich mit Llama-3.1-8B"
+    title: "Llama-3.1-8B Judge"
   - number: "8.1"
     slug: "08.1-llama-70b-judge"
-    title: "Llama-3.1-70b auf Apple Silicon"
+    title: "Llama-3.1-70b Judge (Mac)"
+  - number: 9"
+    slug: "09-multi-lora"
+    title: "Multi-LoRA A/B-Testing"
 
     

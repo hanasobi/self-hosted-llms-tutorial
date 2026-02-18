@@ -211,8 +211,8 @@ This tutorial specifically addresses the needs of organizations that cannot or p
 | 6 | None | Fine-tuned model inference |
 | 7 | OpenAI for dataset creation | Self-hosted generation |
 | 8 | GPT-4 as Judge | Self-hosted LLM-as-Judge |
-
-By the end of this tutorial series (Post 8), you'll have **zero external API dependencies**.
+| 8.1 | Cloud hosted LLM-as-Judge | Locally hosted LLM-as-Judge |
+| 9 | Training in Cloud | Local Training |
 
 ---
 

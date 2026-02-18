@@ -13,7 +13,7 @@ Fine-tuning bis zur vollständigen Unabhängigkeit – inklusive echter Debuggin
 
 Unternehmen im DACH-Raum stehen vor einem Dilemma: Sie wollen generative KI nutzen, aber sensible Daten dürfen nicht an externe APIs fließen — sei es aus DSGVO-Gründen, Branchenregulierung oder zum Schutz von Betriebsgeheimnissen.
 
-Diese Tutorial-Serie zeigt den vollständigen Weg von der ersten LLM-Installation bis zur **kompletten Datensouveränität** — ohne externe Abhängigkeiten. Jeder Post hat ein klares, erreichbares Ziel, und wir dokumentieren echte Probleme und Debugging-Journeys statt nur den "Happy Path".
+Diese Tutorial-Serie zeigt den Weg von der ersten LLM-Installation bis zur **kompletten Datensouveränität** — ohne externe Abhängigkeiten. Jeder Post hat ein klares, erreichbares Ziel, und wir dokumentieren echte Probleme und Debugging-Journeys statt nur den "Happy Path". Dabei beleuchten wir drei verschiedene LLM-Anwendungsfälle, vom fine-tuned LoRA-Adapter, der in einem RAG-System eingesetzt werden kann, über die Generierung von synthetischen Trainings- und Testdaten bis hin zum Einsatz von LLM-as-Judge.
 
 ## Was diese Serie auszeichnet
 
@@ -70,9 +70,9 @@ Qualitative Evaluation durch Manual Inspection & stratifiziertes Sampling. Basel
 **Post 6: [vLLM Deployment mit LoRA – Fine-tuned Models deployen](posts/06-lora-serving.html)**
 LoRA-Adapter auf dem Base Model laden mit vLLM. Multi-Adapter Serving. Performance-Vergleiche.
 
-### Phase 3: Deployment & Souveränität
+### Phase 3: Dataset-Generierung
 
-> *"Wie reduziere ich externe Abhängigkeiten?"*
+> *"Wie nutze ich self-hosted LLMs, um synthetische Trainingsdaten zu generieren?"*
 
 **Post 7: [Dataset-Generierung selbst gehostet](posts/07-self-hosted-dataset-generation.html)**
 Können wir Dataset-Generierung selbst hosten - und zu welchen Trade-offs?
@@ -83,21 +83,21 @@ Dataset-Generierung parallelisiert – 9× schneller durch Batching
 **Post 7.2: [Modell Vergleich (Optional)](posts/07.2-quality-comparison-redux.html)**
 Quality Comparison Redux – Fairer Vergleich mit Llama-3.1-8B
 
+### Phase 4: LLM-as-Judge - Cloud versus Local
+> *"Kann ich self-hosted LLMs als Judge einsetzen? Geht das auch lokal?"*
+
 **Post 8: [LLM-as-Judge Self-Hosted — Evaluation ohne externe APIs](posts/08-llm-as-judge.html)**
 Qualität messen ohne OpenAI oder Anthropic - Self-hosted LLM-as-Judge. Nach diesem Post ist die gesamte Pipeline datensouverän: Dokumente → QA-Paare → Training → Serving → Evaluation.
 
 **Post 8.1: [Llama-70B als Judge – Apple Silicon statt Cloud GPUs (Optional)](posts/08.1-llama-70b-judge.html)**
-Llama-70b-as-Judge auf Apple Silicon - Funktioniert das überhaupt?
+Llama-70B-as-Judge auf Apple Silicon - Funktioniert das überhaupt?
 
-### Phase 4: Iteration & Skalierung
+### Phase 5: Multi-Adapter Serving und lokales Training
+> *"Kann ich mehrere LoRA-Adapter auf einem Server betreiben? Ist lokales Training eine Alternative?"*
 
-> *"Wie verbessere und skaliere ich das Ganze?"*
+**Post 9: [Multi-LoRA A/B-Testing & Adapter Training auf Apple Silicon](posts/09-multi-lora.html)**
+Wir trainieren einen zweiten LoRA-Adapter auf Apple Silicon und nutzen Multi-LoRA für das A/B-Testing der beiden Adapter.
 
-**Post 9: Multi-LoRA & A/B-Testing — Adapter iterativ verbessern**
-Datengetriebene Iteration: Zwei Adapter parallel testen, Metriken vergleichen, den besseren Adapter produktiv setzen. Systematisches Feedback-Loop für kontinuierliche Verbesserung.
-
-**Post 10+: Production Pipelines**
-Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
 
 ---
 
@@ -109,7 +109,9 @@ Argo Workflows, CI/CD für Model Updates, kontinuierliches Fine-tuning.
 
 Die Serie geht ehrlich mit externen Abhängigkeiten um. In <strong>Post 4</strong> nutzen wir GPT-4o-mini für die Dataset-Generierung — ein bewusster Kompromiss, der transparent gemacht wird. In <strong>Post 7</strong> zeigen wir dann die self-hosted Alternative.<br><br>
 
-<strong>Nach Post 8 ist die gesamte Pipeline datensouverän:</strong> Kein API-Call verlässt deine Infrastruktur — weder für Training, Serving, Evaluation noch für Dataset-Generierung.
+<strong>Nach Post 8 ist die gesamte Pipeline datensouverän:</strong> Kein API-Call verlässt deine Infrastruktur — weder für Training, Serving, Evaluation noch für Dataset-Generierung.<br><br>
+
+Als <strong>Bonus</strong> zeigen wir mit den Posts 8.1 und 9, wie man LLMs auch komplett lokal für Training und Inference einsetzen kann.
 
 </div>
 
@@ -137,14 +139,16 @@ self-hosted-llms-tutorial/
 ├── data/                               Dataset Engineering (Post 4)
 ├── 05-lora-training/                   LoRA Training 
 ├── 05.1-mlflow-tracking/               Experiment Tracking mit MLFlow
-├── 05.2-model-evaluation/              Model Evalution
+├── 05.2-model-evaluation/              Model Evaluation
 ├── 05.3-debugging-story/               Eine Debugging-Geschichte
 ├── 06-lora-serving/                    LoRA Serving and Monitoring mit Grafana
 ├── 07-dataset-generation-self-hosted/  Dataset Generation Self-Hosted
 ├── 07.1-parallelization/               Parallele Dataset-Generierung
 ├── 07.2-quality-comparison-redux/      Modell Vergleich für Dataset-Generierung
 ├── 08-llm-as-judge/                    LLM-as-Judge Self-Hosted
-└── .../                                Weitere Posts
+├── 08.1-llama-70b-judge/               Llama-70b als Self-Hosted Judge auf Apple Silicon
+├── 09-multi-lora/                      Multi-LoRA A/B Testing in K8s und Adapater Training auf Apple Silicon
+└── 10-Resümee/                         Ein Fazit
 ```
 
 **Sprache:** Blog Posts auf Deutsch, Code und technische Dokumentation auf Englisch.
