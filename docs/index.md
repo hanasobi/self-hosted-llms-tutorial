@@ -98,6 +98,10 @@ Llama-70B-as-Judge auf Apple Silicon - Funktioniert das überhaupt?
 **Post 9: [Multi-LoRA A/B-Testing & Adapter Training auf Apple Silicon](posts/09-multi-lora.html)**
 Wir trainieren einen zweiten LoRA-Adapter auf Apple Silicon und nutzen Multi-LoRA für das A/B-Testing der beiden Adapter.
 
+### Resümee
+
+**Post 10: [Resümee – Was wir über Self-Hosted LLMs gelernt haben](posts/10-resumee.html)**
+Der letzte Post dieser Serie. Wir ziehen Bilanz.
 
 ---
 
@@ -147,8 +151,7 @@ self-hosted-llms-tutorial/
 ├── 07.2-quality-comparison-redux/      Modell Vergleich für Dataset-Generierung
 ├── 08-llm-as-judge/                    LLM-as-Judge Self-Hosted
 ├── 08.1-llama-70b-judge/               Llama-70b als Self-Hosted Judge auf Apple Silicon
-├── 09-multi-lora/                      Multi-LoRA A/B Testing in K8s und Adapater Training auf Apple Silicon
-└── 10-Resümee/                         Ein Fazit
+└── 09-multi-lora/                      Multi-LoRA A/B Testing in K8s und Adapater Training auf Apple Silicon
 ```
 
 **Sprache:** Blog Posts auf Deutsch, Code und technische Dokumentation auf Englisch.

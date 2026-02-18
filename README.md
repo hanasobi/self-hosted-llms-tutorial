@@ -42,11 +42,14 @@ Phase 1: "Can I even run an LLM myself?"
 Phase 2: "How do I make it better for my use case?"
     → Posts 3-6 (incl. 5.1, 5.2, 5.3, 6): Dataset engineering → Training → Tracking → Evaluation → Debugging → Deployment
     
-Phase 3: "How do reduce external dependencies?"
-    → Posts 7-8 (incl. 8.1): Self-hosted dataset generation, self-hosted evaluation
+Phase 3: "How to use it for test and training data generation?"
+    → Post 7 (incl. 7.1 and 7.2): Self-hosted dataset generation
     
-Phase 4: "How do I iterate and scale this?"
-    → Posts 9+: Multi-LoRA A/B-testing, pipelines, automation
+Phase 4: "Can I used it for LLM-as-Judge? Can I serve it locally?"
+    → Post 8 (incl. 8.1): Self-hosted LLM-as-Judge (Cloud & local)
+    
+Phase 5: "Can I serve multiple LoRA adapters in parallel? Can I train an adapter locally?"
+    → Post 9: Multi-LoRA in K8s via vLLM & LoRA Fine-tuning on Apple Silicon
 ```
 
 After Post 2, you have a **working system**. That's motivating. Then you learn step by step how to improve it and become fully independent.
@@ -70,15 +73,17 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | 5.2 | Model Evaluation (Optional)| ✅ Done | Qualitative evaluation and baseline comparison |
 | 5.3 | The pad_token Bug – A Debugging Story| ✅ Done | 20h debugging journey, community anti-pattern |
 | 6 | LoRA Serving: Fine-tuned Models in Production | ✅ Done | Adapter loading, Multi-LoRA, performance |
-| **Phase 3: Increase Sovereignty** | | | |
+| **Phase 3: Dataset Generation** | | | |
 | 7 | Dataset Generation without OpenAI | ✅ Done | Self-hosted synthetic data generation |
 | 7.1 | Parallel Dataset Generation (Optional) | ✅ Done | Parallel Dataset Generation – 9× faster with Batching |
 | 7.2 | Model Comparison (Optional) | ✅ Done | Quality Comparison Redux – A Fairer Comparison with Llama-3.1-8B |
+| **Phase 4: LLM-as-Judge** | | | |
 | 8 | Self-Hosted LLM-as-Judge | ✅ Done | Evaluation without external APIs |
 | 8.1 | Llama-70b-as-Judge (Optional)| ✅ Done | Performance of Llama-3.1-70b in Apple Silicon |
-| **Phase 4: Iteration & Scaling** | | | |
-| 9 | Multi-LoRA & A/B-Testing | 📝 Planned | Iterative adapter improvement, data-driven decisions |
-| 10+ | Production Pipelines | 📝 Planned | Argo Workflows, CI/CD, automation |
+| **Phase 5: Multi-LoRA & Local Adapter Training** | | | |
+| 9 | Multi-LoRA & A/B-Testing | ✅ Done | Iterative adapter improvement, data-driven decisions |
+| **Resumee** | | | |
+| 10 | Resumee | ✅ Done | What we have learned about self-hosting - Conclusion |
 
 **Legend:** ✅ Done | 🚧 In Progress | 📝 Planned
 
@@ -98,19 +103,19 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 - LoRA/QLoRA: Training 7B models on 16GB GPUs
 - MLflow integration for experiment tracking
 - The pad_token bug: Why low loss doesn't mean good model
+- LoRA adapter serving with vLLM in K8s
 
-**Phase 3: Production & Full Sovereignty**
-- LoRA adapter serving with vLLM
-- Multi-LoRA: One server, multiple specialized adapters
-- Self-hosted evaluation (LLM-as-Judge without external APIs)
+**Phase 3: Dataset Generation**
 - Self-hosted dataset generation (no GPT-4 dependency)
-- Monitoring with Prometheus and Grafana
+- Accelerate through parallelization
 
-**Phase 4: Iteration & Scaling**
+**Phase 4: LLM-as-Judge**
+- Self-hosted evaluation (LLM-as-Judge without external APIs)
+- Serving the LLM-as-Judge locally
+
+**Phase 5: Multi-LoRA & Local Training**
 - Multi-LoRA serving and A/B-testing
-- Data-driven adapter iteration
-- Training pipelines with orchestration (Argo Workflows)
-- CI/CD for model updates
+- Fine-tuning on Apple Silicon
 
 ---
 
@@ -127,6 +132,7 @@ The blog posts are written in **German**, targeting ML engineers, data scientist
 | Orchestration | Kubernetes | Production deployment |
 | Monitoring | Prometheus + Grafana | Metrics and dashboards |
 | GPU | NVIDIA L4 / T4 | Cost-effective inference |
+| Local | Mac Studio Max 64GB | zero-cost inference and training |
 
 ---
 
