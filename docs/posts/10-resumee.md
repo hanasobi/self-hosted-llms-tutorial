@@ -1,3 +1,5 @@
+---
+---
 # Post 10: Resümee – Was wir über Self-Hosted LLMs gelernt haben
 
 **Lesezeit:** ~8 Minuten | **Level:** Alle  

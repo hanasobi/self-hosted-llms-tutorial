@@ -1,3 +1,5 @@
+---
+---
 # Blog Post 1: Warum Self-Hosting? Der Business Case für Datensouveränität
 
 **Lesezeit:** ~10 Minuten | **Level:** Einsteiger  

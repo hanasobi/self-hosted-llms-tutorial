@@ -1,3 +1,5 @@
+---
+---
 # Blog Post 2: vLLM auf Kubernetes – Dein erstes selbst gehostetes LLM
 
 **Lesezeit:** ~20 Minuten | **Level:** Intermediate  

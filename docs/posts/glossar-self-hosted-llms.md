@@ -1,3 +1,5 @@
+---
+---
 # Glossar: Self-Hosted LLMs für Datensouveränität
 
 **Projekt:** Self-Hosted LLMs für Datensouveränität – Blog-Serie  

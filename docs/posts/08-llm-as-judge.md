@@ -1,3 +1,5 @@
+---
+---
 # Blog Post 8: LLM-as-Judge Self-Hosted – Empirische Evaluation der Grenzen und Möglichkeiten
 
 **Lesezeit:** ~20 Minuten | **Level:** Intermediate  

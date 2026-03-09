@@ -1,3 +1,5 @@
+---
+---
 # Blog Post 3: Warum Fine-tuning? Wenn RAG und Prompting nicht reichen
 
 **Lesezeit:** ~12 Minuten | **Level:** Einsteiger-Intermediate  

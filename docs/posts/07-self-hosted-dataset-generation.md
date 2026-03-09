@@ -1,3 +1,5 @@
+---
+---
 
 # Blog Post 7: Dataset-Generierung selbst gehostet – Der ehrliche Vergleich
 **Lesezeit:** ~15 Minuten | **Level:** Intermediate  
