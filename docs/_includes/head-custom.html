@@ -48,7 +48,7 @@
     var path = window.location.pathname;
 
     // Match /posts/slug or /posts/slug.html
-    var match = path.match(/\/posts\/([^\/\.]+)/);
+    var match = path.match(/\/posts\/([^\/]+?)(?:\.html)?$/);
     var slug = match ? match[1] : null;
 
     if (slug && redirectMap[slug]) {
