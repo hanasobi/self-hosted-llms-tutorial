@@ -14,9 +14,47 @@
   });
 </script>
 
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-f0U7p83xO7kT2BBN9hXFt.js"></script>
-  <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-  </script>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-f0U7p83xO7kT2BBN9hXFt.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
+<!-- Redirect to blog.hanasobi.com -->
+<script>
+  (function() {
+    var redirectMap = {
+      "01-warum-self-hosting":             "/self-hosted-llms/01-warum-self-hosting/",
+      "02-vllm-kubernetes-basics":         "/self-hosted-llms/02-vllm-kubernetes-basics/",
+      "03-warum-finetuning":               "/self-hosted-llms/03-warum-finetuning/",
+      "04-dataset-engineering":            "/self-hosted-llms/04-dataset-engineering/",
+      "05-lora-training":                  "/self-hosted-llms/05-lora-training/",
+      "05.1-mlflow-tracking":              "/self-hosted-llms/05.1-mlflow-tracking/",
+      "05.2-model-evaluation":             "/self-hosted-llms/05.2-model-evaluation/",
+      "05.3-debugging-story":              "/self-hosted-llms/05.3-debugging-story/",
+      "06-lora-serving":                   "/self-hosted-llms/06-lora-serving/",
+      "07-self-hosted-dataset-generation": "/self-hosted-llms/07-self-hosted-dataset-generation/",
+      "07.1-parallelization":              "/self-hosted-llms/07.1-parallelization/",
+      "07.2-quality-comparison-redux":     "/self-hosted-llms/07.2-quality-comparison-redux/",
+      "08-llm-as-judge":                   "/self-hosted-llms/08-llm-as-judge/",
+      "08.1-llama-70b-judge":              "/self-hosted-llms/08.1-llama-70b-judge/",
+      "09-multi-lora":                     "/self-hosted-llms/09-multi-lora/",
+      "10-resumee":                        "/self-hosted-llms/10-resumee/",
+      "glossar-self-hosted-llms":          "/self-hosted-llms/glossar-self-hosted-llms/"
+    };
+
+    var newBase = "https://blog.hanasobi.com";
+    var path = window.location.pathname;
+
+    // Match /posts/slug or /posts/slug.html
+    var match = path.match(/\/posts\/([^\/\.]+)/);
+    var slug = match ? match[1] : null;
+
+    if (slug && redirectMap[slug]) {
+      window.location.replace(newBase + redirectMap[slug]);
+    } else if (path === "/" || path === "/self-hosted-llms-tutorial/" || path === "/self-hosted-llms-tutorial/index.html") {
+      window.location.replace(newBase + "/self-hosted-llms/");
+    }
+  })();
+</script>
